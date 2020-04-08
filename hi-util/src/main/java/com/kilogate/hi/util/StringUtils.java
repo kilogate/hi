@@ -7,36 +7,20 @@ package com.kilogate.hi.util;
  * @create 2020/4/8 下午4:39
  **/
 public class StringUtils {
-    public static String toBinaryString(int num) {
-        StringBuffer result = new StringBuffer();
-
-        String binaryString = Integer.toBinaryString(num);
-
-        while (binaryString.length() + result.length() < 32) {
-            result.append('0');
-        }
-
-        result.append(binaryString);
-
-        return result.toString();
+    public static String toBinaryString(byte b) {
+        return String.format("%8s", Integer.toBinaryString(b & 0xFF)).replace(' ', '0');
     }
 
-    public static String toBinaryString(long num) {
-        StringBuffer result = new StringBuffer();
+    public static String toBinaryString(int i) {
+        return String.format("%32s", Integer.toBinaryString(i)).replace(' ', '0');
+    }
 
-        String binaryString = Long.toBinaryString(num);
-
-        while (binaryString.length() + result.length() < 64) {
-            result.append('0');
-        }
-
-        result.append(binaryString);
-
-        return result.toString();
+    public static String toBinaryString(long l) {
+        return String.format("%64s", Long.toBinaryString(l)).replace(' ', '0');
     }
 
     public static void main(String[] args) {
-        for (long i = -10; i < 10; i++) {
+        for (byte i = -10; i < 10; i++) {
             System.out.println(toBinaryString(i));
         }
     }
