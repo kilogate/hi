@@ -10,19 +10,6 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>hi-util</artifactId>
-
-    <dependencies>
-        <dependency>
-            <groupId>com.kilogate</groupId>
-            <artifactId>hi-java</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.kilogate</groupId>
-            <artifactId>hi-spring</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-    </dependencies>
+    
 
 </project>
