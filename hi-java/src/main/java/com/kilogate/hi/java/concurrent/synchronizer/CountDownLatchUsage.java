@@ -1,5 +1,6 @@
 package com.kilogate.hi.java.concurrent.synchronizer;
 
+import java.util.Date;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -11,7 +12,14 @@ import java.util.concurrent.TimeUnit;
  **/
 public class CountDownLatchUsage {
     public static void main(String[] args) {
-        System.out.println("ready?");
+        usage2();
+    }
+
+    /**
+     * 等待其他任务都完成之后再继续执行
+     */
+    private static void usage1() {
+        System.out.println("done?");
 
         int taskCount = 7;
         CountDownLatch countDownLatch = new CountDownLatch(taskCount);
@@ -24,7 +32,7 @@ public class CountDownLatchUsage {
                 e.printStackTrace();
             } finally {
                 // count down
-                System.out.println(String.format("%s ready", Thread.currentThread()));
+                System.out.println(String.format("%s %s done", System.nanoTime(), Thread.currentThread()));
                 countDownLatch.countDown();
             }
         };
@@ -39,6 +47,35 @@ public class CountDownLatchUsage {
             e.printStackTrace();
         }
 
-        System.out.println("go!");
+        System.out.println("run!");
+    }
+
+    /**
+     * 让所有任务同时执行（模拟并发请求）
+     */
+    private static void usage2() {
+        CountDownLatch countDownLatch = new CountDownLatch(1);
+
+        Runnable task = () -> {
+            try {
+                // wait for execute command
+                countDownLatch.await();
+
+                // work
+                System.out.println(String.format("%s %s begin", new Date(), Thread.currentThread()));
+                Thread.sleep((long) (3000 * Math.random()));
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        };
+
+        int concurrencyCount = 100;
+        for (int i = 0; i < concurrencyCount; i++) {
+            new Thread(task).start();
+        }
+
+        countDownLatch.countDown();
+
+        System.out.println("begin");
     }
 }
