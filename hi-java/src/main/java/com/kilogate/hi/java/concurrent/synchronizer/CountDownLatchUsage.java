@@ -5,7 +5,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 /**
- * CountDownLatchUsage
+ * 倒计时门栓的使用
  *
  * @author fengquanwei
  * @create 2020/7/30 上午12:06

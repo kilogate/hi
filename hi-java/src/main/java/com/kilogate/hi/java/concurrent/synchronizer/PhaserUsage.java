@@ -3,7 +3,7 @@ package com.kilogate.hi.java.concurrent.synchronizer;
 import java.util.concurrent.Phaser;
 
 /**
- * PhaserUsage
+ * 阶段器的使用
  *
  * @author fengquanwei
  * @create 2020/7/30 上午12:05
