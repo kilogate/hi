@@ -14,7 +14,7 @@ public class CyclicBarrierUsage {
         int parties = 5;
 
         Runnable barrierAction = () -> {
-            System.out.println(String.format("%s 人满发车", Thread.currentThread()));
+            System.out.println(String.format("%24s 人满发车", Thread.currentThread()));
         };
 
         CyclicBarrier cyclicBarrier = new CyclicBarrier(parties, barrierAction);
@@ -28,7 +28,7 @@ public class CyclicBarrierUsage {
                     e.printStackTrace();
                 }
 
-                System.out.println(String.format("%s 已上车, 等待人满发车", Thread.currentThread()));
+                System.out.println(String.format("%24s 已上车, 等待人满发车", Thread.currentThread()));
 
                 try {
                     cyclicBarrier.await();
@@ -37,6 +37,8 @@ public class CyclicBarrierUsage {
                 } catch (BrokenBarrierException e) {
                     e.printStackTrace();
                 }
+
+                System.out.println(String.format("%24s 已发车", Thread.currentThread()));
             }).start();
         }
     }
