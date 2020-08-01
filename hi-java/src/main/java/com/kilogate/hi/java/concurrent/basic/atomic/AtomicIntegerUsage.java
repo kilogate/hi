@@ -8,7 +8,7 @@ package com.kilogate.hi.java.concurrent.basic.atomic;
  * updateAndGet
  * accumulateAndGet
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2020/8/1 下午3:43
  **/
 public class AtomicIntegerUsage {

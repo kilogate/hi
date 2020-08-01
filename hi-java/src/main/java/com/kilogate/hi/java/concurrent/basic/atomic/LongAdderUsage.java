@@ -6,7 +6,7 @@ package com.kilogate.hi.java.concurrent.basic.atomic;
  * add
  * sum
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2020/8/1 下午3:44
  **/
 public class LongAdderUsage {

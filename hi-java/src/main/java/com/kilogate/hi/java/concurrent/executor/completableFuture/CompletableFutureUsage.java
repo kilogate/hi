@@ -25,7 +25,7 @@ package com.kilogate.hi.java.concurrent.executor.completableFuture;
  * static CompletableFuture<Void> allOf(CompletableFuture<?>... cfs)：所有给定的 future 都完成后完成
  * static CompletableFuture<Object> anyOf(CompletableFuture<?>... cfs)：任意给定的 future 完成后则完成
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2020/8/1 下午4:09
  **/
 public class CompletableFutureUsage {

@@ -6,7 +6,7 @@ package com.kilogate.hi.java.concurrent.collection;
  * compute
  * merge
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2020/8/1 下午4:03
  **/
 public class MapUsage {

@@ -6,7 +6,7 @@ package com.kilogate.hi.java.concurrent.executor.executorService;
  * scheduleAtFixedRate
  * scheduleWithFixedDelay
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2020/8/1 下午4:12
  **/
 public class ScheduledExecutorServiceUsage {

@@ -6,7 +6,7 @@ import java.util.concurrent.Semaphore;
 /**
  * 信号量的使用
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2020/7/30 上午12:07
  **/
 public class SemaphoreUsage {

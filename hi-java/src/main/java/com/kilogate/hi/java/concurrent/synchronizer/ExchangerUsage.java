@@ -6,7 +6,7 @@ import java.util.concurrent.Exchanger;
 /**
  * 交换器的使用
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2020/7/30 上午12:06
  **/
 public class ExchangerUsage {

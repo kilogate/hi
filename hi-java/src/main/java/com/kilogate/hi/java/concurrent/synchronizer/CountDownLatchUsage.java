@@ -7,7 +7,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * 倒计时门栓的使用
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2020/7/30 上午12:06
  **/
 public class CountDownLatchUsage {

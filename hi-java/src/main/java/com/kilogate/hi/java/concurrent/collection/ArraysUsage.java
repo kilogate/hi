@@ -6,7 +6,7 @@ package com.kilogate.hi.java.concurrent.collection;
  * parallelSetAll
  * parallelPrefix
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2020/8/1 下午4:06
  **/
 public class ArraysUsage {

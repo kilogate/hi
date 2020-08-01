@@ -6,7 +6,7 @@ import java.util.concurrent.CyclicBarrier;
 /**
  * 循环障栅的使用
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2020/7/30 上午12:05
  **/
 public class CyclicBarrierUsage {
