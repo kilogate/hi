@@ -3,7 +3,7 @@ package com.kilogate.hi.java.basic;
 /**
  * 基本类型的用法
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2020/8/5 上午12:00
  **/
 public class PrimitiveTypeUsage {

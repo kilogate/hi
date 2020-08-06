@@ -7,7 +7,7 @@ import java.util.Date;
  * <p>
  * 格式说明符：%<参数索引>$<标志><宽度>.<精度><转换符>
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2020/8/5 上午12:12
  **/
 public class FormatUsage {

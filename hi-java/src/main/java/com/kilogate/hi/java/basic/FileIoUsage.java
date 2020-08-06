@@ -10,12 +10,12 @@ import java.util.Scanner;
 /**
  * 文件输入输出的用法
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2020/8/5 上午12:10
  **/
 public class FileIoUsage {
     public static void main(String[] args) throws FileNotFoundException {
-        String filename = "/Users/fengquanwei/a.txt";
+        String filename = "/Users/kilogate/a.txt";
 
         // 写文件：PrintWriter
         PrintWriter printWriter = new PrintWriter(new FileOutputStream(filename, true));

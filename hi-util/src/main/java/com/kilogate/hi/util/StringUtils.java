@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * StringUtils
+ * 字符串工具类
  *
  * @author kilogate
  * @create 2020/4/8 下午4:39

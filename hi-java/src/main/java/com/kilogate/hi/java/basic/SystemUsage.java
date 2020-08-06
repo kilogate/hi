@@ -3,7 +3,7 @@ package com.kilogate.hi.java.basic;
 /**
  * 系统相关
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2020/8/5 上午10:22
  **/
 public class SystemUsage {
