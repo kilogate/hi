@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * 关闭钩子的用法
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2020/8/8 上午10:21
  **/
 public class ShutdownHookUsage {
