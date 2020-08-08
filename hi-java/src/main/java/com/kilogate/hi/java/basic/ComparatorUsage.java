@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 /**
  * 比较器的用法
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2020/8/8 上午11:49
  **/
 public class ComparatorUsage {
