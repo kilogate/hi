@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.logging.Logger;
 
 /**
- * 仓库一
+ * 仓库一：使用 synchronized wait notifyAll 实现
  *
  * @author kilogate
  * @create 2020/8/9 下午9:31
