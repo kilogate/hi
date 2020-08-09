@@ -16,10 +16,10 @@ import java.util.Random;
  **/
 public class ProducerAndConsumer {
     public static void main(String[] args) {
-        Repository repository = new Repository2();
+        Repository repository = new Repository3();
 
         Runnable producer = () -> {
-            for (int i = 0; i < 16; i++) {
+            for (int i = 0; i < 10; i++) {
                 try {
                     Thread.sleep(new Random().nextInt(100));
                 } catch (InterruptedException e) {
@@ -38,7 +38,7 @@ public class ProducerAndConsumer {
         };
 
         Runnable consumer = () -> {
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < 12; i++) {
                 Object product = repository.consume();
 
                 if (product != null) {
