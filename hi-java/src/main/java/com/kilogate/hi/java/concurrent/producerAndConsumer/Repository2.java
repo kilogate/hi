@@ -1,20 +1,39 @@
 package com.kilogate.hi.java.concurrent.producerAndConsumer;
 
 import java.util.LinkedList;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.logging.Logger;
 
 /**
- * 仓库一：使用 synchronized wait notifyAll 实现
+ * 仓库二：使用 Lock 和 Condition 实现
  *
- * @author kilogate
- * @create 2020/8/9 下午9:31
+ * @author fengquanwei
+ * @create 2020/8/9 下午10:18
  **/
-public class Repository1 implements Repository {
-    private static final Logger logger = Logger.getLogger(Repository1.class.getName());
+public class Repository2 implements Repository {
+    private static final Logger logger = Logger.getLogger(Repository2.class.getName());
+
     private LinkedList<Object> list = new LinkedList<>();
 
+    private final Lock lock = new ReentrantLock();
+    private final Condition emptyCondition = lock.newCondition();
+    private final Condition fullCondition = lock.newCondition();
+
     @Override
-    public synchronized void produce(Object product) {
+    public void produce(Object product) {
+        lock.lock();
+
+        try {
+            doProduce(product);
+        } finally {
+            lock.unlock();
+        }
+    }
+
+    private void doProduce(Object product) {
         // 仓库已满，等待消费者消费
         int retry = 0;
         while (list.size() == MAX_SIZE) {
@@ -25,7 +44,7 @@ public class Repository1 implements Repository {
 
             try {
                 logger.info(String.format("[%s] 生产失败: %s, 仓库已满，等待消费", Thread.currentThread(), product));
-                wait(10000);
+                emptyCondition.await(10, TimeUnit.SECONDS);
                 retry++;
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -39,11 +58,21 @@ public class Repository1 implements Repository {
         logger.info(String.format("[%s] 生产成功: %s, 产品库存: %s", Thread.currentThread(), product, list.size()));
 
         // 通知所有消费者
-        notifyAll();
+        emptyCondition.signalAll();
     }
 
     @Override
-    public synchronized Object consume() {
+    public Object consume() {
+        lock.lock();
+
+        try {
+            return doConsume();
+        } finally {
+            lock.unlock();
+        }
+    }
+
+    private Object doConsume() {
         // 仓库为空，等待生产者生产
         int retry = 0;
         while (list.size() == 0) {
@@ -54,7 +83,7 @@ public class Repository1 implements Repository {
 
             try {
                 logger.info(String.format("[%s] 消费失败, 仓库为空，等待生产", Thread.currentThread()));
-                wait(10000);
+                fullCondition.await(10, TimeUnit.SECONDS);
                 retry++;
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -68,7 +97,7 @@ public class Repository1 implements Repository {
         logger.info(String.format("[%s] 消费成功: %s, 产品库存: %s", Thread.currentThread(), product, list.size()));
 
         // 通知所有生产者
-        notifyAll();
+        fullCondition.signalAll();
 
         return product;
     }
