@@ -14,23 +14,24 @@ public class Repository1 implements Repository {
     private LinkedList<Object> list = new LinkedList<>();
 
     @Override
-    public synchronized void produce(Object product) {
+    public synchronized boolean produce(Object product) {
         // 仓库已满，等待消费者消费
-        int retry = 0;
+        boolean retry = false;
         while (list.size() == MAX_SIZE) {
-            if (retry >= 3) {
-                logger.info(String.format("[%s] 生产失败: %s, 超过等待次数: %s，退出生产", Thread.currentThread(), product, retry++));
-                return;
+            if (retry) {
+                logger.info(String.format("[%s] 生产失败: %s，等待超时, 退出生产", Thread.currentThread(), product));
+                return false;
             }
 
             try {
                 logger.info(String.format("[%s] 生产失败: %s, 仓库已满，等待消费", Thread.currentThread(), product));
                 wait(10000);
-                retry++;
+
+                retry = true;
             } catch (InterruptedException e) {
                 e.printStackTrace();
-                logger.severe(String.format("[%s] 生产失败: %s，发生异常: %s", Thread.currentThread(), product, e.getMessage()));
-                return;
+                logger.severe(String.format("[%s] 生产失败: %s，发生异常: %s, 退出生产", Thread.currentThread(), product, e.getMessage()));
+                return false;
             }
         }
 
@@ -40,25 +41,28 @@ public class Repository1 implements Repository {
 
         // 通知所有消费者
         notifyAll();
+
+        return true;
     }
 
     @Override
     public synchronized Object consume() {
         // 仓库为空，等待生产者生产
-        int retry = 0;
+        boolean retry = false;
         while (list.size() == 0) {
-            if (retry >= 3) {
-                logger.info(String.format("[%s] 消费失败, 超过等待次数: %s，退出消费", Thread.currentThread(), retry++));
+            if (retry) {
+                logger.info(String.format("[%s] 消费失败, 等待超时，退出消费", Thread.currentThread()));
                 return null;
             }
 
             try {
                 logger.info(String.format("[%s] 消费失败, 仓库为空，等待生产", Thread.currentThread()));
                 wait(10000);
-                retry++;
+
+                retry = true;
             } catch (InterruptedException e) {
                 e.printStackTrace();
-                logger.severe(String.format("[%s] 消费失败，发生异常: %s", Thread.currentThread(), e.getMessage()));
+                logger.severe(String.format("[%s] 消费失败，发生异常: %s, 退出消费", Thread.currentThread(), e.getMessage()));
                 return null;
             }
         }

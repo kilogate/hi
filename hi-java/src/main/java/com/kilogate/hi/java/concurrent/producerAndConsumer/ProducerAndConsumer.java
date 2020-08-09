@@ -1,5 +1,6 @@
 package com.kilogate.hi.java.concurrent.producerAndConsumer;
 
+import java.util.Date;
 import java.util.Random;
 
 /**
@@ -18,20 +19,33 @@ public class ProducerAndConsumer {
         Repository repository = new Repository2();
 
         Runnable producer = () -> {
-            for (int i = 0; i < 17; i++) {
+            for (int i = 0; i < 16; i++) {
                 try {
                     Thread.sleep(new Random().nextInt(100));
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
 
-                repository.produce("产品" + i);
+                String product = "产品" + i;
+                boolean produce = repository.produce(product);
+
+                if (produce) {
+                    System.out.println(String.format("%s [%s] 生产成功: %s", new Date(), Thread.currentThread(), product));
+                } else {
+                    System.out.println(String.format("%s [%s] 生产失败: %s", new Date(), Thread.currentThread(), product));
+                }
             }
         };
 
         Runnable consumer = () -> {
             for (int i = 0; i < 10; i++) {
-                repository.consume();
+                Object product = repository.consume();
+
+                if (product != null) {
+                    System.out.println(String.format("%s [%s] 消费成功: %s", new Date(), Thread.currentThread(), product));
+                } else {
+                    System.out.println(String.format("%s [%s] 消费失败: %s", new Date(), Thread.currentThread(), product));
+                }
 
                 try {
                     Thread.sleep(new Random().nextInt(100));

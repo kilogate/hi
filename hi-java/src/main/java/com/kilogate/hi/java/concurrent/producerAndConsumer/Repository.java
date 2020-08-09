@@ -17,7 +17,7 @@ public interface Repository {
      *
      * @param product
      */
-    void produce(Object product);
+    boolean produce(Object product);
 
     /**
      * 消费产品

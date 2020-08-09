@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 /**
  * 仓库二：使用 Lock 和 Condition 实现
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2020/8/9 下午10:18
  **/
 public class Repository2 implements Repository {
@@ -23,33 +23,34 @@ public class Repository2 implements Repository {
     private final Condition fullCondition = lock.newCondition();
 
     @Override
-    public void produce(Object product) {
+    public boolean produce(Object product) {
         lock.lock();
 
         try {
-            doProduce(product);
+            return doProduce(product);
         } finally {
             lock.unlock();
         }
     }
 
-    private void doProduce(Object product) {
+    private boolean doProduce(Object product) {
         // 仓库已满，等待消费者消费
-        int retry = 0;
+        boolean retry = false;
         while (list.size() == MAX_SIZE) {
-            if (retry >= 3) {
-                logger.info(String.format("[%s] 生产失败: %s, 超过等待次数: %s，退出生产", Thread.currentThread(), product, retry++));
-                return;
+            if (retry) {
+                logger.info(String.format("[%s] 生产失败: %s，等待超时, 退出生产", Thread.currentThread(), product));
+                return false;
             }
 
             try {
                 logger.info(String.format("[%s] 生产失败: %s, 仓库已满，等待消费", Thread.currentThread(), product));
                 emptyCondition.await(10, TimeUnit.SECONDS);
-                retry++;
+
+                retry = true;
             } catch (InterruptedException e) {
                 e.printStackTrace();
-                logger.severe(String.format("[%s] 生产失败: %s，发生异常: %s", Thread.currentThread(), product, e.getMessage()));
-                return;
+                logger.severe(String.format("[%s] 生产失败: %s，发生异常: %s, 退出生产", Thread.currentThread(), product, e.getMessage()));
+                return false;
             }
         }
 
@@ -59,6 +60,8 @@ public class Repository2 implements Repository {
 
         // 通知所有消费者
         emptyCondition.signalAll();
+
+        return true;
     }
 
     @Override
@@ -74,20 +77,21 @@ public class Repository2 implements Repository {
 
     private Object doConsume() {
         // 仓库为空，等待生产者生产
-        int retry = 0;
+        boolean retry = false;
         while (list.size() == 0) {
-            if (retry >= 3) {
-                logger.info(String.format("[%s] 消费失败, 超过等待次数: %s，退出消费", Thread.currentThread(), retry++));
+            if (retry) {
+                logger.info(String.format("[%s] 消费失败, 等待超时，退出消费", Thread.currentThread()));
                 return null;
             }
 
             try {
                 logger.info(String.format("[%s] 消费失败, 仓库为空，等待生产", Thread.currentThread()));
                 fullCondition.await(10, TimeUnit.SECONDS);
-                retry++;
+
+                retry = true;
             } catch (InterruptedException e) {
                 e.printStackTrace();
-                logger.severe(String.format("[%s] 消费失败，发生异常: %s", Thread.currentThread(), e.getMessage()));
+                logger.severe(String.format("[%s] 消费失败，发生异常: %s, 退出消费", Thread.currentThread(), e.getMessage()));
                 return null;
             }
         }
