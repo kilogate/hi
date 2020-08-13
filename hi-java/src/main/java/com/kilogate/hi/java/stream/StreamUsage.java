@@ -1,13 +1,8 @@
 package com.kilogate.hi.java.stream;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.ConcurrentMap;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -101,45 +96,53 @@ public class StreamUsage {
 //        int max = summaryStatistics.getMax();
 //        int min = summaryStatistics.getMin();
 
-        Map<String, String> map1 = Stream.of("Tom", "Lask", "Jennifer").collect(Collectors.toMap(
-                String::toLowerCase,
-                String::toUpperCase));
+//        Map<String, String> map1 = Stream.of("Tom", "Lask", "Jennifer").collect(Collectors.toMap(
+//                String::toLowerCase,
+//                String::toUpperCase));
+//
+//        System.out.println(map1);
+//
+//        Map<String, String> map2 = Stream.of("Tom", "Lask", "Jennifer", "lask").collect(Collectors.toMap(
+//                String::toLowerCase,
+//                String::toUpperCase,
+//                (existingValue, newValue) -> existingValue));
+//
+//        System.out.println(map2);
+//
+//        LinkedHashMap<String, String> linkedHashMap = Stream.of("Tom", "Lask", "Jennifer", "lask").collect(Collectors.toMap(
+//                String::toLowerCase,
+//                String::toUpperCase,
+//                (existingValue, newValue) -> existingValue,
+//                LinkedHashMap::new
+//        ));
+//
+//        System.out.println(linkedHashMap);
+//
+//        Map<String, Set<String>> map3 = Stream.of(Locale.getAvailableLocales()).collect(Collectors.toMap(
+//                Locale::getDisplayCountry,
+//                l -> Collections.singleton(l.getDisplayLanguage()),
+//                (a, b) -> {
+//                    Set<String> set = new HashSet<>(a);
+//                    set.addAll(b);
+//                    return set;
+//                }
+//        ));
+//
+//        System.out.println(map3);
+//
+//        ConcurrentMap<String, String> concurrentMap = Stream.of("Tom", "Lask", "Jennifer").collect(Collectors.toConcurrentMap(
+//                String::toLowerCase,
+//                String::toUpperCase));
+//
+//        System.out.println(concurrentMap);
 
-        System.out.println(map1);
+        // 群组
+        Map<String, List<Locale>> stringListMap = Stream.of(Locale.getAvailableLocales()).collect(Collectors.groupingBy(Locale::getCountry));
+        System.out.println(stringListMap);
 
-        Map<String, String> map2 = Stream.of("Tom", "Lask", "Jennifer", "lask").collect(Collectors.toMap(
-                String::toLowerCase,
-                String::toUpperCase,
-                (existingValue, newValue) -> existingValue));
-
-        System.out.println(map2);
-
-        LinkedHashMap<String, String> linkedHashMap = Stream.of("Tom", "Lask", "Jennifer", "lask").collect(Collectors.toMap(
-                String::toLowerCase,
-                String::toUpperCase,
-                (existingValue, newValue) -> existingValue,
-                LinkedHashMap::new
-        ));
-
-        System.out.println(linkedHashMap);
-
-        Map<String, Set<String>> map3 = Stream.of(Locale.getAvailableLocales()).collect(Collectors.toMap(
-                Locale::getDisplayCountry,
-                l -> Collections.singleton(l.getDisplayLanguage()),
-                (a, b) -> {
-                    Set<String> set = new HashSet<>(a);
-                    set.addAll(b);
-                    return set;
-                }
-        ));
-
-        System.out.println(map3);
-
-        ConcurrentMap<String, String> concurrentMap = Stream.of("Tom", "Lask", "Jennifer").collect(Collectors.toConcurrentMap(
-                String::toLowerCase,
-                String::toUpperCase));
-
-        System.out.println(concurrentMap);
+        // 分区
+        Map<Boolean, List<Locale>> booleanListMap = Stream.of(Locale.getAvailableLocales()).collect(Collectors.partitioningBy(l -> l.getLanguage().equals("en")));
+        System.out.println(booleanListMap);
     }
 
     private static <T> void printStream(String title, Stream<T> stream) {
