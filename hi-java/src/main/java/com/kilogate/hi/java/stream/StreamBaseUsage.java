@@ -2,6 +2,7 @@ package com.kilogate.hi.java.stream;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 /**
@@ -25,6 +26,28 @@ public class StreamBaseUsage {
 
             if (i < size) {
                 System.out.print(list.get(i));
+            } else {
+                System.out.print("...");
+            }
+        }
+
+        System.out.println();
+    }
+
+    protected static <T> void printStream(String title, IntStream intStream) {
+        int size = 10;
+
+        int[] ints = intStream.limit(size + 1).toArray();
+
+        System.out.print(title + ": ");
+
+        for (int i = 0; i < ints.length; i++) {
+            if (i > 0) {
+                System.out.print(", ");
+            }
+
+            if (i < size) {
+                System.out.print(ints[i]);
             } else {
                 System.out.print("...");
             }
