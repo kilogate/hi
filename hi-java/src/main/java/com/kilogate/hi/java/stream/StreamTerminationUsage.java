@@ -130,6 +130,17 @@ public class StreamTerminationUsage extends StreamBaseUsage {
 
         Map<String, IntSummaryStatistics> summaryStatisticsMap = generateCityStream().collect(Collectors.groupingBy(City::getState, Collectors.summarizingInt(City::getPopulation)));
         System.out.println(summaryStatisticsMap);
+
+        // 约简操作
+
+        Optional<Integer> reduce1 = Stream.of(1, 2, 3).reduce(Integer::sum);
+        System.out.println(reduce1.orElse(0));
+
+        Integer reduce2 = Stream.of(1, 2, 3).reduce(0, Integer::sum);
+        System.out.println(reduce2);
+
+        Integer reduce3 = Stream.of("Tom", "Lask", "Jennifer").reduce(0, (total, name) -> total + name.length(), (total1, total2) -> total1 + total2);
+        System.out.println(reduce3);
     }
 
     private static Stream<City> generateCityStream() {
