@@ -1,12 +1,13 @@
 package com.kilogate.hi.java.io.file;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
-import java.util.Scanner;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.stream.Stream;
 
 /**
  * 文本输入输出的用法
@@ -14,31 +15,20 @@ import java.util.Scanner;
  * @author kilogate
  * @create 2020/8/29 17:32
  **/
-public class TextIOUsage {
-    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException {
-        Student student1 = new Student(1L, "Lask", 28);
-        Student student2 = new Student(2L, "Jeff", 30);
+public class TextIOUsage2 {
+    public static void main(String[] args) throws IOException {
+        Stream<Student> studentStream = Stream.of(new Student(1L, "Lask", 28), new Student(2L, "Jeff", 30));
 
-        Student[] students = new Student[]{student1, student2};
-        String filename = "/tmp/students.txt";
+        String filename = "/tmp/students2.txt";
 
         // write students
-        try (PrintWriter printWriter = new PrintWriter(filename, StandardCharsets.UTF_8.name());) {
-            writeStudents(students, printWriter);
+        try (PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(new FileOutputStream(filename, true), StandardCharsets.UTF_8.name()))) {
+            studentStream.forEach(student -> writeStudent(student, printWriter));
         }
 
         // read students
-        try (Scanner scanner = new Scanner(new FileInputStream(filename), StandardCharsets.UTF_8.name())) {
-            Student[] newStudents = readStudents(scanner);
-            System.out.println(Arrays.toString(newStudents));
-        }
-    }
-
-    private static void writeStudents(Student[] students, PrintWriter printWriter) {
-        printWriter.println(students.length);
-
-        for (Student student : students) {
-            writeStudent(student, printWriter);
+        try (Stream<String> lines = Files.lines(Paths.get(filename), StandardCharsets.UTF_8)) {
+            lines.map(TextIOUsage2::readStudent).forEach(System.out::println);
         }
     }
 
@@ -46,21 +36,7 @@ public class TextIOUsage {
         printWriter.printf("%s|%s|%s%n", student.getSno(), student.getName(), student.getAge());
     }
 
-    private static Student[] readStudents(Scanner scanner) {
-        int length = scanner.nextInt();
-        scanner.nextLine();
-
-        Student[] students = new Student[length];
-
-        for (int i = 0; i < length; i++) {
-            students[i] = readStudent(scanner);
-        }
-
-        return students;
-    }
-
-    private static Student readStudent(Scanner scanner) {
-        String line = scanner.nextLine();
+    private static Student readStudent(String line) {
         String[] tokens = line.split("\\|");
 
         Long sno = Long.valueOf(tokens[0]);
