@@ -46,6 +46,6 @@ public class FilesUsage {
 
         // 读入器写出器
         BufferedReader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8);
-        BufferedWriter writer = Files.newBufferedWriter(path, StandardCharsets.UTF_8);
+        BufferedWriter writer = Files.newBufferedWriter(path, StandardCharsets.UTF_8, StandardOpenOption.CREATE, StandardOpenOption.APPEND);
     }
 }
