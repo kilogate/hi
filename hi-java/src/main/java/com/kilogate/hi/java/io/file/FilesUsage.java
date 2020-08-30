@@ -11,7 +11,14 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.nio.file.StandardOpenOption;
+import java.nio.file.attribute.BasicFileAttributes;
+import java.nio.file.attribute.FileTime;
+import java.nio.file.attribute.GroupPrincipal;
+import java.nio.file.attribute.PosixFileAttributes;
+import java.nio.file.attribute.PosixFilePermission;
+import java.nio.file.attribute.UserPrincipal;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -65,14 +72,45 @@ public class FilesUsage {
         Path tempFile2 = Files.createTempFile(Paths.get("/tmp"), "tmp", ".txt");
 
         // 复制文件
-        Path copy = Files.copy(path, Paths.get("/tmp/newTst.txt"), StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.COPY_ATTRIBUTES);
+        Path copy = Files.copy(path, Paths.get("/tmp/tst_copy.txt"), StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.COPY_ATTRIBUTES);
 
         // 移动文件
-        Path move = Files.move(copy, Paths.get("/tmp/TST.txt"), StandardCopyOption.ATOMIC_MOVE);
+        Path move = Files.move(copy, Paths.get("/tmp/tst_move.txt"), StandardCopyOption.ATOMIC_MOVE);
 
         // 删除文件
         Files.delete(move);
         boolean b = Files.deleteIfExists(move);
+
+        // 获取文件信息
+        boolean exists = Files.exists(path);
+        boolean hidden = Files.isHidden(path);
+
+        boolean readable = Files.isReadable(path);
+        boolean writable = Files.isWritable(path);
+        boolean executable = Files.isExecutable(path);
+
+        boolean regularFile = Files.isRegularFile(path);
+        boolean directory = Files.isDirectory(path);
+        boolean symbolicLink = Files.isSymbolicLink(path);
+
+        long size = Files.size(path);
+
+        UserPrincipal owner = Files.getOwner(path);
+
+        BasicFileAttributes basicFileAttributes = Files.readAttributes(path, BasicFileAttributes.class);
+        FileTime creationTime = basicFileAttributes.creationTime();
+        FileTime lastAccessTime = basicFileAttributes.lastAccessTime();
+        FileTime lastModifiedTime = basicFileAttributes.lastModifiedTime();
+        boolean regularFile1 = basicFileAttributes.isRegularFile();
+        boolean directory1 = basicFileAttributes.isDirectory();
+        boolean symbolicLink1 = basicFileAttributes.isSymbolicLink();
+        long size1 = basicFileAttributes.size();
+        Object fileKey = basicFileAttributes.fileKey();
+
+        PosixFileAttributes posixFileAttributes = Files.readAttributes(path, PosixFileAttributes.class);
+        UserPrincipal owner2 = posixFileAttributes.owner();
+        GroupPrincipal group = posixFileAttributes.group();
+        Set<PosixFilePermission> permissions = posixFileAttributes.permissions();
 
         System.out.println();
     }
