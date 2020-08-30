@@ -9,6 +9,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.nio.file.StandardOpenOption;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -49,11 +50,11 @@ public class FilesUsage {
         BufferedWriter writer = Files.newBufferedWriter(path, StandardCharsets.UTF_8, StandardOpenOption.CREATE, StandardOpenOption.APPEND);
 
         // 创建目录
-        Path directory1 = Files.createDirectory(Paths.get("/tmp/a"));
+//        Path directory1 = Files.createDirectory(Paths.get("/tmp/a"));
         Path directories = Files.createDirectories(Paths.get("/tmp/a/b/c/d/e"));
 
         // 创建文件
-        Path file = Files.createFile(Paths.get("/tmp/a/tst.txt"));
+//        Path file = Files.createFile(Paths.get("/tmp/a/tst.txt"));
 
         // 创建临时目录
         Path tempDirectory1 = Files.createTempDirectory("tmp");
@@ -62,6 +63,16 @@ public class FilesUsage {
         // 创建临时文件
         Path tempFile1 = Files.createTempFile("tmp", ".txt");
         Path tempFile2 = Files.createTempFile(Paths.get("/tmp"), "tmp", ".txt");
+
+        // 复制文件
+        Path copy = Files.copy(path, Paths.get("/tmp/newTst.txt"), StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.COPY_ATTRIBUTES);
+
+        // 移动文件
+        Path move = Files.move(copy, Paths.get("/tmp/TST.txt"), StandardCopyOption.ATOMIC_MOVE);
+
+        // 删除文件
+        Files.delete(move);
+        boolean b = Files.deleteIfExists(move);
 
         System.out.println();
     }
