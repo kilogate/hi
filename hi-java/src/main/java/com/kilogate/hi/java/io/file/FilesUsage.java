@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.FileVisitOption;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -111,6 +112,23 @@ public class FilesUsage {
         UserPrincipal owner2 = posixFileAttributes.owner();
         GroupPrincipal group = posixFileAttributes.group();
         Set<PosixFilePermission> permissions = posixFileAttributes.permissions();
+
+        // 访问目录中的项
+        try (Stream<Path> list = Files.list(Paths.get(""))) {
+            list.forEach(System.out::println);
+        }
+
+        try (Stream<Path> walk = Files.walk(Paths.get(""))) {
+            walk.forEach(System.out::println);
+        }
+
+        try (Stream<Path> walk = Files.walk(Paths.get(""), 1)) {
+            walk.forEach(System.out::println);
+        }
+
+        try (Stream<Path> find = Files.find(Paths.get("hi-java"), 10, (p, a) -> p.toFile().getName().endsWith(".java") && a.isRegularFile(), FileVisitOption.FOLLOW_LINKS)) {
+            find.forEach(System.out::println);
+        }
 
         System.out.println();
     }
