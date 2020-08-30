@@ -1,6 +1,10 @@
 package com.kilogate.hi.java.io.file;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -35,5 +39,13 @@ public class FilesUsage {
         // 读文件
         List<String> allLines = Files.readAllLines(path, StandardCharsets.UTF_8);
         System.out.println(allLines);
+
+        // 输入输出流
+        InputStream inputStream = Files.newInputStream(path);
+        OutputStream outputStream = Files.newOutputStream(path, StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+
+        // 读入器写出器
+        BufferedReader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8);
+        BufferedWriter writer = Files.newBufferedWriter(path, StandardCharsets.UTF_8);
     }
 }
