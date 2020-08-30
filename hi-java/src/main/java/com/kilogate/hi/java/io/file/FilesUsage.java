@@ -6,7 +6,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.DirectoryStream;
 import java.nio.file.FileVisitOption;
+import java.nio.file.FileVisitResult;
+import java.nio.file.FileVisitor;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -18,6 +21,7 @@ import java.nio.file.attribute.GroupPrincipal;
 import java.nio.file.attribute.PosixFileAttributes;
 import java.nio.file.attribute.PosixFilePermission;
 import java.nio.file.attribute.UserPrincipal;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -83,6 +87,7 @@ public class FilesUsage {
         boolean b = Files.deleteIfExists(move);
 
         // 获取文件信息
+
         boolean exists = Files.exists(path);
         boolean hidden = Files.isHidden(path);
 
@@ -114,6 +119,7 @@ public class FilesUsage {
         Set<PosixFilePermission> permissions = posixFileAttributes.permissions();
 
         // 访问目录中的项
+
         try (Stream<Path> list = Files.list(Paths.get(""))) {
             list.forEach(System.out::println);
         }
@@ -129,6 +135,45 @@ public class FilesUsage {
         try (Stream<Path> find = Files.find(Paths.get("hi-java"), 10, (p, a) -> p.toFile().getName().endsWith(".java") && a.isRegularFile(), FileVisitOption.FOLLOW_LINKS)) {
             find.forEach(System.out::println);
         }
+
+        // 使用目录流
+
+        try (DirectoryStream<Path> paths = Files.newDirectoryStream(Paths.get(""), "*.xml")) {
+            for (Path p : paths) {
+                System.out.println(p);
+            }
+        }
+
+        Set<FileVisitOption> options = new HashSet<>();
+        options.add(FileVisitOption.FOLLOW_LINKS);
+
+        FileVisitor fileVisitor = new FileVisitor<Path>() {
+            @Override
+            public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
+                System.out.println(String.format("preVisitDirectory: %s", dir.toAbsolutePath()));
+                return FileVisitResult.CONTINUE;
+            }
+
+            @Override
+            public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+                System.out.println(String.format("visitFile: %s", file.toAbsolutePath()));
+                return FileVisitResult.CONTINUE;
+            }
+
+            @Override
+            public FileVisitResult visitFileFailed(Path file, IOException exc) throws IOException {
+                System.out.println(String.format("visitFileFailed: %s", file.toAbsolutePath()));
+                return FileVisitResult.CONTINUE;
+            }
+
+            @Override
+            public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
+                System.out.println(String.format("postVisitDirectory: %s", dir.toAbsolutePath()));
+                return FileVisitResult.CONTINUE;
+            }
+        };
+
+        Files.walkFileTree(Paths.get("hi-java"), options, 10, fileVisitor);
 
         System.out.println();
     }
