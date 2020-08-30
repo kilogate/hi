@@ -47,5 +47,22 @@ public class FilesUsage {
         // 读入器写出器
         BufferedReader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8);
         BufferedWriter writer = Files.newBufferedWriter(path, StandardCharsets.UTF_8, StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+
+        // 创建目录
+        Path directory1 = Files.createDirectory(Paths.get("/tmp/a"));
+        Path directories = Files.createDirectories(Paths.get("/tmp/a/b/c/d/e"));
+
+        // 创建文件
+        Path file = Files.createFile(Paths.get("/tmp/a/tst.txt"));
+
+        // 创建临时目录
+        Path tempDirectory1 = Files.createTempDirectory("tmp");
+        Path tempDirectory2 = Files.createTempDirectory(Paths.get("/tmp"), "tmp");
+
+        // 创建临时文件
+        Path tempFile1 = Files.createTempFile("tmp", ".txt");
+        Path tempFile2 = Files.createTempFile(Paths.get("/tmp"), "tmp", ".txt");
+
+        System.out.println();
     }
 }
