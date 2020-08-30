@@ -7,6 +7,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.DirectoryStream;
+import java.nio.file.FileSystem;
+import java.nio.file.FileSystems;
 import java.nio.file.FileVisitOption;
 import java.nio.file.FileVisitResult;
 import java.nio.file.FileVisitor;
@@ -174,6 +176,13 @@ public class FilesUsage {
         };
 
         Files.walkFileTree(Paths.get("hi-java"), options, 10, fileVisitor);
+
+        // ZIP 文件系统
+        FileSystem fileSystem = FileSystems.newFileSystem(Paths.get("/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib/rt.jar"), null);
+
+        try (Stream<Path> walk = Files.walk(fileSystem.getPath("/"))) {
+            walk.forEach(System.out::println);
+        }
 
         System.out.println();
     }

@@ -28,13 +28,13 @@ public class PathUsage {
         Path path4 = absolutePath.resolveSibling("/a/b/c");
         System.out.println("path4: " + path4);
 
-        Path path5 = absolutePath.relativize(Paths.get("/Users/fengquanwei/IdeaProjects/hi/a/b/c"));
+        Path path5 = absolutePath.relativize(Paths.get("/Users/kilogate/IdeaProjects/hi/a/b/c"));
         System.out.println("path5: " + path5);
 
-        Path path6 = absolutePath.relativize(Paths.get("/Users/fengquanwei/IdeaProjects/hello/a/b/c"));
+        Path path6 = absolutePath.relativize(Paths.get("/Users/kilogate/IdeaProjects/hello/a/b/c"));
         System.out.println("path6: " + path6);
 
-        Path path7 = Paths.get("/Users/fengquanwei/IdeaProjects/./hello/../hi/a/b/c").normalize();
+        Path path7 = Paths.get("/Users/kilogate/IdeaProjects/./hello/../hi/a/b/c").normalize();
         System.out.println("path7: " + path7);
 
         System.out.println(path.getParent());
