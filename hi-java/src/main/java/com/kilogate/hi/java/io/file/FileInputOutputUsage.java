@@ -1,4 +1,4 @@
-package com.kilogate.hi.java.basic;
+package com.kilogate.hi.java.io.file;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -13,7 +13,7 @@ import java.util.Scanner;
  * @author kilogate
  * @create 2020/8/5 上午12:10
  **/
-public class FileIoUsage {
+public class FileInputOutputUsage {
     public static void main(String[] args) throws FileNotFoundException {
         String filename = "/Users/kilogate/a.txt";
 

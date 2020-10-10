@@ -1,4 +1,4 @@
-package com.kilogate.hi.java.concurrent.basic.atomic;
+package com.kilogate.hi.java.concurrent.atomic;
 
 import java.util.concurrent.atomic.AtomicInteger;
 

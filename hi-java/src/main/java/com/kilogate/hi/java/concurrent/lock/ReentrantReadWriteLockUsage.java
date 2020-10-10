@@ -1,4 +1,4 @@
-package com.kilogate.hi.java.concurrent.basic.lock;
+package com.kilogate.hi.java.concurrent.lock;
 
 import java.util.Date;
 import java.util.Random;

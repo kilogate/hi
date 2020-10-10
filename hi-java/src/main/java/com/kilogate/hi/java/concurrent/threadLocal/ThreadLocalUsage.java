@@ -1,4 +1,4 @@
-package com.kilogate.hi.java.concurrent.basic.threadLocal;
+package com.kilogate.hi.java.concurrent.threadLocal;
 
 /**
  * 线程局部变量的用法 todo
