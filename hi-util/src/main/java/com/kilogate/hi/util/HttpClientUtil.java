@@ -27,7 +27,7 @@ public class HttpClientUtil {
         CloseableHttpClient httpClient = HttpClients.createDefault();
 
         // http get 请求
-        HttpGet httpGet = new HttpGet("http://nc.hz.service.163.org/playlist/open/nc/playlist/detail?pid=SP1561815733840");
+        HttpGet httpGet = new HttpGet("http://127.0.0.1:12345/a/b/c?id=123");
 
         // 执行请求获取 http 响应
         CloseableHttpResponse httpResponse = httpClient.execute(httpGet);
