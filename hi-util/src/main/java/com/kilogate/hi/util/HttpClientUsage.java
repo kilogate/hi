@@ -23,7 +23,7 @@ import java.nio.charset.StandardCharsets;
  **/
 public class HttpClientUsage {
     public static void main(String[] args) throws IOException {
-        testResponseHandler();
+        testAbort();
     }
 
     /**
@@ -114,5 +114,69 @@ public class HttpClientUsage {
         // 执行请求获取 http 响应，由响应处理器处理响应
         Object result = httpClient.execute(httpGet, responseHandler);
         System.out.println(result);
+    }
+
+    /**
+     * 测试关闭连接
+     */
+    private static void testClose() throws IOException {
+        // http 客户端
+        try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
+            // http get 请求
+            HttpGet httpGet = new HttpGet("http://www.kaops.com/");
+
+            // 执行请求获取 http 响应
+            try (CloseableHttpResponse httpResponse = httpClient.execute(httpGet)) {
+                if (httpResponse == null) {
+                    return;
+                }
+
+                // 响应状态行
+                StatusLine statusLine = httpResponse.getStatusLine();
+                System.out.println("response status line: " + statusLine);
+
+                // 响应内容
+                HttpEntity httpEntity = httpResponse.getEntity();
+                String content = EntityUtils.toString(httpEntity, StandardCharsets.UTF_8);
+                System.out.println("response content: " + content);
+            }
+        }
+    }
+
+    /**
+     * 测试中止请求
+     */
+    private static void testAbort() throws IOException {
+        // http 客户端
+        try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
+            // http get 请求
+            HttpGet httpGet = new HttpGet("http://www.kaops.com/");
+
+            // 执行请求获取 http 响应
+            try (CloseableHttpResponse httpResponse = httpClient.execute(httpGet)) {
+                if (httpResponse == null) {
+                    return;
+                }
+
+                // 响应状态行
+                System.out.println("response status line 1: " + httpResponse.getStatusLine());
+
+                // 中止请求
+                httpGet.abort();
+
+                System.out.println("response status line 2: " + httpResponse.getStatusLine());
+            }
+
+
+            // 执行请求获取 http 响应
+            try (CloseableHttpResponse httpResponse = httpClient.execute(httpGet)) {
+                if (httpResponse == null) {
+                    return;
+                }
+
+                // 响应状态行
+                System.out.println("response status line 3: " + httpResponse.getStatusLine());
+            }
+        }
     }
 }
