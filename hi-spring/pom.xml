@@ -11,5 +11,12 @@
 
     <artifactId>hi-spring</artifactId>
 
-    
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>4.3.29.RELEASE</version>
+        </dependency>
+    </dependencies>
+
 </project>
