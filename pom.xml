@@ -13,6 +13,7 @@
         <module>hi-spring</module>
         <module>hi-util</module>
         <module>hi-commons</module>
+        <module>hi-guava</module>
     </modules>
 
     <build>
