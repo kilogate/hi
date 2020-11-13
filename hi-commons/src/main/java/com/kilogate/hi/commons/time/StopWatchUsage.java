@@ -24,8 +24,6 @@ public class StopWatchUsage {
             e.printStackTrace();
         }
 
-        stopWatch.stop();
-
         System.out.println(stopWatch.getTime(TimeUnit.SECONDS));
         System.out.println(stopWatch.getTime(TimeUnit.MILLISECONDS));
         System.out.println(stopWatch.getTime(TimeUnit.MICROSECONDS));
@@ -33,20 +31,17 @@ public class StopWatchUsage {
 
         // task 2
 
-        stopWatch.reset();
-        stopWatch.start();
-
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-        stopWatch.stop();
-
         System.out.println(stopWatch.getTime(TimeUnit.SECONDS));
         System.out.println(stopWatch.getTime(TimeUnit.MILLISECONDS));
         System.out.println(stopWatch.getTime(TimeUnit.MICROSECONDS));
         System.out.println(stopWatch.getTime(TimeUnit.NANOSECONDS));
+
+        stopWatch.stop();
     }
 }
