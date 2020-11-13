@@ -12,6 +12,7 @@
         <module>hi-java</module>
         <module>hi-spring</module>
         <module>hi-util</module>
+        <module>hi-commons</module>
     </modules>
 
     <build>
