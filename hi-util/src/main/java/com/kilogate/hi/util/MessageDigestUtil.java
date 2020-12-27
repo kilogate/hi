@@ -33,28 +33,28 @@ public class MessageDigestUtil {
         System.out.println();
     }
 
-    public static String md5(String data) {
-        return digest(data, "MD5");
+    public static String md5(String message) {
+        return digest(message, "MD5");
     }
 
-    public static String sha1(String data) {
-        return digest(data, "SHA-1");
+    public static String sha1(String message) {
+        return digest(message, "SHA-1");
     }
 
-    public static String sha256(String data) {
-        return digest(data, "SHA-256");
+    public static String sha256(String message) {
+        return digest(message, "SHA-256");
     }
 
-    public static String sha384(String data) {
-        return digest(data, "SHA-384");
+    public static String sha384(String message) {
+        return digest(message, "SHA-384");
     }
 
-    public static String sha512(String data) {
-        return digest(data, "SHA-512");
+    public static String sha512(String message) {
+        return digest(message, "SHA-512");
     }
 
-    private static String digest(String data, String algorithm) {
-        if (data == null || data.length() == 0 || algorithm == null || algorithm.length() == 0) {
+    private static String digest(String message, String algorithm) {
+        if (message == null || message.length() == 0 || algorithm == null || algorithm.length() == 0) {
             return null;
         }
 
@@ -69,7 +69,7 @@ public class MessageDigestUtil {
             return null;
         }
 
-        byte[] input = data.getBytes(StandardCharsets.UTF_8);
+        byte[] input = message.getBytes(StandardCharsets.UTF_8);
 
         byte[] digest = messageDigest.digest(input);
 
