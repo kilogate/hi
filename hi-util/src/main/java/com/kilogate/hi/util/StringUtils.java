@@ -13,14 +13,23 @@ public class StringUtils {
     private static final Pattern HALF_CHAR_PATTERN = Pattern.compile("[A-Za-z0-9\u0000-\u00FF\uFF1b]");
     private static final Pattern WHOLE_CHAR_PATTERN = Pattern.compile("[\u4E00-\u9FA5\uF900-\uFA2D\uFF00-\uFF1a\uFF1c-\uFFFF\u3002\u3001\u201c\u201d\u2018\u2019\u300a\u300b\u3008\u3009\u3010\u3011\u300e\u300F\u300c\u300d\uFe43\uFe44\u3014\u3015\u2026\u2014\uFe4F]");
 
+    /**
+     * 转二进制字符串
+     */
     public static String toBinaryString(byte b) {
         return String.format("%8s", Integer.toBinaryString(b & 0xFF)).replace(' ', '0');
     }
 
+    /**
+     * 转二进制字符串
+     */
     public static String toBinaryString(int i) {
         return String.format("%32s", Integer.toBinaryString(i)).replace(' ', '0');
     }
 
+    /**
+     * 转二进制字符串
+     */
     public static String toBinaryString(long l) {
         return String.format("%64s", Long.toBinaryString(l)).replace(' ', '0');
     }
@@ -50,6 +59,9 @@ public class StringUtils {
         return length;
     }
 
+    /**
+     * 测试
+     */
     public static void main(String[] args) {
         for (byte i = -10; i < 10; i++) {
             System.out.println(toBinaryString(i));
