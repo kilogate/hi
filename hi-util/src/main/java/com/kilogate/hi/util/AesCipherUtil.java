@@ -15,12 +15,12 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
 /**
- * 加密工具类
+ * AES 加密工具类
  *
  * @author kilogate
  * @create 2020/12/27 23:39
  **/
-public class CipherUtil {
+public class AesCipherUtil {
     public static void main(String[] args) throws IllegalBlockSizeException, InvalidKeyException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException, IOException {
         String data = "哈喽";
         String seed = "种子";
