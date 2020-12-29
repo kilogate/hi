@@ -27,6 +27,19 @@ public class Base64Util {
     }
 
     /**
+     * URL 安全的 base64 解码
+     */
+    public static String urlSafeDecode(String data) {
+        if (data == null || data.length() == 0) {
+            return null;
+        }
+
+        data = data.replaceAll("-", "\\+").replaceAll("_", "/").replaceAll("\\.", "=");
+
+        return decode(data);
+    }
+
+    /**
      * base64 编码
      */
     public static String encode(String data) {
@@ -35,6 +48,17 @@ public class Base64Util {
         }
 
         return doEncode(data.getBytes(StandardCharsets.UTF_8));
+    }
+
+    /**
+     * base64 解码
+     */
+    public static String decode(String data) {
+        if (data == null || data.length() == 0) {
+            return null;
+        }
+
+        return new String(doDecode(data), StandardCharsets.UTF_8);
     }
 
     /**
@@ -49,44 +73,25 @@ public class Base64Util {
     }
 
     /**
-     * URL 安全的 base64 解码
-     */
-    public static String urlSafeDecode(String data) throws IOException {
-        if (data == null || data.length() == 0) {
-            return null;
-        }
-
-        data = data.replaceAll("-", "\\+").replaceAll("_", "/").replaceAll("\\.", "=");
-
-        return decode(data);
-    }
-
-    /**
      * base64 解码
      */
-    public static String decode(String data) throws IOException {
+    public static byte[] doDecode(String data) {
         if (data == null || data.length() == 0) {
             return null;
         }
 
-        return new String(doDecode(data), StandardCharsets.UTF_8);
-    }
-
-    /**
-     * base64 解码
-     */
-    public static byte[] doDecode(String data) throws IOException {
-        if (data == null || data.length() == 0) {
+        try {
+            return new BASE64Decoder().decodeBuffer(data);
+        } catch (IOException e) {
+            e.printStackTrace();
             return null;
         }
-
-        return new BASE64Decoder().decodeBuffer(data);
     }
 
     /**
      * 测试
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         // 编码
         String urlSafeEncode = urlSafeEncode("哈喽");
         System.out.println(urlSafeEncode);
@@ -96,8 +101,9 @@ public class Base64Util {
 
         // 解码
         String urlSafeDecode = urlSafeDecode(urlSafeEncode);
-        String decode = decode(encode);
+        System.out.println(urlSafeDecode);
 
-        System.out.println();
+        String decode = decode(encode);
+        System.out.println(decode);
     }
 }

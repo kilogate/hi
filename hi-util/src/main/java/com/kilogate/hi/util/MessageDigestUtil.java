@@ -12,6 +12,77 @@ import java.util.Arrays;
  * @create 2020/12/27 17:32
  **/
 public class MessageDigestUtil {
+    /**
+     * md5
+     */
+    public static byte[] md5(String message) {
+        return digest(message, "MD5");
+    }
+
+    /**
+     * md5
+     */
+    public static String md5ToHexString(String message) {
+        return digestToHexString(message, "MD5");
+    }
+
+    /**
+     * sha1
+     */
+    public static String sha1ToHexString(String message) {
+        return digestToHexString(message, "SHA-1");
+    }
+
+    /**
+     * sha256
+     */
+    public static String sha256ToHexString(String message) {
+        return digestToHexString(message, "SHA-256");
+    }
+
+    /**
+     * sha384
+     */
+    public static String sha384ToHexString(String message) {
+        return digestToHexString(message, "SHA-384");
+    }
+
+    /**
+     * sha512
+     */
+    public static String sha512ToHexString(String message) {
+        return digestToHexString(message, "SHA-512");
+    }
+
+    private static String digestToHexString(String message, String algorithm) {
+        byte[] digest = digest(message, algorithm);
+
+        if (digest == null || digest.length == 0) {
+            return null;
+        }
+
+        return ByteArrayUtil.byteArrayToHexString(digest);
+    }
+
+    private static byte[] digest(String message, String algorithm) {
+        if (message == null || message.length() == 0 || algorithm == null || algorithm.length() == 0) {
+            return null;
+        }
+
+        MessageDigest messageDigest;
+        try {
+            messageDigest = MessageDigest.getInstance(algorithm);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return messageDigest.digest(message.getBytes(StandardCharsets.UTF_8));
+    }
+
+    /**
+     * 测试
+     */
     public static void main(String[] args) {
         System.out.println("MD5");
         System.out.println(Arrays.toString(md5("哈哈")));
@@ -36,62 +107,5 @@ public class MessageDigestUtil {
         System.out.println("SHA-512");
         System.out.println(sha512ToHexString("哈哈"));
         System.out.println();
-    }
-
-    public static byte[] md5(String message) {
-        return digest(message, "MD5");
-    }
-
-    public static String md5ToHexString(String message) {
-        return digestToHexString(message, "MD5");
-    }
-
-    public static String sha1ToHexString(String message) {
-        return digestToHexString(message, "SHA-1");
-    }
-
-    public static String sha256ToHexString(String message) {
-        return digestToHexString(message, "SHA-256");
-    }
-
-    public static String sha384ToHexString(String message) {
-        return digestToHexString(message, "SHA-384");
-    }
-
-    public static String sha512ToHexString(String message) {
-        return digestToHexString(message, "SHA-512");
-    }
-
-    private static String digestToHexString(String message, String algorithm) {
-        byte[] digest = digest(message, algorithm);
-
-        if (digest == null || digest.length == 0) {
-            return null;
-        }
-
-        return ByteArrayUtil.byteArrayToHexString(digest);
-    }
-
-    private static byte[] digest(String message, String algorithm) {
-        if (message == null || message.length() == 0 || algorithm == null || algorithm.length() == 0) {
-            return null;
-        }
-
-        MessageDigest messageDigest = null;
-        try {
-            messageDigest = MessageDigest.getInstance(algorithm);
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-
-        if (messageDigest == null) {
-            return null;
-        }
-
-        byte[] input = message.getBytes(StandardCharsets.UTF_8);
-
-        byte[] digest = messageDigest.digest(input);
-
-        return digest;
     }
 }
