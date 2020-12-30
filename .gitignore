@@ -14,3 +14,6 @@ Servers/
 
 ## mac
 .DS_Store
+
+## log
+logs/
