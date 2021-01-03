@@ -73,7 +73,7 @@ public class ExecSql {
         }
     }
 
-    private static void printResultSet(String sql, ResultSet resultSet) throws SQLException {
+    public static void printResultSet(String sql, ResultSet resultSet) throws SQLException {
         System.out.println("==================== query result ====================");
         System.out.println("sql: " + sql);
         System.out.println("resultSet: ");
