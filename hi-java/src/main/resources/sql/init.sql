@@ -28,3 +28,6 @@ INSERT INTO Publishers VALUES ('1', '清华出版社', 'www.qinghua.com');
 INSERT INTO Publishers VALUES ('2', '北大出版社', 'www.beida.com');
 INSERT INTO Publishers VALUES ('3', '机械出版社', 'www.jixie.com');
 SELECT * FROM Publishers;
+
+DROP TABLE IF EXISTS `Covers`;
+CREATE TABLE `Covers` (`ISBN` varchar(30) DEFAULT NULL, `cover` longblob) ENGINE=InnoDB DEFAULT CHARSET=utf8;
