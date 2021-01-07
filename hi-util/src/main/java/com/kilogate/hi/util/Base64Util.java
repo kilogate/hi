@@ -1,10 +1,7 @@
 package com.kilogate.hi.util;
 
-import sun.misc.BASE64Decoder;
-import sun.misc.BASE64Encoder;
-
-import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 
 /**
  * base64 工具类
@@ -14,33 +11,7 @@ import java.nio.charset.StandardCharsets;
  **/
 public class Base64Util {
     /**
-     * URL 安全的 base64 编码
-     */
-    public static String urlSafeEncode(String data) {
-        String encode = encode(data);
-
-        if (encode == null || encode.length() == 0) {
-            return null;
-        }
-
-        return encode.replaceAll("\\+", "-").replaceAll("/", "_").replaceAll("=", "\\.");
-    }
-
-    /**
-     * URL 安全的 base64 解码
-     */
-    public static String urlSafeDecode(String data) {
-        if (data == null || data.length() == 0) {
-            return null;
-        }
-
-        data = data.replaceAll("-", "\\+").replaceAll("_", "/").replaceAll("\\.", "=");
-
-        return decode(data);
-    }
-
-    /**
-     * base64 编码
+     * base64编码
      */
     public static String encode(String data) {
         if (data == null || data.length() == 0) {
@@ -51,7 +22,18 @@ public class Base64Util {
     }
 
     /**
-     * base64 解码
+     * base64编码
+     */
+    public static String doEncode(byte[] data) {
+        if (data == null || data.length == 0) {
+            return null;
+        }
+
+        return Base64.getEncoder().encodeToString(data);
+    }
+
+    /**
+     * base64解码
      */
     public static String decode(String data) {
         if (data == null || data.length() == 0) {
@@ -62,48 +44,80 @@ public class Base64Util {
     }
 
     /**
-     * base64 编码
-     */
-    public static String doEncode(byte[] data) {
-        if (data == null || data.length == 0) {
-            return null;
-        }
-
-        return new BASE64Encoder().encodeBuffer(data);
-    }
-
-    /**
-     * base64 解码
+     * base64解码
      */
     public static byte[] doDecode(String data) {
         if (data == null || data.length() == 0) {
             return null;
         }
 
-        try {
-            return new BASE64Decoder().decodeBuffer(data);
-        } catch (IOException e) {
-            e.printStackTrace();
+        return Base64.getDecoder().decode(data);
+    }
+
+    /**
+     * URL安全的base64编码
+     */
+    public static String urlEncode(String data) {
+        if (data == null || data.length() == 0) {
             return null;
         }
+
+        return doUrlEncode(data.getBytes(StandardCharsets.UTF_8));
+    }
+
+    /**
+     * URL安全的base64编码
+     */
+    public static String doUrlEncode(byte[] data) {
+        if (data == null || data.length == 0) {
+            return null;
+        }
+
+        return Base64.getUrlEncoder().encodeToString(data);
+    }
+
+    /**
+     * URL安全的base64解码
+     */
+    public static String urlDecode(String data) {
+        if (data == null || data.length() == 0) {
+            return null;
+        }
+
+        return new String(doUrlDecode(data), StandardCharsets.UTF_8);
+    }
+
+    /**
+     * URL安全的base64解码
+     */
+    public static byte[] doUrlDecode(String data) {
+        if (data == null || data.length() == 0) {
+            return null;
+        }
+
+        return Base64.getUrlDecoder().decode(data);
     }
 
     /**
      * 测试
      */
     public static void main(String[] args) {
-        // 编码
-        String urlSafeEncode = urlSafeEncode("哈喽");
-        System.out.println(urlSafeEncode);
+        String data = "这是测试数据";
 
-        String encode = encode("哈喽");
+        // base64编码
+        String encode = encode(data);
         System.out.println(encode);
 
-        // 解码
-        String urlSafeDecode = urlSafeDecode(urlSafeEncode);
-        System.out.println(urlSafeDecode);
-
+        // base64解码
         String decode = decode(encode);
         System.out.println(decode);
+
+        // URL安全的base64编码
+        String urlEncode = urlEncode(data);
+        System.out.println(urlEncode);
+
+        // URL安全的base64解码
+        String urlDecode = urlDecode(urlEncode);
+        System.out.println(urlDecode);
     }
 }
