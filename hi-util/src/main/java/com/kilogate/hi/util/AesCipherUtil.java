@@ -1,8 +1,5 @@
 package com.kilogate.hi.util;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
@@ -20,8 +17,6 @@ import java.security.NoSuchAlgorithmException;
  * @create 2020/12/27 23:39
  **/
 public class AesCipherUtil {
-    private static final Logger LOGGER = LoggerFactory.getLogger(AesCipherUtil.class);
-
     /**
      * AES 加密
      */
@@ -41,10 +36,10 @@ public class AesCipherUtil {
         try {
             cipher = Cipher.getInstance("AES");
         } catch (NoSuchAlgorithmException e) {
-            LOGGER.error("encrypt error", e);
+            e.printStackTrace();
             return null;
         } catch (NoSuchPaddingException e) {
-            LOGGER.error("encrypt error", e);
+            e.printStackTrace();
             return null;
         }
 
@@ -52,7 +47,7 @@ public class AesCipherUtil {
         try {
             cipher.init(Cipher.ENCRYPT_MODE, key);
         } catch (InvalidKeyException e) {
-            LOGGER.error("encrypt error", e);
+            e.printStackTrace();
             return null;
         }
 
@@ -61,10 +56,10 @@ public class AesCipherUtil {
         try {
             encrypt = cipher.doFinal(data.getBytes(StandardCharsets.UTF_8));
         } catch (IllegalBlockSizeException e) {
-            LOGGER.error("encrypt error", e);
+            e.printStackTrace();
             return null;
         } catch (BadPaddingException e) {
-            LOGGER.error("encrypt error", e);
+            e.printStackTrace();
             return null;
         }
 
@@ -91,10 +86,10 @@ public class AesCipherUtil {
         try {
             cipher = Cipher.getInstance("AES");
         } catch (NoSuchAlgorithmException e) {
-            LOGGER.error("decrypt error", e);
+            e.printStackTrace();
             return null;
         } catch (NoSuchPaddingException e) {
-            LOGGER.error("decrypt error", e);
+            e.printStackTrace();
             return null;
         }
 
@@ -102,7 +97,7 @@ public class AesCipherUtil {
         try {
             cipher.init(Cipher.DECRYPT_MODE, key);
         } catch (InvalidKeyException e) {
-            LOGGER.error("decrypt error", e);
+            e.printStackTrace();
             return null;
         }
 
@@ -114,10 +109,10 @@ public class AesCipherUtil {
         try {
             decrypt = cipher.doFinal(in);
         } catch (IllegalBlockSizeException e) {
-            LOGGER.error("decrypt error", e);
+            e.printStackTrace();
             return null;
         } catch (BadPaddingException e) {
-            LOGGER.error("decrypt error", e);
+            e.printStackTrace();
             return null;
         }
 
