@@ -1,4 +1,4 @@
-package com.kilogate.hi.commons.time;
+package com.kilogate.hi.commonslang3.time;
 
 import org.apache.commons.lang3.time.StopWatch;
 
