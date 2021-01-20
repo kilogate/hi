@@ -16,7 +16,7 @@ import java.util.Random;
  **/
 public class ProducerAndConsumer {
     public static void main(String[] args) {
-        Repository repository = new Repository3();
+        Repository repository = new Repository2();
 
         Runnable producer = () -> {
             for (int i = 0; i < 10; i++) {
