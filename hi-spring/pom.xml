@@ -12,6 +12,7 @@
     <artifactId>hi-spring</artifactId>
 
     <dependencies>
+        <!--spring-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>

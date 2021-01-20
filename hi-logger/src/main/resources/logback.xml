@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <property name="appName" value="hi-util"/>
     <property name="logPattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5p %c{36} - %msg%n"/>
     <property name="maxHistory" value="30"/>
     <property name="maxFileSize" value="512MB"/>
@@ -15,9 +14,9 @@
 
     <!--all appender-->
     <appender name="all" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>logs/${appName}/all.log</file>
+        <file>logs/all.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>logs/${appName}/history/all.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <fileNamePattern>logs/history/all.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
             <maxHistory>${maxHistory}</maxHistory>
             <TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <MaxFileSize>${maxFileSize}</MaxFileSize>
@@ -35,9 +34,9 @@
             <onMatch>ACCEPT</onMatch>
             <onMismatch>DENY</onMismatch>
         </filter>
-        <file>logs/${appName}/error.log</file>
+        <file>logs/error.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>logs/${appName}/history/error.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <fileNamePattern>logs/history/error.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
             <maxHistory>${maxHistory}</maxHistory>
             <TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <MaxFileSize>${maxFileSize}</MaxFileSize>

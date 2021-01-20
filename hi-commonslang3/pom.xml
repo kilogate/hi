@@ -12,6 +12,7 @@
     <artifactId>hi-commonslang3</artifactId>
 
     <dependencies>
+        <!--commons lang3-->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>

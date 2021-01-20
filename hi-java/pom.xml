@@ -12,6 +12,7 @@
     <artifactId>hi-java</artifactId>
 
     <dependencies>
+        <!--mysql-->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>

@@ -12,6 +12,7 @@
     <artifactId>hi-guava</artifactId>
 
     <dependencies>
+        <!--guava-->
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
