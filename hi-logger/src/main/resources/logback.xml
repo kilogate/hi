@@ -12,11 +12,11 @@
         </encoder>
     </appender>
 
-    <!--info appender-->
-    <appender name="infoAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>logs/info.log</file>
+    <!--all appender-->
+    <appender name="allAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/all.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>logs/history/info.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <fileNamePattern>logs/history/all.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
             <maxHistory>${maxHistory}</maxHistory>
             <TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <MaxFileSize>${maxFileSize}</MaxFileSize>
@@ -70,7 +70,7 @@
     <!--root-->
     <root level="INFO">
         <appender-ref ref="consoleAppender"/>
-        <appender-ref ref="infoAppender"/>
+        <appender-ref ref="allAppender"/>
         <appender-ref ref="errorAppender"/>
     </root>
 </configuration>
