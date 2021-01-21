@@ -3,7 +3,7 @@ package com.kilogate.hi.logger.log4j;
 import org.apache.log4j.Logger;
 
 /**
- * Log4jUsage
+ * log4j
  *
  * @author kilogate
  * @create 2021/1/21 12:09

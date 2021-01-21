@@ -4,7 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 /**
- * Log4j2Usage
+ * log4j2
  *
  * @author kilogate
  * @create 2021/1/21 16:37
