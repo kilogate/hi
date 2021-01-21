@@ -26,6 +26,7 @@ public class Log4jUsage {
      */
     public static void main(String[] args) {
         Logger logger = Logger.getLogger(Log4jUsage.class);
+        logger.debug("调试信息" + System.currentTimeMillis());
         logger.info("正常信息" + System.currentTimeMillis());
         logger.error("异常信息" + System.currentTimeMillis());
 
