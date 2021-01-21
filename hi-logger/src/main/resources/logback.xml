@@ -5,18 +5,18 @@
     <property name="maxFileSize" value="512MB"/>
 
     <!--console appender-->
-    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+    <appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>${logPattern}</pattern>
             <charset>UTF-8</charset>
         </encoder>
     </appender>
 
-    <!--all appender-->
-    <appender name="all" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>logs/all.log</file>
+    <!--info appender-->
+    <appender name="infoAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/info.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>logs/history/all.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <fileNamePattern>logs/history/info.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
             <maxHistory>${maxHistory}</maxHistory>
             <TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <MaxFileSize>${maxFileSize}</MaxFileSize>
@@ -28,7 +28,7 @@
     </appender>
 
     <!--error appender-->
-    <appender name="error" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <appender name="errorAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <level>ERROR</level>
             <onMatch>ACCEPT</onMatch>
@@ -47,17 +47,30 @@
         </encoder>
     </appender>
 
-    <!--common logger-->
-    <logger name="com.kilogate.hi" level="INFO" additivity="false">
-        <appender-ref ref="console"/>
-        <appender-ref ref="all"/>
-        <appender-ref ref="error"/>
+    <!--statistics appender-->
+    <appender name="statisticsAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/statistics.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/history/statistics.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxHistory>${maxHistory}</maxHistory>
+            <TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <MaxFileSize>${maxFileSize}</MaxFileSize>
+            </TimeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${logPattern}</pattern>
+        </encoder>
+    </appender>
+
+    <!--logger-->
+    <logger name="statisticsLogger" level="INFO" additivity="false">
+        <appender-ref ref="statisticsAppender"/>
     </logger>
 
-    <!--root logger-->
+    <!--root-->
     <root level="INFO">
-        <appender-ref ref="console"/>
-        <appender-ref ref="all"/>
-        <appender-ref ref="error"/>
+        <appender-ref ref="consoleAppender"/>
+        <appender-ref ref="infoAppender"/>
+        <appender-ref ref="errorAppender"/>
     </root>
 </configuration>
