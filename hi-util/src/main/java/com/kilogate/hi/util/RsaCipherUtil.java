@@ -54,16 +54,16 @@ public class RsaCipherUtil {
             // 分段加密
             ByteArrayOutputStream output = new ByteArrayOutputStream();
             int offset = 0;
-            byte[] cache;
+            byte[] buffer;
 
             while (length > offset) {
                 if (length - offset > 117) {
-                    cache = cipher.doFinal(bytes, offset, 117);
+                    buffer = cipher.doFinal(bytes, offset, 117);
                 } else {
-                    cache = cipher.doFinal(bytes, offset, length - offset);
+                    buffer = cipher.doFinal(bytes, offset, length - offset);
                 }
 
-                output.write(cache, 0, cache.length);
+                output.write(buffer, 0, buffer.length);
 
                 offset += 117;
             }
@@ -98,16 +98,16 @@ public class RsaCipherUtil {
             // 分段解密
             ByteArrayOutputStream output = new ByteArrayOutputStream();
             int offset = 0;
-            byte[] cache;
+            byte[] buffer;
 
             while (length > offset) {
                 if (length - offset > 128) {
-                    cache = cipher.doFinal(bytes, offset, 128);
+                    buffer = cipher.doFinal(bytes, offset, 128);
                 } else {
-                    cache = cipher.doFinal(bytes, offset, length - offset);
+                    buffer = cipher.doFinal(bytes, offset, length - offset);
                 }
 
-                output.write(cache, 0, cache.length);
+                output.write(buffer, 0, buffer.length);
 
                 offset += 128;
             }
@@ -213,22 +213,9 @@ public class RsaCipherUtil {
         // 生成并打印公私密钥对
 //        generateAndPrintKeyPair();
 
-        String base64PublicKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCESCZozgNWvtnEdD37ORRoBiAkzgrgu7tyXaeg\n" +
-                "AvFtzlP01xH40/I82NelWg4d2vchwajBgDzuqgcR9VlwYSG1CRhzgo9kYAxBmUnAPwbYoYnqkwVF\n" +
-                "83Wd8XLV3HPXG9DVQhlhRoGeRT+rGQo+APtUhlRYJ5RSk/8UwWCIJ5OD+QIDAQAB\n";
+        String base64PublicKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCf6Gkx4j1cqOLNBATZd3tn2aICDCvYkLCOAa6itJEEiY3aduU8C1WeqQBkLM4FJ1D1Zeuf57stm1TiDW0zDpn27pjp1c2jno5c8W4g+5RAQm1ApP5hID7AgzkY7JLvm5DCyclE67jGKd5pX4GvBSiNbQPVlmShHJqD4VslpqHu/wIDAQAB";
 
-        String base64PrivateKey = "MIICdQIBADANBgkqhkiG9w0BAQEFAASCAl8wggJbAgEAAoGBAIRIJmjOA1a+2cR0Pfs5FGgGICTO\n" +
-                "CuC7u3Jdp6AC8W3OU/TXEfjT8jzY16VaDh3a9yHBqMGAPO6qBxH1WXBhIbUJGHOCj2RgDEGZScA/\n" +
-                "BtihieqTBUXzdZ3xctXcc9cb0NVCGWFGgZ5FP6sZCj4A+1SGVFgnlFKT/xTBYIgnk4P5AgMBAAEC\n" +
-                "gYBLgeey0U2kmWIyumua2FUmn8B/YcFh0KdJu93v/14SYMEZtB5FG65dPyWw8/u03QVOFn4enfWq\n" +
-                "AhHxFUyNUlRrcKBB0hp8IVwckf5tb9+1+KBM+R0VudSt7roih5fvX6iz9SsuiutYp5DVCVM8lUao\n" +
-                "mwqd5AnwkyKrQn9YigGz9QJBAMOfMKnttyqJNzfhn9hSNrbdYrsWzaoJ2aKeu5MDNSjQhfAgyMGy\n" +
-                "iDFNhOjuh9a50QwmlQj6yqchWYZjA/mIMG8CQQCtHDsJG3G29SOQIfPj9r8Ulk5yNLQXOsjH2DF1\n" +
-                "xjw/TZ00UXbpKNFyhD+510eMAOn1E1j9VDKTUDr1f+MkPHYXAkBRz3F6n3/Kujftlt5SiY94Sn3P\n" +
-                "4GmCgzwRVnD7uouw1gQtuIg8+X0boV/ESn1kv7E9c6VAbCH0Y24dVauD4ADhAkBappDnqP54b5CK\n" +
-                "9qyv8NOJJVi5B45TJ85ikHz+DqwX/j3XWt2pJV3g2Q5B9FEcKJJbayFLr564c+gcDTdWD29LAkA2\n" +
-                "oQ35ADkKTndFqWDTlP9fIGQ/OkkScGMEoeh9YCJvbMPYuCSCp+3r+khGT6udT6Lx0WcrErlmcylw\n" +
-                "Gft11F5K\n";
+        String base64PrivateKey = "MIICdQIBADANBgkqhkiG9w0BAQEFAASCAl8wggJbAgEAAoGBAJ/oaTHiPVyo4s0EBNl3e2fZogIMK9iQsI4BrqK0kQSJjdp25TwLVZ6pAGQszgUnUPVl65/nuy2bVOINbTMOmfbumOnVzaOejlzxbiD7lEBCbUCk/mEgPsCDORjsku+bkMLJyUTruMYp3mlfga8FKI1tA9WWZKEcmoPhWyWmoe7/AgMBAAECgYBVQxbUAk21mldT+VCco5ipRuGbNeIrFvsMvNjg6GZqhO2eDscrvN9qObJ7t2giV1RThISePnEPYENiRMZ08tQke8FDjhmE6lA0sJP6Ez1a5JoHCU1RUeI+zOCyfLl+4NdbzugHvox8R5vakTlulyz6evj5OxWaQR4aX88BRuy0AQJBAOv9DBo4o6tAtaBBeIV2gkjHw9/tDUYxnvqAp8PcNyZD+4XjHx+kM76JL9iVIIlnJBDlpABhI9G/8OTvrwUgX2MCQQCtd8TFNxZthbCwSlpXs+jcqHMiOPxqFXLFcS3lWArJEFHEzwHhf/rULocHPxP89cuHWGtYA81NQQ3YA5oamuq1AkABY9IobWD5Zz4qnXgaQSJvT03mCb1kRnKLQyq5yphAj3Hxze6m/w6W9rPjcK1qYcMinlei8O+HErxWfNrpCtHFAkAZ01PzPJFVOuskQ92RYxKPD3Ecrjk+HfVZWdFIbMQmTQyvbVZNWT1hq4+kz4pNRdbITqykjORa1Q2XlGmz/k5lAkAFelHPOaWZ6grDbVGuTtHglXIvtoSz6BX6L5TNNb6Wm/bnmAKDazVR2imuW0P1Brz872xldg7o4T/q9k1Y7MPx";
 
         // 获取公私密钥
         PublicKey publicKey = getPublicKey(base64PublicKey);
