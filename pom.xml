@@ -15,6 +15,7 @@
         <module>hi-commonslang3</module>
         <module>hi-guava</module>
         <module>hi-logger</module>
+        <module>hi-berkeleydb</module>
     </modules>
 
     <build>
