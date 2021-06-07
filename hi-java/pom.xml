@@ -11,6 +11,7 @@
 
     <artifactId>hi-java</artifactId>
 
+    <!--todo code review-->
     <dependencies>
         <!--mysql-->
         <dependency>

@@ -11,6 +11,7 @@
 
     <artifactId>hi-logger</artifactId>
 
+    <!--todo 五种日志组合拆成五个模块-->
     <dependencies>
         <!--slf4j-->
         <dependency>
