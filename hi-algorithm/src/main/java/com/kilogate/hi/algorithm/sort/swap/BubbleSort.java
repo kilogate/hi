@@ -1,4 +1,4 @@
-package com.kilogate.hi.algorithm.swap;
+package com.kilogate.hi.algorithm.sort.swap;
 
 import java.util.Arrays;
 
