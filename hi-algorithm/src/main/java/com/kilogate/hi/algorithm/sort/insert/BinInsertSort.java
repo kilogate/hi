@@ -44,7 +44,7 @@ public class BinInsertSort {
                 datas[j + 1] = datas[j];
             }
 
-            // 在 high + 1 位置处插入元素
+            // 在 high + 1 位置处插入元素（high + 1 是上一次的 mid 位置）
             datas[high + 1] = temp;
         }
     }
