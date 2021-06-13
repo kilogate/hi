@@ -32,9 +32,9 @@ public class BinInsertSort {
             int high = i - 1;
             while (low <= high) {
                 int mid = (low + high) / 2;
-                if (temp < datas[mid]) {
+                if (temp < datas[mid]) { // 左半区
                     high = mid - 1;
-                } else {
+                } else { // 右半区（为了保证稳定性，相等时放到右半区）
                     low = mid + 1;
                 }
             }
