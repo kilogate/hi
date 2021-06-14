@@ -3,7 +3,7 @@ package com.kilogate.hi.algorithm.sort.insert;
 import java.util.Arrays;
 
 /**
- * 插入排序二：折半插入排序
+ * 折半插入排序
  *
  * @author kilogate
  * @create 2021/6/13 16:31

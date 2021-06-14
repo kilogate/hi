@@ -3,7 +3,7 @@ package com.kilogate.hi.algorithm.sort.swap;
 import java.util.Arrays;
 
 /**
- * 交换排序二：快速排序
+ * 快速排序
  *
  * @author kilogate
  * @create 2021/6/13 22:38

@@ -3,7 +3,7 @@ package com.kilogate.hi.algorithm.sort.insert;
 import java.util.Arrays;
 
 /**
- * 插入排序三：希尔排序
+ * 希尔排序
  *
  * @author kilogate
  * @create 2021/6/13 16:48

@@ -3,7 +3,7 @@ package com.kilogate.hi.algorithm.sort.select;
 import java.util.Arrays;
 
 /**
- * 选择排序二：堆排序
+ * 堆排序
  *
  * @author kilogate
  * @create 2021/6/14 16:30
