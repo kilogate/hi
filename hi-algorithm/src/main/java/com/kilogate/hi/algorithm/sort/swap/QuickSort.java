@@ -12,76 +12,76 @@ public class QuickSort {
     /**
      * 快速排序
      *
-     * @param datas
+     * @param data
      */
-    public static void quickSort(int[] datas) {
-        if (datas == null || datas.length <= 1) {
+    public static void quickSort(int[] data) {
+        if (data == null || data.length <= 1) {
             return;
         }
 
-        doQuickSort(datas, 0, datas.length - 1);
+        doQuickSort(data, 0, data.length - 1);
     }
 
-    private static void doQuickSort(int[] datas, int s, int t) {
+    private static void doQuickSort(int[] data, int s, int t) {
         if (s >= t) {
             return;
         }
 
         // 一趟划分
-        int i = partition(datas, s, t);
+        int i = partition(data, s, t);
 
         // 递归排序左区间
-        doQuickSort(datas, s, i - 1);
+        doQuickSort(data, s, i - 1);
 
         // 递归排序右区间
-        doQuickSort(datas, i + 1, t);
+        doQuickSort(data, i + 1, t);
     }
 
     /**
      * 一趟划分
      *
-     * @param datas
+     * @param data
      * @param s
      * @param t
      * @return
      */
-    private static int partition(int[] datas, int s, int t) {
+    private static int partition(int[] data, int s, int t) {
         int i = s;
         int j = t;
 
         // 设第一个元素为基准元素
-        int temp = datas[i];
+        int temp = data[i];
 
         while (i < j) {
             // 找小于基准元素的
-            while (j > i && datas[j] >= temp) {
+            while (j > i && data[j] >= temp) {
                 j--;
             }
 
             // 小于基准元素的前移
-            datas[i] = datas[j];
+            data[i] = data[j];
 
             // 找大于基准元素的
-            while (i < j && datas[i] <= temp) {
+            while (i < j && data[i] <= temp) {
                 i++;
             }
 
             // 大于基准元素的后移
-            datas[j] = datas[i];
+            data[j] = data[i];
         }
 
         // 基准元素归位
-        datas[i] = temp;
+        data[i] = temp;
 
         // 返回基准元素的位置，此时 i == j
         return i;
     }
 
     public static void main(String[] args) {
-        int[] datas = new int[]{6, 7, 8, 9, 0, 1, 3, 2, 4, 5};
+        int[] data = new int[]{6, 7, 8, 9, 0, 1, 3, 2, 4, 5};
 
-        quickSort(datas);
+        quickSort(data);
 
-        System.out.println(Arrays.toString(datas));
+        System.out.println(Arrays.toString(data));
     }
 }

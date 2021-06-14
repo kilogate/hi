@@ -12,39 +12,39 @@ public class InsertSort {
     /**
      * 直接插入排序
      *
-     * @param datas
+     * @param data
      */
-    public static void insertSort(int[] datas) {
-        if (datas == null || datas.length <= 1) {
+    public static void insertSort(int[] data) {
+        if (data == null || data.length <= 1) {
             return;
         }
 
         // 向有序区直接插入第 i 个元素
-        for (int i = 1; i < datas.length; i++) {
+        for (int i = 1; i < data.length; i++) {
             // 本元素有序，下一个
-            if (datas[i] >= datas[i - 1]) {
+            if (data[i] >= data[i - 1]) {
                 continue;
             }
 
             // 从后向前找插入位置，边找边后移元素
-            int temp = datas[i];
+            int temp = data[i];
             int j = i - 1;
             do {
-                datas[j + 1] = datas[j];
+                data[j + 1] = data[j];
                 j--;
-            } while (j >= 0 && datas[j] > temp);
+            } while (j >= 0 && data[j] > temp);
 
             // 在 j + 1 位置处插入元素
-            datas[j + 1] = temp;
+            data[j + 1] = temp;
         }
     }
 
     public static void main(String[] args) {
-//        int[] datas = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9};
-        int[] datas = new int[]{9, 8, 7, 6, 5, 4, 3, 2, 1};
+//        int[] data = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9};
+        int[] data = new int[]{9, 8, 7, 6, 5, 4, 3, 2, 1};
 
-        insertSort(datas);
+        insertSort(data);
 
-        System.out.println(Arrays.toString(datas));
+        System.out.println(Arrays.toString(data));
     }
 }

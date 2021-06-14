@@ -12,41 +12,41 @@ public class SelectSort {
     /**
      * 简单选择排序
      *
-     * @param datas
+     * @param data
      */
-    public static void selectSort(int[] datas) {
-        if (datas == null || datas.length <= 1) {
+    public static void selectSort(int[] data) {
+        if (data == null || data.length <= 1) {
             return;
         }
 
         // 选择第 i 个最小的元素
-        for (int i = 0; i < datas.length - 1; i++) {
+        for (int i = 0; i < data.length - 1; i++) {
             // 找最小元素的下标
             int k = i;
-            for (int j = i + 1; j < datas.length; j++) {
-                if (datas[j] < datas[k]) {
+            for (int j = i + 1; j < data.length; j++) {
+                if (data[j] < data[k]) {
                     k = j;
                 }
             }
 
             // 移动最小元素
             if (k != i) {
-                swap(datas, k, i);
+                swap(data, k, i);
             }
         }
     }
 
-    private static void swap(int[] datas, int i, int j) {
-        int temp = datas[i];
-        datas[i] = datas[j];
-        datas[j] = temp;
+    private static void swap(int[] data, int i, int j) {
+        int temp = data[i];
+        data[i] = data[j];
+        data[j] = temp;
     }
 
     public static void main(String[] args) {
-        int[] datas = new int[]{6, 7, 8, 9, 0, 1, 3, 2, 4, 5};
+        int[] data = new int[]{6, 7, 8, 9, 0, 1, 3, 2, 4, 5};
 
-        selectSort(datas);
+        selectSort(data);
 
-        System.out.println(Arrays.toString(datas));
+        System.out.println(Arrays.toString(data));
     }
 }

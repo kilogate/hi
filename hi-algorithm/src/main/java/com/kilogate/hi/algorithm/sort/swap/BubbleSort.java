@@ -12,19 +12,19 @@ public class BubbleSort {
     /**
      * 冒泡排序
      *
-     * @param datas
+     * @param data
      */
-    public static void bubbleSort(int[] datas) {
-        if (datas == null || datas.length <= 1) {
+    public static void bubbleSort(int[] data) {
+        if (data == null || data.length <= 1) {
             return;
         }
 
         // 使得第 i 个元素归位
-        for (int i = 0; i < datas.length - 1; i++) {
+        for (int i = 0; i < data.length - 1; i++) {
             // 从后往前冒泡，将小的元素迁移
-            for (int j = datas.length - 1; j > i; j--) {
-                if (datas[j] < datas[j - 1]) {
-                    swap(datas, j, j - 1);
+            for (int j = data.length - 1; j > i; j--) {
+                if (data[j] < data[j - 1]) {
+                    swap(data, j, j - 1);
                 }
             }
         }
@@ -33,22 +33,22 @@ public class BubbleSort {
     /**
      * 冒泡排序（优化：已排好序就不再比较了）
      *
-     * @param datas
+     * @param data
      */
-    public static void bubbleSort1(int[] datas) {
-        if (datas == null || datas.length <= 1) {
+    public static void bubbleSort1(int[] data) {
+        if (data == null || data.length <= 1) {
             return;
         }
 
         // 使得第 i 个元素归位
-        for (int i = 0; i < datas.length - 1; i++) {
+        for (int i = 0; i < data.length - 1; i++) {
             boolean exchange = false;
 
             // 从后往前冒泡，将小的元素迁移
-            for (int j = datas.length - 1; j > i; j--) {
-                if (datas[j] < datas[j - 1]) {
+            for (int j = data.length - 1; j > i; j--) {
+                if (data[j] < data[j - 1]) {
                     exchange = true;
-                    swap(datas, j, j - 1);
+                    swap(data, j, j - 1);
                 }
             }
 
@@ -59,18 +59,18 @@ public class BubbleSort {
         }
     }
 
-    private static void swap(int[] datas, int i, int j) {
-        int temp = datas[i];
-        datas[i] = datas[j];
-        datas[j] = temp;
+    private static void swap(int[] data, int i, int j) {
+        int temp = data[i];
+        data[i] = data[j];
+        data[j] = temp;
     }
 
     public static void main(String[] args) {
-//        int[] datas = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9};
-        int[] datas = new int[]{9, 8, 7, 6, 5, 4, 3, 2, 1};
+//        int[] data = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9};
+        int[] data = new int[]{9, 8, 7, 6, 5, 4, 3, 2, 1};
 
-        bubbleSort1(datas);
+        bubbleSort1(data);
 
-        System.out.println(Arrays.toString(datas));
+        System.out.println(Arrays.toString(data));
     }
 }

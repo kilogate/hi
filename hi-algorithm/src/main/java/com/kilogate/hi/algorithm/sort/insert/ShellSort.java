@@ -12,29 +12,29 @@ public class ShellSort {
     /**
      * 希尔排序
      *
-     * @param datas
+     * @param data
      */
-    public static void shellSort(int[] datas) {
-        if (datas == null || datas.length <= 1) {
+    public static void shellSort(int[] data) {
+        if (data == null || data.length <= 1) {
             return;
         }
 
         // 初始增量
-        int d = datas.length / 2;
+        int d = data.length / 2;
 
         while (d > 0) {
             // 分组向有序区直接插入第 i 个元素
-            for (int i = d; i < datas.length; i++) {
+            for (int i = d; i < data.length; i++) {
 
                 // 直接插入排序
-                int temp = datas[i];
+                int temp = data[i];
                 int j = i - d;
-                while (j >= 0 && temp < datas[j]) {
-                    datas[j + d] = datas[j];
+                while (j >= 0 && temp < data[j]) {
+                    data[j + d] = data[j];
                     j = j - d;
                 }
 
-                datas[j + d] = temp;
+                data[j + d] = temp;
             }
 
             // 减少增量
@@ -43,11 +43,11 @@ public class ShellSort {
     }
 
     public static void main(String[] args) {
-//        int[] datas = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9};
-        int[] datas = new int[]{9, 8, 7, 6, 5, 4, 3, 2, 1};
+//        int[] data = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9};
+        int[] data = new int[]{9, 8, 7, 6, 5, 4, 3, 2, 1};
 
-        shellSort(datas);
+        shellSort(data);
 
-        System.out.println(Arrays.toString(datas));
+        System.out.println(Arrays.toString(data));
     }
 }
