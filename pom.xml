@@ -19,6 +19,7 @@
         <module>hi-algorithm</module>
         <module>hi-logger-log4j</module>
         <module>hi-logger-log4j2</module>
+        <module>hi-logger-log4j-jcl</module>
     </modules>
 
     <build>
