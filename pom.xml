@@ -14,7 +14,6 @@
         <module>hi-util</module>
         <module>hi-commonslang3</module>
         <module>hi-guava</module>
-        <module>hi-logger</module>
         <module>hi-berkeleydb</module>
         <module>hi-algorithm</module>
         <module>hi-logger-log4j</module>
