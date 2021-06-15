@@ -21,6 +21,7 @@
         <module>hi-logger-log4j2</module>
         <module>hi-logger-log4j-jcl</module>
         <module>hi-logger-log4j-slf4j</module>
+        <module>hi-logger-logback-slf4j</module>
     </modules>
 
     <build>
