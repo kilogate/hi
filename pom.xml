@@ -18,6 +18,7 @@
         <module>hi-berkeleydb</module>
         <module>hi-algorithm</module>
         <module>hi-logger-log4j</module>
+        <module>hi-logger-log4j2</module>
     </modules>
 
     <build>
