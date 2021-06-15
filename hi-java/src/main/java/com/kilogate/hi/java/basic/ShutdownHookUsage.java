@@ -36,7 +36,7 @@ public class ShutdownHookUsage {
         }
 
         // NPE
-        new ArrayList<String>().get(0).toString();
+        new ArrayList<String>().get(0);
 
         System.out.println(String.format("%s end", Thread.currentThread()));
     }
