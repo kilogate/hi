@@ -1,8 +1,6 @@
 package com.kilogate.hi.hystrix;
 
-import com.netflix.hystrix.HystrixCommand;
-import com.netflix.hystrix.HystrixCommandGroupKey;
-import com.netflix.hystrix.HystrixCommandProperties;
+import com.netflix.hystrix.*;
 
 import java.util.concurrent.TimeUnit;
 
@@ -18,7 +16,11 @@ public class HelloFallbackCommand extends HystrixCommand<String> {
     public HelloFallbackCommand(String name) {
         super(Setter
                 // 设置命令分组
-                .withGroupKey(HystrixCommandGroupKey.Factory.asKey("HelloWorldGroup"))
+                .withGroupKey(HystrixCommandGroupKey.Factory.asKey("HelloFallbackGroup"))
+                // 设置命令命名
+                .andCommandKey(HystrixCommandKey.Factory.asKey("HelloFallbackCommand"))
+                // 设置线程池名
+                .andThreadPoolKey(HystrixThreadPoolKey.Factory.asKey("HelloFallbackThreadPool"))
                 // 设置超时时间
                 .andCommandPropertiesDefaults(HystrixCommandProperties.Setter().withExecutionIsolationThreadTimeoutInMilliseconds(500)));
         this.name = name;
