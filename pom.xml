@@ -22,6 +22,7 @@
         <module>hi-logger-log4j-slf4j</module>
         <module>hi-logger-logback-slf4j</module>
         <module>hi-lombok</module>
+        <module>hi-hystrix</module>
     </modules>
 
     <build>
