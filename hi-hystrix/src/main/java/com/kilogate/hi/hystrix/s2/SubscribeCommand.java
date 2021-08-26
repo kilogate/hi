@@ -1,4 +1,4 @@
-package com.kilogate.hi.hystrix;
+package com.kilogate.hi.hystrix.s2;
 
 import com.netflix.hystrix.HystrixCommand;
 import com.netflix.hystrix.HystrixCommandGroupKey;
@@ -7,22 +7,19 @@ import rx.Observer;
 import rx.functions.Action1;
 
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 /**
- * HelloWorldCommand
+ * SubscribeCommand
  *
  * @author kilogate
  * @create 2021/8/23 15:15
  **/
-public class HelloWorldCommand extends HystrixCommand<String> {
+public class SubscribeCommand extends HystrixCommand<String> {
     private final String name;
 
-    public HelloWorldCommand(String name) {
-        // 最少配置：指定命令组名（CommandGroup）
-        super(HystrixCommandGroupKey.Factory.asKey("ExampleGroup"));
+    public SubscribeCommand(String name) {
+        super(HystrixCommandGroupKey.Factory.asKey("SubscribeGroup"));
         this.name = name;
     }
 
@@ -33,27 +30,8 @@ public class HelloWorldCommand extends HystrixCommand<String> {
     }
 
     public static void main(String[] args) throws ExecutionException, InterruptedException, TimeoutException {
-        subscribe();
-    }
-
-    private static void helloWorld() throws ExecutionException, InterruptedException, TimeoutException {
-        // 每个 Command 对象只能调用一次
-        HelloWorldCommand helloWorldCommand = new HelloWorldCommand("Sync");
-
-        // 同步调用，等价于：helloWorldCommand.queue().get()
-        String result = helloWorldCommand.execute();
-        System.out.println(result);
-
-        // 异步调用
-        helloWorldCommand = new HelloWorldCommand("Async");
-        Future<String> future = helloWorldCommand.queue();
-        result = future.get(1000, TimeUnit.MILLISECONDS);
-        System.out.println(result);
-    }
-
-    private static void subscribe() {
         // 注册观察者事件拦截
-        Observable<String> observe = new HelloWorldCommand("Lask").observe();
+        Observable<String> observe = new SubscribeCommand("Lask").observe();
 
         // 注册结果回调事件
         observe.subscribe(new Action1<String>() {

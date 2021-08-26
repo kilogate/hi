@@ -1,23 +1,23 @@
-package com.kilogate.hi.hystrix;
+package com.kilogate.hi.hystrix.s3;
 
 import com.netflix.hystrix.*;
 
 import java.util.concurrent.TimeUnit;
 
 /**
- * HelloFallbackCommand
+ * FallbackCommand
  *
  * @author kilogate
  * @create 2021/8/23 15:45
  **/
-public class HelloFallbackCommand extends HystrixCommand<String> {
+public class FallbackCommand extends HystrixCommand<String> {
     private final String name;
 
-    public HelloFallbackCommand(String name) {
+    public FallbackCommand(String name) {
         super(Setter
-                // 设置命令分组
+                // 设置分组名
                 .withGroupKey(HystrixCommandGroupKey.Factory.asKey("HelloFallbackGroup"))
-                // 设置命令命名
+                // 设置依赖名
                 .andCommandKey(HystrixCommandKey.Factory.asKey("HelloFallbackCommand"))
                 // 设置线程池名
                 .andThreadPoolKey(HystrixThreadPoolKey.Factory.asKey("HelloFallbackThreadPool"))
@@ -28,7 +28,7 @@ public class HelloFallbackCommand extends HystrixCommand<String> {
 
     @Override
     protected String getFallback() {
-        return "Execute Failed";
+        return "【Fallback】Execute Failed";
     }
 
     @Override
@@ -38,8 +38,8 @@ public class HelloFallbackCommand extends HystrixCommand<String> {
     }
 
     public static void main(String[] args) {
-        HelloFallbackCommand helloFallbackCommand = new HelloFallbackCommand("Lask");
-        String result = helloFallbackCommand.execute();
+        FallbackCommand fallbackCommand = new FallbackCommand("Lask");
+        String result = fallbackCommand.execute();
         System.out.println(result);
     }
 }
