@@ -1,9 +1,9 @@
-package com.kilogate.hi.algorithm.sort.merge;
+package com.kilogate.hi.algorithm.sort.s8;
 
 import java.util.Arrays;
 
 /**
- * 二路归并排序
+ * 归并排序 - 二路归并排序
  *
  * @author kilogate
  * @create 2021/6/14 17:56

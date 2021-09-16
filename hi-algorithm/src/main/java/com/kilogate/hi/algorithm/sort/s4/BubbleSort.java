@@ -1,9 +1,9 @@
-package com.kilogate.hi.algorithm.sort.swap;
+package com.kilogate.hi.algorithm.sort.s4;
 
 import java.util.Arrays;
 
 /**
- * 冒泡排序
+ * 交换排序 - 冒泡排序
  *
  * @author kilogate
  * @create 2021/6/13 22:08

@@ -1,9 +1,9 @@
-package com.kilogate.hi.algorithm.sort.swap;
+package com.kilogate.hi.algorithm.sort.s5;
 
 import java.util.Arrays;
 
 /**
- * 快速排序
+ * 交换排序 - 快速排序
  *
  * @author kilogate
  * @create 2021/6/13 22:38

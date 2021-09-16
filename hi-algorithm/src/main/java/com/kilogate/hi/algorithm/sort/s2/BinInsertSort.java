@@ -1,9 +1,9 @@
-package com.kilogate.hi.algorithm.sort.insert;
+package com.kilogate.hi.algorithm.sort.s2;
 
 import java.util.Arrays;
 
 /**
- * 折半插入排序
+ * 插入排序 - 折半插入排序
  *
  * @author kilogate
  * @create 2021/6/13 16:31

@@ -1,7 +1,7 @@
-package com.kilogate.hi.algorithm.sort.radix;
+package com.kilogate.hi.algorithm.sort.s9;
 
 /**
- * 基数排序
+ * 基数排序（非比较排序）
  *
  * @author kilogate
  * @create 2021/6/14 22:42

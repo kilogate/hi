@@ -1,9 +1,9 @@
-package com.kilogate.hi.algorithm.sort.select;
+package com.kilogate.hi.algorithm.sort.s7;
 
 import java.util.Arrays;
 
 /**
- * 堆排序
+ * 选择排序 - 堆排序
  *
  * @author kilogate
  * @create 2021/6/14 16:30
