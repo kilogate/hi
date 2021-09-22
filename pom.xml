@@ -23,6 +23,10 @@
         <module>hi-logger-logback-slf4j</module>
         <module>hi-lombok</module>
         <module>hi-hystrix</module>
+        <module>hi-sentinel</module>
+        <module>hi-javaagent-client</module>
+        <module>hi-javaagent-premain</module>
+        <module>hi-javaagent-agentmain</module>
     </modules>
 
     <build>
