@@ -18,7 +18,7 @@ public class RmiServer {
         Hello hello = new HelloImpl();
 
         // 第二步：绑定服务
-        Naming.bind("rmi://127.0.0.1:1234/hello", hello);
+        Naming.bind("rmi://localhost:1234/hello", hello);
 
         System.out.println("server ready");
     }
