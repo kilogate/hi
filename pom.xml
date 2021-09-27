@@ -27,6 +27,7 @@
         <module>hi-javaagent-client</module>
         <module>hi-javaagent-premain</module>
         <module>hi-javaagent-agentmain</module>
+        <module>hi-java-rmi</module>
     </modules>
 
     <build>
