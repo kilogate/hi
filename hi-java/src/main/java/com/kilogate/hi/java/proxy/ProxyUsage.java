@@ -1,4 +1,4 @@
-package com.kilogate.hi.java.basic;
+package com.kilogate.hi.java.proxy;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
