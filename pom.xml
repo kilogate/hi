@@ -28,6 +28,7 @@
         <module>hi-javaagent-premain</module>
         <module>hi-javaagent-agentmain</module>
         <module>hi-java-rmi</module>
+        <module>hi-ognl</module>
     </modules>
 
     <build>
