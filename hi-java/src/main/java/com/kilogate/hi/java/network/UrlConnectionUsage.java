@@ -39,6 +39,7 @@ public class UrlConnectionUsage {
     }
 
     public static String doPost(URL url, Map<String, Object> nameValuePairs, String userAgent, int redirects) throws IOException {
+        // 1、发送请求
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
         if (userAgent != null) {
@@ -70,6 +71,7 @@ public class UrlConnectionUsage {
             }
         }
 
+        // 2、接收响应
         String encoding = connection.getContentEncoding();
 
         if (encoding == null) {

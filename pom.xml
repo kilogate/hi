@@ -29,6 +29,7 @@
         <module>hi-javaagent-agentmain</module>
         <module>hi-java-rmi</module>
         <module>hi-ognl</module>
+        <module>hi-httpclient</module>
     </modules>
 
     <build>
