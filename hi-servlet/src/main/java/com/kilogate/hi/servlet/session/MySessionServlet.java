@@ -11,7 +11,7 @@ import java.io.PrintWriter;
 /**
  * MySessionServlet
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2021/12/4 20:06
  **/
 @WebServlet(urlPatterns = "/mySessionServlet")
