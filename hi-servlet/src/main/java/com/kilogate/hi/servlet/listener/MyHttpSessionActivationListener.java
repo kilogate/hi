@@ -10,7 +10,7 @@ import javax.servlet.http.HttpSessionEvent;
  * @author kilogate
  * @create 2021/12/4 23:42
  **/
-@WebListener
+//@WebListener open this for test
 public class MyHttpSessionActivationListener implements HttpSessionActivationListener {
     @Override
     public void sessionWillPassivate(HttpSessionEvent se) {

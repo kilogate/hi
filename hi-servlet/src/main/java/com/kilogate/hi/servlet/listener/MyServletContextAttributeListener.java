@@ -10,7 +10,7 @@ import javax.servlet.annotation.WebListener;
  * @author kilogate
  * @create 2021/12/4 20:18
  **/
-@WebListener
+//@WebListener open this for test
 public class MyServletContextAttributeListener implements ServletContextAttributeListener {
     @Override
     public void attributeAdded(ServletContextAttributeEvent event) {

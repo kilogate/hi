@@ -10,7 +10,7 @@ import javax.servlet.http.HttpSessionListener;
  * @author kilogate
  * @create 2021/12/4 23:34
  **/
-@WebListener
+//@WebListener open this for test
 public class MyHttpSessionListener implements HttpSessionListener {
     @Override
     public void sessionCreated(HttpSessionEvent se) {

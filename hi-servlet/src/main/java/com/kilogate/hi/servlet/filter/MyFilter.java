@@ -11,7 +11,7 @@ import java.io.IOException;
  * @author kilogate
  * @create 2021/12/4 23:59
  **/
-@WebFilter(filterName = "myFilter", urlPatterns = {"/*"})
+//@WebFilter(filterName = "myFilter", urlPatterns = {"/*"}) open this for test
 public class MyFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

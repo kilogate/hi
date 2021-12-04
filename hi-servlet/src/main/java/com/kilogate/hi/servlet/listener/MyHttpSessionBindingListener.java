@@ -10,7 +10,7 @@ import javax.servlet.http.HttpSessionBindingListener;
  * @author kilogate
  * @create 2021/12/4 23:45
  **/
-@WebListener
+//@WebListener open this for test
 public class MyHttpSessionBindingListener implements HttpSessionBindingListener {
     @Override
     public void valueBound(HttpSessionBindingEvent event) {
