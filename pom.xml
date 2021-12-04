@@ -30,6 +30,7 @@
         <module>hi-java-rmi</module>
         <module>hi-ognl</module>
         <module>hi-httpclient</module>
+        <module>hi-servlet</module>
     </modules>
 
     <build>
