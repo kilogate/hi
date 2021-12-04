@@ -1,4 +1,4 @@
-package com.kilogate.hi.servlet.session;
+package com.kilogate.hi.servlet.servlet.session;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;

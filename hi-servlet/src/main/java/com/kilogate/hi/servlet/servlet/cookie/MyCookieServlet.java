@@ -1,4 +1,4 @@
-package com.kilogate.hi.servlet.cookie;
+package com.kilogate.hi.servlet.servlet.cookie;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -40,6 +40,6 @@ public class MyCookieServlet extends HttpServlet {
 //        resp.addCookie(cookie);
 
         PrintWriter writer = resp.getWriter();
-        writer.println("com.kilogate.hi.servlet.cookie.MyCookieServlet.doGet");
+        writer.println("com.kilogate.hi.servlet.servlet.cookie.MyCookieServlet.doGet");
     }
 }
