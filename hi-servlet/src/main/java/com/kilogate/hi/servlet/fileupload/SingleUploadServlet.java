@@ -23,7 +23,7 @@ public class SingleUploadServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // save uploaded file to WEB-INF
         Part part = req.getPart("filename");
-        String filename = getFilename(part);
+        String filename = FileUploadUtil.getFilename(part);
         if (filename != null && !filename.isEmpty()) {
             part.write(getServletContext().getRealPath("/WEB-INF") + "/" + filename);
         }
@@ -34,18 +34,5 @@ public class SingleUploadServlet extends HttpServlet {
         // write to browser
         PrintWriter writer = resp.getWriter();
         writer.println(String.format("Uploaded filename: %s, size: %s, author: %s", filename, part.getSize(), author));
-    }
-
-    private String getFilename(Part part) {
-        String contentDispositionHeader = part.getHeader("content-disposition");
-
-        String[] elements = contentDispositionHeader.split(";");
-        for (String element : elements) {
-            if (element.trim().startsWith("filename")) {
-                return element.substring(element.indexOf('=') + 1).trim().replace("\"", "");
-            }
-        }
-
-        return null;
     }
 }
