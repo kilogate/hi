@@ -7,7 +7,7 @@ import javax.servlet.http.HttpSessionBindingListener;
 /**
  * MyHttpSessionBindingListener
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2021/12/4 23:45
  **/
 @WebListener
