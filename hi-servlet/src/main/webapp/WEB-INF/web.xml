@@ -7,7 +7,7 @@
 
     <servlet>
         <servlet-name>myXmlServlet</servlet-name>
-        <servlet-class>com.kilogate.hi.servlet.MyXmlServlet</servlet-class>
+        <servlet-class>com.kilogate.hi.servlet.servlet.MyXmlServlet</servlet-class>
         <load-on-startup>10</load-on-startup>
     </servlet>
 

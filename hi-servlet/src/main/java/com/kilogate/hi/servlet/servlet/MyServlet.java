@@ -1,4 +1,4 @@
-package com.kilogate.hi.servlet;
+package com.kilogate.hi.servlet.servlet;
 
 import javax.servlet.Servlet;
 import javax.servlet.ServletConfig;
@@ -20,19 +20,19 @@ public class MyServlet implements Servlet {
 
     @Override
     public void init(ServletConfig config) {
-        System.out.println("com.kilogate.hi.servlet.MyServlet.init");
+        System.out.println("com.kilogate.hi.servlet.servlet.MyServlet.init");
         this.servletConfig = config;
     }
 
     @Override
     public ServletConfig getServletConfig() {
-        System.out.println("com.kilogate.hi.servlet.MyServlet.getServletConfig");
+        System.out.println("com.kilogate.hi.servlet.servlet.MyServlet.getServletConfig");
         return servletConfig;
     }
 
     @Override
     public void service(ServletRequest req, ServletResponse res) throws IOException {
-        System.out.println("com.kilogate.hi.servlet.MyServlet.service");
+        System.out.println("com.kilogate.hi.servlet.servlet.MyServlet.service");
 
         PrintWriter writer = res.getWriter();
         writer.println("hello servlet");
@@ -40,12 +40,12 @@ public class MyServlet implements Servlet {
 
     @Override
     public String getServletInfo() {
-        System.out.println("com.kilogate.hi.servlet.MyServlet.getServletInfo");
+        System.out.println("com.kilogate.hi.servlet.servlet.MyServlet.getServletInfo");
         return "MyServlet";
     }
 
     @Override
     public void destroy() {
-        System.out.println("com.kilogate.hi.servlet.MyServlet.destroy");
+        System.out.println("com.kilogate.hi.servlet.servlet.MyServlet.destroy");
     }
 }

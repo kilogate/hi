@@ -1,4 +1,4 @@
-package com.kilogate.hi.servlet;
+package com.kilogate.hi.servlet.servlet;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebInitParam;
