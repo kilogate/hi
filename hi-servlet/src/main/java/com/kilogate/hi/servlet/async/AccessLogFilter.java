@@ -12,7 +12,7 @@ import java.util.Date;
  * @author kilogate
  * @create 2021/12/5 01:33
  **/
-@WebFilter("/*")
+@WebFilter(urlPatterns = "/*", asyncSupported = true)
 public class AccessLogFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
