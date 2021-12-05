@@ -1,5 +1,7 @@
 package com.kilogate.hi.servlet.async;
 
+import com.kilogate.hi.servlet.listener.MyServletRequestAsyncListener;
+
 import javax.servlet.AsyncContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,7 +24,8 @@ public class AsyncDispatchServlet extends HttpServlet {
         req.setAttribute("mainThread", Thread.currentThread().getName());
 
         AsyncContext asyncContext = req.startAsync();
-        asyncContext.setTimeout(5000);
+        asyncContext.setTimeout(1000);
+        asyncContext.addListener(new MyServletRequestAsyncListener());
         asyncContext.start(() -> {
             try {
                 Thread.sleep(3000);
