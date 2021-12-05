@@ -8,13 +8,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * TestServlet
+ * DecoratorTestServlet
  *
  * @author kilogate
  * @create 2021/12/5 01:13
  **/
-@WebServlet("/testServlet")
-public class TestServlet extends HttpServlet {
+@WebServlet("/decoratorTestServlet")
+public class DecoratorTestServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String name = req.getParameter("name");

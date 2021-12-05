@@ -14,7 +14,7 @@ import java.util.Collection;
 /**
  * MultipleUploadServlet
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2021/12/5 00:38
  **/
 @WebServlet("/multipleUploadServlet")
