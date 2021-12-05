@@ -32,6 +32,7 @@
         <module>hi-httpclient</module>
         <module>hi-servlet</module>
         <module>hi-servlet-webfragment</module>
+        <module>hi-servlet-initializer</module>
     </modules>
 
     <build>
