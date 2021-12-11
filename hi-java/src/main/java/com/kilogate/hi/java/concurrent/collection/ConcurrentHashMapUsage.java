@@ -1,7 +1,7 @@
 package com.kilogate.hi.java.concurrent.collection;
 
 /**
- * 散列映射表的用法 todo
+ * 散列映射表的用法
  * search
  * reduce
  * forEach
