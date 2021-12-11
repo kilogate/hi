@@ -6,7 +6,7 @@ import java.util.Random;
 import java.util.concurrent.*;
 
 /**
- * 执行器服务的用法 todo
+ * 执行器服务的用法
  * invokeAny
  * invokeAll
  *
