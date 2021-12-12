@@ -15,11 +15,11 @@ import java.util.function.Supplier;
  * <p>
  * 处理单个 CompletableFuture 的方法
  * CompletableFuture<Void> thenRun(Runnable action)：执行一个任务
- * CompletableFuture<U> thenApply(Function<? super T,? extends U> fn)：对结果应用一个函数
  * CompletableFuture<Void> thenAccept(Consumer<? super T> action)：对结果应用一个函数（无返回值）
- * CompletableFuture<U> thenCompose(Function<? super T, ? extends CompletionStage<U>> fn)：对结果应用一个函数（返回 future 并执行）
- * CompletableFuture<U> handle(BiFunction<? super T, Throwable, ? extends U> fn)：对结果和错误应用一个函数（返回函数结果）
+ * CompletableFuture<U> thenApply(Function<? super T,? extends U> fn)：对结果应用一个函数
  * CompletableFuture<T> whenComplete(BiConsumer<? super T, ? super Throwable> action)：对结果和错误应用一个函数（返回原结果）
+ * CompletableFuture<U> handle(BiFunction<? super T, Throwable, ? extends U> fn)：对结果和错误应用一个函数（返回函数结果）
+ * CompletableFuture<U> thenCompose(Function<? super T, ? extends CompletionStage<U>> fn)：对结果应用一个函数（返回 future 并执行）
  * <p>
  * 组合多个 CompletableFuture 的方法
  * CompletableFuture<V> thenCombine(CompletionStage<? extends U> other, BiFunction<? super T,? super U,? extends V> fn)：执行两个动作并用给定函数组合结果
@@ -36,7 +36,7 @@ import java.util.function.Supplier;
  **/
 public class CompletableFutureUsage {
     public static void main(String[] args) {
-        test5();
+        test6();
     }
 
     // runAsync
@@ -130,8 +130,48 @@ public class CompletableFutureUsage {
         System.out.printf("[%s] [%s] test end%n", new Date(), Thread.currentThread());
     }
 
-    // thenApply
+    // thenAccept
     private static void test4() {
+        System.out.printf("[%s] [%s] test start%n", new Date(), Thread.currentThread());
+
+        Supplier<String> task = () -> {
+            System.out.printf("[%s] [%s] task start%n", new Date(), Thread.currentThread());
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.printf("[%s] [%s] task end%n", new Date(), Thread.currentThread());
+
+            return "task success";
+        };
+
+        ExecutorService executorService = Executors.newFixedThreadPool(3);
+
+        CompletableFuture<String> taskFuture = CompletableFuture.supplyAsync(task, executorService);
+        CompletableFuture<Void> acceptFuture = taskFuture.thenAccept((taskResult) -> {
+            System.out.printf("[%s] [%s] accept start, taskResult: %s%n", new Date(), Thread.currentThread(), taskResult);
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.printf("[%s] [%s] accept end, taskResult: %s%n", new Date(), Thread.currentThread(), taskResult);
+        });
+
+        String taskResult = taskFuture.join();
+        System.out.printf("[%s] [%s] taskResult: %s%n", new Date(), Thread.currentThread(), taskResult);
+
+        Void acceptResult = acceptFuture.join();
+        System.out.printf("[%s] [%s] acceptResult: %s%n", new Date(), Thread.currentThread(), acceptResult);
+
+        executorService.shutdown();
+
+        System.out.printf("[%s] [%s] test end%n", new Date(), Thread.currentThread());
+    }
+
+    // thenApply
+    private static void test5() {
         System.out.printf("[%s] [%s] test start%n", new Date(), Thread.currentThread());
 
         Supplier<String> task = () -> {
@@ -172,40 +212,56 @@ public class CompletableFutureUsage {
         System.out.printf("[%s] [%s] test end%n", new Date(), Thread.currentThread());
     }
 
-    // thenAccept
-    private static void test5() {
+    // whenComplete
+    private static void test6() {
         System.out.printf("[%s] [%s] test start%n", new Date(), Thread.currentThread());
 
-        Supplier<String> task = () -> {
+//        Supplier<String> successTask = () -> {
+//            System.out.printf("[%s] [%s] task start%n", new Date(), Thread.currentThread());
+//            try {
+//                Thread.sleep(1000);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//            System.out.printf("[%s] [%s] task end%n", new Date(), Thread.currentThread());
+//
+//            return "task success";
+//        };
+
+        Supplier<String> exceptionTask = () -> {
             System.out.printf("[%s] [%s] task start%n", new Date(), Thread.currentThread());
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            int i = 1 / 0;
             System.out.printf("[%s] [%s] task end%n", new Date(), Thread.currentThread());
 
             return "task success";
         };
 
+        Supplier<String> task = exceptionTask;
+
         ExecutorService executorService = Executors.newFixedThreadPool(3);
 
         CompletableFuture<String> taskFuture = CompletableFuture.supplyAsync(task, executorService);
-        CompletableFuture<Void> acceptFuture = taskFuture.thenAccept((taskResult) -> {
-            System.out.printf("[%s] [%s] accept start, taskResult: %s%n", new Date(), Thread.currentThread(), taskResult);
+        CompletableFuture<String> whenCompleteFuture = taskFuture.whenComplete((taskResult, taskException) -> {
+            System.out.printf("[%s] [%s] whenComplete start, taskResult: %s, taskException: %s%n", new Date(), Thread.currentThread(), taskResult, taskException);
             try {
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            System.out.printf("[%s] [%s] accept end, taskResult: %s%n", new Date(), Thread.currentThread(), taskResult);
+            System.out.printf("[%s] [%s] whenComplete end, taskResult: %s, taskException: %s%n", new Date(), Thread.currentThread(), taskResult, taskException);
         });
 
         String taskResult = taskFuture.join();
         System.out.printf("[%s] [%s] taskResult: %s%n", new Date(), Thread.currentThread(), taskResult);
 
-        Void acceptResult = acceptFuture.join();
-        System.out.printf("[%s] [%s] acceptResult: %s%n", new Date(), Thread.currentThread(), acceptResult);
+        // 返回原结果
+        String whenCompleteResult = whenCompleteFuture.join();
+        System.out.printf("[%s] [%s] whenCompleteResult: %s%n", new Date(), Thread.currentThread(), whenCompleteResult);
 
         executorService.shutdown();
 
