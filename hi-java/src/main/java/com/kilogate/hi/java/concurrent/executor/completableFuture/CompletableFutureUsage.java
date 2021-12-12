@@ -36,7 +36,7 @@ import java.util.function.Supplier;
  **/
 public class CompletableFutureUsage {
     public static void main(String[] args) {
-        test7();
+        test8();
     }
 
     // runAsync
@@ -353,6 +353,81 @@ public class CompletableFutureUsage {
                 interruptedException.printStackTrace();
             }
             System.out.printf("[%s] [%s] handleException: %s%n", new Date(), Thread.currentThread(), e);
+        }
+
+        // 关闭线程池
+        executorService.shutdown();
+
+        System.out.printf("[%s] [%s] test end%n", new Date(), Thread.currentThread());
+    }
+
+    // thenCompose
+    private static void test8() {
+        System.out.printf("[%s] [%s] test start%n", new Date(), Thread.currentThread());
+
+        // 正常执行的任务
+        Supplier<String> task = () -> {
+            System.out.printf("[%s] [%s] task start%n", new Date(), Thread.currentThread());
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.printf("[%s] [%s] task end%n", new Date(), Thread.currentThread());
+
+            return "task success";
+        };
+
+        ExecutorService executorService = Executors.newFixedThreadPool(3);
+
+        // 组合可完成 Future
+        CompletableFuture<String> taskFuture = CompletableFuture.supplyAsync(task, executorService);
+        CompletableFuture<String> composeFuture = taskFuture.thenCompose(taskResult -> {
+            System.out.printf("[%s] [%s] compose start, taskResult: %s%n", new Date(), Thread.currentThread(), taskResult);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.printf("[%s] [%s] compose end, taskResult: %s%n", new Date(), Thread.currentThread(), taskResult);
+
+            return CompletableFuture.supplyAsync(() -> {
+                System.out.printf("[%s] [%s] supply start%n", new Date(), Thread.currentThread());
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                System.out.printf("[%s] [%s] supply end%n", new Date(), Thread.currentThread());
+
+                return "supply success";
+            });
+        });
+
+        // 获取任务执行结果（join 方法必须 try catch）
+        try {
+            String taskResult = taskFuture.join();
+            System.out.printf("[%s] [%s] taskResult: %s%n", new Date(), Thread.currentThread(), taskResult);
+        } catch (Exception e) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException interruptedException) {
+                interruptedException.printStackTrace();
+            }
+            System.out.printf("[%s] [%s] taskException: %s%n", new Date(), Thread.currentThread(), e);
+        }
+
+        // 返回原结果（join 方法必须 try catch）
+        try {
+            String composeResult = composeFuture.join();
+            System.out.printf("[%s] [%s] composeResult: %s%n", new Date(), Thread.currentThread(), composeResult);
+        } catch (Exception e) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException interruptedException) {
+                interruptedException.printStackTrace();
+            }
+            System.out.printf("[%s] [%s] composeException: %s%n", new Date(), Thread.currentThread(), e);
         }
 
         // 关闭线程池
