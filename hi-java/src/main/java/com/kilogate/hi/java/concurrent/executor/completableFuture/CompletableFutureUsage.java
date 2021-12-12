@@ -37,7 +37,7 @@ import java.util.function.Supplier;
  **/
 public class CompletableFutureUsage {
     public static void main(String[] args) {
-        test14();
+        test15();
     }
 
     // runAsync
@@ -729,6 +729,52 @@ public class CompletableFutureUsage {
 
         try {
             Integer task3Result = future3.get();
+            System.out.printf("[%s] [%s] task3Result: %s%n", new Date(), Thread.currentThread(), task3Result);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        System.out.printf("[%s] [%s] test end%n", new Date(), Thread.currentThread());
+    }
+
+    // allOf
+    private static void test15() {
+        System.out.printf("[%s] [%s] test start%n", new Date(), Thread.currentThread());
+
+        CompletableFuture<Integer> future1 = CompletableFuture.supplyAsync(() -> {
+            System.out.printf("[%s] [%s] task1 start%n", new Date(), Thread.currentThread());
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.printf("[%s] [%s] task1 end%n", new Date(), Thread.currentThread());
+            return 1;
+        });
+
+        CompletableFuture<Integer> future2 = CompletableFuture.supplyAsync(() -> {
+            System.out.printf("[%s] [%s] task2 start%n", new Date(), Thread.currentThread());
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.printf("[%s] [%s] task2 end%n", new Date(), Thread.currentThread());
+            return 2;
+        });
+
+        CompletableFuture<Void> future3 = CompletableFuture.allOf(future1, future2);
+
+        try {
+            Void task3Result = future3.get();
             System.out.printf("[%s] [%s] task3Result: %s%n", new Date(), Thread.currentThread(), task3Result);
         } catch (InterruptedException e) {
             e.printStackTrace();
