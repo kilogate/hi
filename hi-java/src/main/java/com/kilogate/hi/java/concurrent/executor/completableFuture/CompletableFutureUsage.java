@@ -216,6 +216,7 @@ public class CompletableFutureUsage {
     private static void test6() {
         System.out.printf("[%s] [%s] test start%n", new Date(), Thread.currentThread());
 
+        // 正常执行的任务
 //        Supplier<String> successTask = () -> {
 //            System.out.printf("[%s] [%s] task start%n", new Date(), Thread.currentThread());
 //            try {
@@ -228,6 +229,7 @@ public class CompletableFutureUsage {
 //            return "task success";
 //        };
 
+        // 会产生异常的任务
         Supplier<String> exceptionTask = () -> {
             System.out.printf("[%s] [%s] task start%n", new Date(), Thread.currentThread());
             try {
@@ -245,24 +247,40 @@ public class CompletableFutureUsage {
 
         ExecutorService executorService = Executors.newFixedThreadPool(3);
 
+        // 组合可完成 Future
         CompletableFuture<String> taskFuture = CompletableFuture.supplyAsync(task, executorService);
         CompletableFuture<String> whenCompleteFuture = taskFuture.whenComplete((taskResult, taskException) -> {
             System.out.printf("[%s] [%s] whenComplete start, taskResult: %s, taskException: %s%n", new Date(), Thread.currentThread(), taskResult, taskException);
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
             System.out.printf("[%s] [%s] whenComplete end, taskResult: %s, taskException: %s%n", new Date(), Thread.currentThread(), taskResult, taskException);
         });
 
-        String taskResult = taskFuture.join();
-        System.out.printf("[%s] [%s] taskResult: %s%n", new Date(), Thread.currentThread(), taskResult);
+        // 获取任务执行结果（join 方法必须 try catch）
+        try {
+            String taskResult = taskFuture.join();
+            System.out.printf("[%s] [%s] taskResult: %s%n", new Date(), Thread.currentThread(), taskResult);
+        } catch (Exception e) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException interruptedException) {
+                interruptedException.printStackTrace();
+            }
+            System.out.printf("[%s] [%s] taskException: %s%n", new Date(), Thread.currentThread(), e);
+        }
 
-        // 返回原结果
-        String whenCompleteResult = whenCompleteFuture.join();
-        System.out.printf("[%s] [%s] whenCompleteResult: %s%n", new Date(), Thread.currentThread(), whenCompleteResult);
+        // 返回原结果（join 方法必须 try catch）
+        try {
+            String whenCompleteResult = whenCompleteFuture.join();
+            System.out.printf("[%s] [%s] whenCompleteResult: %s%n", new Date(), Thread.currentThread(), whenCompleteResult);
+        } catch (Exception e) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException interruptedException) {
+                interruptedException.printStackTrace();
+            }
+            System.out.printf("[%s] [%s] whenCompleteException: %s%n", new Date(), Thread.currentThread(), e);
+        }
 
+        // 关闭线程池
         executorService.shutdown();
 
         System.out.printf("[%s] [%s] test end%n", new Date(), Thread.currentThread());
