@@ -1,7 +1,12 @@
 package com.kilogate.hi.java.concurrent.executor.completableFuture;
 
+import java.util.Date;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 /**
- * 可完成 Future 的用法 todo
+ * 可完成 Future 的用法
  * <p>
  * 创建一个 CompletableFuture 的方法
  * static CompletableFuture<Void> runAsync(Runnable runnable)
@@ -29,4 +34,30 @@ package com.kilogate.hi.java.concurrent.executor.completableFuture;
  * @create 2020/8/1 下午4:09
  **/
 public class CompletableFutureUsage {
+    public static void main(String[] args) {
+        test1();
+    }
+
+    private static void test1() {
+        System.out.printf("[%s] [%s] test1 start%n", new Date(), Thread.currentThread());
+
+        Runnable task = () -> {
+            System.out.printf("[%s] [%s] task start%n", new Date(), Thread.currentThread());
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.printf("[%s] [%s] task end%n", new Date(), Thread.currentThread());
+        };
+
+        ExecutorService executorService = Executors.newFixedThreadPool(3);
+
+        CompletableFuture<Void> completableFuture = CompletableFuture.runAsync(task, executorService);
+        completableFuture.join();
+
+        executorService.shutdown();
+
+        System.out.printf("[%s] [%s] test1 end%n", new Date(), Thread.currentThread());
+    }
 }
