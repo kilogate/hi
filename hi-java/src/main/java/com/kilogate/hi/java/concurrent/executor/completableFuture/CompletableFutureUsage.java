@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.function.Supplier;
 
 /**
  * 可完成 Future 的用法
@@ -35,11 +36,11 @@ import java.util.concurrent.Executors;
  **/
 public class CompletableFutureUsage {
     public static void main(String[] args) {
-        test1();
+        test2();
     }
 
     private static void test1() {
-        System.out.printf("[%s] [%s] test1 start%n", new Date(), Thread.currentThread());
+        System.out.printf("[%s] [%s] test start%n", new Date(), Thread.currentThread());
 
         Runnable task = () -> {
             System.out.printf("[%s] [%s] task start%n", new Date(), Thread.currentThread());
@@ -58,6 +59,32 @@ public class CompletableFutureUsage {
 
         executorService.shutdown();
 
-        System.out.printf("[%s] [%s] test1 end%n", new Date(), Thread.currentThread());
+        System.out.printf("[%s] [%s] test end%n", new Date(), Thread.currentThread());
+    }
+
+    private static void test2() {
+        System.out.printf("[%s] [%s] test start%n", new Date(), Thread.currentThread());
+
+        Supplier<String> supplier = () -> {
+            System.out.printf("[%s] [%s] task start%n", new Date(), Thread.currentThread());
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.printf("[%s] [%s] task end%n", new Date(), Thread.currentThread());
+
+            return "supplier success";
+        };
+
+        ExecutorService executorService = Executors.newFixedThreadPool(3);
+
+        CompletableFuture<String> completableFuture = CompletableFuture.supplyAsync(supplier, executorService);
+        String result = completableFuture.join();
+        System.out.printf("[%s] [%s] test result: %s%n", new Date(), Thread.currentThread(), result);
+
+        executorService.shutdown();
+
+        System.out.printf("[%s] [%s] test end%n", new Date(), Thread.currentThread());
     }
 }
