@@ -27,8 +27,8 @@ import java.util.function.Supplier;
  * CompletableFuture<Void> thenAcceptBoth(CompletionStage<? extends U> other, BiConsumer<? super T, ? super U> action)：执行两个动作并用给定函数组合结果（无返回值）
  * CompletableFuture<Void> runAfterBoth(CompletionStage<?> other, Runnable action)：两个都完成后执行任务
  * CompletableFuture<Void> runAfterEither(CompletionStage<?> other,Runnable action)：其中一个完成后执行任务
- * CompletableFuture<U> applyToEither(CompletionStage<? extends T> other, Function<? super T, U> fn)：得到其中一个的结果时，传入给定的函数
  * CompletableFuture<Void> acceptEither(CompletionStage<? extends T> other, Consumer<? super T> action)：得到其中一个的结果时，传入给定的函数（无返回值）
+ * CompletableFuture<U> applyToEither(CompletionStage<? extends T> other, Function<? super T, U> fn)：得到其中一个的结果时，传入给定的函数
  * static CompletableFuture<Void> allOf(CompletableFuture<?>... cfs)：所有给定的 future 都完成后完成
  * static CompletableFuture<Object> anyOf(CompletableFuture<?>... cfs)：任意给定的 future 完成后则完成
  *
@@ -37,7 +37,7 @@ import java.util.function.Supplier;
  **/
 public class CompletableFutureUsage {
     public static void main(String[] args) {
-        test12();
+        test13();
     }
 
     // runAsync
@@ -616,6 +616,60 @@ public class CompletableFutureUsage {
                 e.printStackTrace();
             }
             System.out.printf("[%s] [%s] task3 end%n", new Date(), Thread.currentThread());
+        });
+
+        try {
+            Void task3Result = future3.get();
+            System.out.printf("[%s] [%s] task3Result: %s%n", new Date(), Thread.currentThread(), task3Result);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        System.out.printf("[%s] [%s] test end%n", new Date(), Thread.currentThread());
+    }
+
+    // acceptEither
+    private static void test13() {
+        System.out.printf("[%s] [%s] test start%n", new Date(), Thread.currentThread());
+
+        CompletableFuture<Integer> future1 = CompletableFuture.supplyAsync(() -> {
+            System.out.printf("[%s] [%s] task1 start%n", new Date(), Thread.currentThread());
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.printf("[%s] [%s] task1 end%n", new Date(), Thread.currentThread());
+            return 1;
+        });
+
+        CompletableFuture<Integer> future2 = CompletableFuture.supplyAsync(() -> {
+            System.out.printf("[%s] [%s] task2 start%n", new Date(), Thread.currentThread());
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.printf("[%s] [%s] task2 end%n", new Date(), Thread.currentThread());
+            return 2;
+        });
+
+        CompletableFuture<Void> future3 = future1.acceptEither(future2, (a) -> {
+            System.out.printf("[%s] [%s] task3 start, a: %s%n", new Date(), Thread.currentThread(), a);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.printf("[%s] [%s] task3 end, a: %s%n", new Date(), Thread.currentThread(), a);
         });
 
         try {
