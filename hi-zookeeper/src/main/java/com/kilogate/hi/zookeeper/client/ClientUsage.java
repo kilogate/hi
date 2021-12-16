@@ -15,7 +15,7 @@ import java.util.concurrent.CountDownLatch;
  **/
 public class ClientUsage {
     public static void main(String[] args) throws IOException, InterruptedException, KeeperException {
-        test3();
+        test4();
     }
 
     // 创建会话
@@ -93,6 +93,40 @@ public class ClientUsage {
         Thread.sleep(1000000);
     }
 
+    // 删除节点
+    private static void test4() throws IOException, InterruptedException, KeeperException {
+        CountDownLatch countDownLatch = new CountDownLatch(1);
+        MyWatcher myWatcher = new MyWatcher(countDownLatch);
+
+        // 创建会话
+        System.out.printf("[%s] [%s] 开始创建会话 %n", new Date(), Thread.currentThread().getName());
+        String connectString = "127.0.0.1:2181,127.0.0.1:2182,127.0.0.1:2183/client";
+        ZooKeeper zooKeeper = new ZooKeeper(connectString, 5000, myWatcher);
+
+        // 等待会话创建成功
+        countDownLatch.await();
+        System.out.printf("[%s] [%s] 完成创建会话, 会话ID:%s %n", new Date(), Thread.currentThread().getName(), zooKeeper.getSessionId());
+
+        // 同步创建持久节点
+        String path1 = zooKeeper.create("/path1", "PATH1".getBytes(StandardCharsets.UTF_8), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
+        System.out.printf("[%s] [%s] 同步创建持久节点完成:%s %n", new Date(), Thread.currentThread().getName(), path1);
+
+        // 同步创建持久顺序节点
+        String path2 = zooKeeper.create("/path2", "PATH2".getBytes(StandardCharsets.UTF_8), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT_SEQUENTIAL);
+        System.out.printf("[%s] [%s] 同步创建持久顺序节点完成:%s %n", new Date(), Thread.currentThread().getName(), path2);
+
+        Thread.sleep(5000);
+
+        // 同步删除节点
+        zooKeeper.delete(path1, -1);
+        System.out.printf("[%s] [%s] 同步删除节点完成:%s %n", new Date(), Thread.currentThread().getName(), path1);
+
+        // 异步删除节点
+        zooKeeper.delete(path2, -1, new MyVoidCallback(), "MyContext");
+
+        Thread.sleep(1000000);
+    }
+
     private static class MyWatcher implements Watcher {
         private CountDownLatch countDownLatch;
 
@@ -115,6 +149,14 @@ public class ClientUsage {
         public void processResult(int rc, String path, Object ctx, String name) {
             System.out.printf("[%s] [%s] MyStringCallback收到事件通知, rc: %s, path: %s, ctx: %s, name: %s %n",
                     new Date(), Thread.currentThread().getName(), rc, path, ctx, name);
+        }
+    }
+
+    private static class MyVoidCallback implements AsyncCallback.VoidCallback {
+        @Override
+        public void processResult(int rc, String path, Object ctx) {
+            System.out.printf("[%s] [%s] MyVoidCallback收到事件通知, rc: %s, path: %s, ctx: %s %n",
+                    new Date(), Thread.currentThread().getName(), rc, path, ctx);
         }
     }
 }
