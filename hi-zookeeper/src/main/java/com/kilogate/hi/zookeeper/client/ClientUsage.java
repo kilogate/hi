@@ -17,7 +17,7 @@ import java.util.concurrent.CountDownLatch;
  **/
 public class ClientUsage {
     public static void main(String[] args) throws IOException, InterruptedException, KeeperException {
-        test6();
+        test7();
     }
 
     // 创建会话
@@ -204,6 +204,38 @@ public class ClientUsage {
         Thread.sleep(1000000);
     }
 
+    // 设置数据
+    private static void test7() throws IOException, InterruptedException, KeeperException {
+        CountDownLatch countDownLatch = new CountDownLatch(1);
+        MyWatcher myWatcher = new MyWatcher(countDownLatch);
+
+        // 创建会话
+        System.out.printf("[%s] [%s] 开始创建会话 %n", new Date(), Thread.currentThread().getName());
+        String connectString = "127.0.0.1:2181,127.0.0.1:2182,127.0.0.1:2183/client";
+        ZooKeeper zooKeeper = new ZooKeeper(connectString, 5000, myWatcher);
+
+        // 等待会话创建成功
+        countDownLatch.await();
+        System.out.printf("[%s] [%s] 完成创建会话, 会话ID:%s %n", new Date(), Thread.currentThread().getName(), zooKeeper.getSessionId());
+
+        // 同步创建临时节点
+        String path1 = zooKeeper.create("/path1", "PATH1".getBytes(StandardCharsets.UTF_8), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL);
+        System.out.printf("[%s] [%s] 同步创建临时节点完成:%s %n", new Date(), Thread.currentThread().getName(), path1);
+
+        Thread.sleep(1000);
+
+        // 1、同步设置数据
+        Stat stat = zooKeeper.setData(path1, "PATH1".getBytes(StandardCharsets.UTF_8), -1);
+        System.out.printf("[%s] [%s] 同步设置数据完成, stat: %s %n", new Date(), Thread.currentThread().getName(), stat);
+
+        Thread.sleep(1000);
+
+        // 2、异步设置数据
+        zooKeeper.setData(path1, "NewPath1".getBytes(StandardCharsets.UTF_8), -1, new MyStatCallback(), "MyContext");
+
+        Thread.sleep(1000000);
+    }
+
     private static class MyWatcher implements Watcher {
         private CountDownLatch countDownLatch;
 
@@ -250,6 +282,14 @@ public class ClientUsage {
         public void processResult(int rc, String path, Object ctx, byte[] data, Stat stat) {
             System.out.printf("[%s] [%s] MyDataCallback收到事件通知, rc: %s, path: %s, ctx: %s, data: %s, stat: %s %n",
                     new Date(), Thread.currentThread().getName(), rc, path, ctx, new String(data), stat);
+        }
+    }
+
+    private static class MyStatCallback implements AsyncCallback.StatCallback {
+        @Override
+        public void processResult(int rc, String path, Object ctx, Stat stat) {
+            System.out.printf("[%s] [%s] MyStatCallback收到事件通知, rc: %s, path: %s, ctx: %s, stat: %s %n",
+                    new Date(), Thread.currentThread().getName(), rc, path, ctx, stat);
         }
     }
 }
