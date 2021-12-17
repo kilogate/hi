@@ -1,8 +1,10 @@
 package com.kilogate.hi.zookeeper.zkclient;
 
+import org.I0Itec.zkclient.IZkChildListener;
 import org.I0Itec.zkclient.ZkClient;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * ZkClientUsage
@@ -12,7 +14,7 @@ import java.util.Date;
  **/
 public class ZkClientUsage {
     public static void main(String[] args) throws InterruptedException {
-        test1();
+        test2();
     }
 
     // 创建会话、创建和删除节点
@@ -31,5 +33,46 @@ public class ZkClientUsage {
         // 递归删除节点
         boolean success = zkClient.deleteRecursive("/p1");
         System.out.printf("[%s] [%s] 递归删除节点完成, success: %s %n", new Date(), Thread.currentThread().getName(), success);
+    }
+
+    // 获取子节点列表、监听子节点变更
+    private static void test2() throws InterruptedException {
+        // 创建会话
+        String connectString = "127.0.0.1:2181,127.0.0.1:2182,127.0.0.1:2183/zkClient";
+        ZkClient zkClient = new ZkClient(connectString);
+        System.out.printf("[%s] [%s] 完成创建会话 %n", new Date(), Thread.currentThread().getName());
+
+        // 创建子节点
+        zkClient.createEphemeral("/p1", "P1");
+        System.out.printf("[%s] [%s] 创建子节点 /p1 完成 %n", new Date(), Thread.currentThread().getName());
+        zkClient.createEphemeral("/p2", "P2");
+        System.out.printf("[%s] [%s] 创建子节点 /p2 完成 %n", new Date(), Thread.currentThread().getName());
+        zkClient.createEphemeral("/p3", "P3");
+        System.out.printf("[%s] [%s] 创建子节点 /p3 完成 %n", new Date(), Thread.currentThread().getName());
+
+        // 1、获取子节点列表
+        List<String> children = zkClient.getChildren("/");
+        System.out.printf("[%s] [%s] 获取子节点列表完成, children: %s %n", new Date(), Thread.currentThread().getName(), children);
+
+        // 2、监听子节点变更
+        zkClient.subscribeChildChanges("/", new MyZkChildListener());
+
+        // 创建子节点
+        zkClient.createEphemeral("/p4", "P4");
+        System.out.printf("[%s] [%s] 创建子节点 /p4 完成 %n", new Date(), Thread.currentThread().getName());
+
+        // 删除子节点
+        boolean success = zkClient.delete("/p4");
+        System.out.printf("[%s] [%s] 删除子节点 /p4 完成, success: %s %n", new Date(), Thread.currentThread().getName(), success);
+
+        Thread.sleep(30000);
+    }
+
+    private static class MyZkChildListener implements IZkChildListener {
+        @Override
+        public void handleChildChange(String parentPath, List<String> currentChilds) throws Exception {
+            System.out.printf("[%s] [%s] MyZkChildListener收到事件通知, parentPath: %s, currentChilds: %s %n",
+                    new Date(), Thread.currentThread().getName(), parentPath, currentChilds);
+        }
     }
 }
