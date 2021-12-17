@@ -97,7 +97,7 @@ public class CuratorUsage {
         Thread.sleep(30000);
     }
 
-    // 事件监听
+    // 事件监听：节点监听
     private static void test3() throws Exception {
         // 创建会话
         String connectString = "127.0.0.1:2181,127.0.0.1:2182,127.0.0.1:2183";
@@ -114,7 +114,7 @@ public class CuratorUsage {
         client.start();
         System.out.printf("[%s] [%s] 完成创建会话 %n", new Date(), Thread.currentThread().getName());
 
-        // 1、节点监听
+        // 节点监听
         NodeCache nodeCache = new NodeCache(client, "/p1");
         nodeCache.start();
         nodeCache.getListenable().addListener(new MyNodeCacheListener(nodeCache));
@@ -140,10 +140,6 @@ public class CuratorUsage {
         // 删除节点
         client.delete().forPath("/p1");
         System.out.printf("[%s] [%s] 删除节点 /p1 完成 %n", new Date(), Thread.currentThread().getName());
-
-        Thread.sleep(1000);
-
-        // 2、子节点监听
 
         Thread.sleep(30000);
     }
