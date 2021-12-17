@@ -9,6 +9,7 @@ import org.apache.curator.framework.recipes.cache.*;
 import org.apache.curator.framework.recipes.leader.CancelLeadershipException;
 import org.apache.curator.framework.recipes.leader.LeaderSelector;
 import org.apache.curator.framework.recipes.leader.LeaderSelectorListener;
+import org.apache.curator.framework.recipes.locks.InterProcessMutex;
 import org.apache.curator.framework.state.ConnectionState;
 import org.apache.curator.retry.ExponentialBackoffRetry;
 import org.apache.zookeeper.CreateMode;
@@ -16,6 +17,7 @@ import org.apache.zookeeper.data.Stat;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -27,7 +29,7 @@ import java.util.concurrent.Executors;
  **/
 public class CuratorUsage {
     public static void main(String[] args) throws Exception {
-        test5();
+        test6();
     }
 
     // 创建会话、创建节点、删除节点、读取数据、更新数据
@@ -264,6 +266,61 @@ public class CuratorUsage {
                 }
             }).start();
         }
+
+        Thread.sleep(Integer.MAX_VALUE);
+    }
+
+    // 分布式锁
+    private static void test6() throws Exception {
+        // 创建会话
+        String connectString = "127.0.0.1:2181,127.0.0.1:2182,127.0.0.1:2183";
+        RetryPolicy retryPolicy = new ExponentialBackoffRetry(1000, 3);
+        CuratorFramework client = CuratorFrameworkFactory.builder()
+                .connectString(connectString)
+                .namespace("curator")
+                .sessionTimeoutMs(50000)
+                .connectionTimeoutMs(3000)
+                .retryPolicy(retryPolicy)
+                .build();
+
+        // 启动会话
+        client.start();
+        System.out.printf("[%s] [%s] 创建会话完成 %n", new Date(), Thread.currentThread().getName());
+
+        // 分布式锁
+        String lockPath = "/lock" + System.currentTimeMillis() + "-";
+        InterProcessMutex lock = new InterProcessMutex(client, lockPath);
+
+        // 开启多个线程打印当前时间戳
+        CountDownLatch countDownLatch = new CountDownLatch(1);
+        for (int i = 0; i < 100; i++) {
+            new Thread(() -> {
+                try {
+                    // 获取分布式锁
+                    lock.acquire();
+
+                    // 等待所有线程都启动
+                    countDownLatch.await();
+
+                    // 打印当前时间戳
+                    System.out.printf("[%s] [%s] 当前时间戳: %s %n", new Date(), Thread.currentThread().getName(), System.currentTimeMillis());
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    try {
+                        // 释放分布式锁
+                        lock.release();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
+        }
+
+        // 开始执行
+        countDownLatch.countDown();
 
         Thread.sleep(Integer.MAX_VALUE);
     }
