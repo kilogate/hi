@@ -17,7 +17,7 @@ import java.util.concurrent.CountDownLatch;
  **/
 public class ClientUsage {
     public static void main(String[] args) throws IOException, InterruptedException, KeeperException {
-        test5();
+        test6();
     }
 
     // 创建会话
@@ -151,7 +151,7 @@ public class ClientUsage {
 
 //        // 1、同步获取子节点列表（使用默认的 Watcher）
 //        List<String> children = zooKeeper.getChildren("/", true);
-//        System.out.printf("[%s] [%s] 获取子节点列表:%s %n", new Date(), Thread.currentThread().getName(), children);
+//        System.out.printf("[%s] [%s] 获取子节点列表完成:%s %n", new Date(), Thread.currentThread().getName(), children);
 
 //        // 2、异步获取子节点列表
 //        zooKeeper.getChildren("/", null, new MyChildCallback(), "MyContext");
@@ -159,7 +159,7 @@ public class ClientUsage {
         // 3、同步获取子节点列表（同时获取节点状态信息）
         Stat stat = new Stat();
         List<String> children = zooKeeper.getChildren("/", false, stat);
-        System.out.printf("[%s] [%s] 获取子节点列表, children: %s, stat: %s %n", new Date(), Thread.currentThread().getName(), children, stat);
+        System.out.printf("[%s] [%s] 获取子节点列表完成, children: %s, stat: %s %n", new Date(), Thread.currentThread().getName(), children, stat);
 
         Thread.sleep(1000);
 
@@ -167,6 +167,39 @@ public class ClientUsage {
         String path2 = zooKeeper.create("/path2", "PATH2".getBytes(StandardCharsets.UTF_8), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL_SEQUENTIAL);
         System.out.printf("[%s] [%s] 同步创建临时顺序节点完成:%s %n", new Date(), Thread.currentThread().getName(), path2);
 
+
+        Thread.sleep(1000000);
+    }
+
+    // 读取数据
+    private static void test6() throws IOException, InterruptedException, KeeperException {
+        CountDownLatch countDownLatch = new CountDownLatch(1);
+        MyWatcher myWatcher = new MyWatcher(countDownLatch);
+
+        // 创建会话
+        System.out.printf("[%s] [%s] 开始创建会话 %n", new Date(), Thread.currentThread().getName());
+        String connectString = "127.0.0.1:2181,127.0.0.1:2182,127.0.0.1:2183/client";
+        ZooKeeper zooKeeper = new ZooKeeper(connectString, 5000, myWatcher);
+
+        // 等待会话创建成功
+        countDownLatch.await();
+        System.out.printf("[%s] [%s] 完成创建会话, 会话ID:%s %n", new Date(), Thread.currentThread().getName(), zooKeeper.getSessionId());
+
+        // 同步创建临时节点
+        String path1 = zooKeeper.create("/path1", "PATH1".getBytes(StandardCharsets.UTF_8), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL);
+        System.out.printf("[%s] [%s] 同步创建临时节点完成:%s %n", new Date(), Thread.currentThread().getName(), path1);
+
+        Thread.sleep(1000);
+
+        // 1、同步读取数据
+        Stat stat = new Stat();
+        byte[] data = zooKeeper.getData(path1, false, stat);
+        System.out.printf("[%s] [%s] 同步读取数据完成, data: %s, stat: %s %n", new Date(), Thread.currentThread().getName(), new String(data), stat);
+
+        Thread.sleep(1000);
+
+        // 2、异步读取数据
+        zooKeeper.getData(path1, false, new MyDataCallback(), "MyContext");
 
         Thread.sleep(1000000);
     }
@@ -212,5 +245,11 @@ public class ClientUsage {
         }
     }
 
-
+    private static class MyDataCallback implements AsyncCallback.DataCallback {
+        @Override
+        public void processResult(int rc, String path, Object ctx, byte[] data, Stat stat) {
+            System.out.printf("[%s] [%s] MyDataCallback收到事件通知, rc: %s, path: %s, ctx: %s, data: %s, stat: %s %n",
+                    new Date(), Thread.currentThread().getName(), rc, path, ctx, new String(data), stat);
+        }
+    }
 }
