@@ -8,6 +8,7 @@ import org.apache.curator.framework.api.CuratorEvent;
 import org.apache.curator.framework.recipes.atomic.AtomicValue;
 import org.apache.curator.framework.recipes.atomic.DistributedAtomicInteger;
 import org.apache.curator.framework.recipes.barriers.DistributedBarrier;
+import org.apache.curator.framework.recipes.barriers.DistributedDoubleBarrier;
 import org.apache.curator.framework.recipes.cache.*;
 import org.apache.curator.framework.recipes.leader.CancelLeadershipException;
 import org.apache.curator.framework.recipes.leader.LeaderSelector;
@@ -33,7 +34,7 @@ import java.util.concurrent.Executors;
  **/
 public class CuratorUsage {
     public static void main(String[] args) throws Exception {
-        test8();
+        test9();
     }
 
     // 创建会话、创建节点、删除节点、读取数据、更新数据
@@ -377,29 +378,31 @@ public class CuratorUsage {
 
     // 分布式Barrier（主线程释放Barrier）
     private static void test8() throws Exception {
-        // 创建会话
-        String connectString = "127.0.0.1:2181,127.0.0.1:2182,127.0.0.1:2183";
-        RetryPolicy retryPolicy = new ExponentialBackoffRetry(1000, 3);
-        CuratorFramework client = CuratorFrameworkFactory.builder()
-                .connectString(connectString)
-                .namespace("curator")
-                .sessionTimeoutMs(50000)
-                .connectionTimeoutMs(3000)
-                .retryPolicy(retryPolicy)
-                .build();
-
-        // 启动会话
-        client.start();
-        System.out.printf("[%s] [%s] 创建会话完成 %n", new Date(), Thread.currentThread().getName());
-
-        // 分布式Barrier
         String barrierPath = "/barrier" + System.currentTimeMillis() + "-";
-        DistributedBarrier distributedBarrier = new DistributedBarrier(client, barrierPath);
 
-        // 开启多个线程
         for (int i = 0; i < 10; i++) {
             new Thread(() -> {
                 try {
+                    // 创建会话
+                    String connectString = "127.0.0.1:2181,127.0.0.1:2182,127.0.0.1:2183";
+                    RetryPolicy retryPolicy = new ExponentialBackoffRetry(1000, 3);
+                    CuratorFramework client = CuratorFrameworkFactory.builder()
+                            .connectString(connectString)
+                            .namespace("curator")
+                            .sessionTimeoutMs(50000)
+                            .connectionTimeoutMs(3000)
+                            .retryPolicy(retryPolicy)
+                            .build();
+
+                    // 启动会话
+                    client.start();
+                    System.out.printf("[%s] [%s] 创建会话完成 %n", new Date(), Thread.currentThread().getName());
+
+                    Thread.sleep(1000);
+
+                    // 分布式Barrier
+                    DistributedBarrier distributedBarrier = new DistributedBarrier(client, barrierPath);
+
                     // 设置Barrier
                     System.out.printf("[%s] [%s] 设置Barrier %n", new Date(), Thread.currentThread().getName());
                     distributedBarrier.setBarrier();
@@ -417,11 +420,83 @@ public class CuratorUsage {
         }
 
         Thread.sleep(2000);
-        System.out.printf("[%s] [%s] 倒计时10s %n", new Date(), Thread.currentThread().getName());
-        Thread.sleep(10000);
+        System.out.printf("[%s] [%s] 倒计时3s %n", new Date(), Thread.currentThread().getName());
+        Thread.sleep(3000);
+
+        // 创建会话
+        String connectString = "127.0.0.1:2181,127.0.0.1:2182,127.0.0.1:2183";
+        RetryPolicy retryPolicy = new ExponentialBackoffRetry(1000, 3);
+        CuratorFramework client = CuratorFrameworkFactory.builder()
+                .connectString(connectString)
+                .namespace("curator")
+                .sessionTimeoutMs(50000)
+                .connectionTimeoutMs(3000)
+                .retryPolicy(retryPolicy)
+                .build();
+
+        // 启动会话
+        client.start();
+        System.out.printf("[%s] [%s] 创建会话完成 %n", new Date(), Thread.currentThread().getName());
+
+        // 分布式Barrier
+        DistributedBarrier distributedBarrier = new DistributedBarrier(client, barrierPath);
 
         // 移除Barrier
         distributedBarrier.removeBarrier();
+
+        Thread.sleep(Integer.MAX_VALUE);
+    }
+
+    // 分布式Barrier（当前线程释放Barrier）
+    private static void test9() throws Exception {
+        String barrierPath = "/barrier" + System.currentTimeMillis() + "-";
+
+        int num = 10;
+        for (int i = 0; i < num; i++) {
+            new Thread(() -> {
+                try {
+                    // 创建会话
+                    String connectString = "127.0.0.1:2181,127.0.0.1:2182,127.0.0.1:2183";
+                    RetryPolicy retryPolicy = new ExponentialBackoffRetry(1000, 3);
+                    CuratorFramework client = CuratorFrameworkFactory.builder()
+                            .connectString(connectString)
+                            .namespace("curator")
+                            .sessionTimeoutMs(50000)
+                            .connectionTimeoutMs(3000)
+                            .retryPolicy(retryPolicy)
+                            .build();
+
+                    // 启动会话
+                    client.start();
+                    System.out.printf("[%s] [%s] 创建会话完成 %n", new Date(), Thread.currentThread().getName());
+
+                    Thread.sleep(1000);
+
+                    // 分布式Barrier
+                    DistributedDoubleBarrier distributedDoubleBarrier = new DistributedDoubleBarrier(client, barrierPath, num);
+
+                    Thread.sleep(1000);
+
+                    // 进入Barrier
+                    System.out.printf("[%s] [%s] 进入Barrier %n", new Date(), Thread.currentThread().getName());
+                    distributedDoubleBarrier.enter();
+
+                    // 全部进入了，启动。。。
+                    System.out.printf("[%s] [%s] 全部进入了，启动。。。 %n", new Date(), Thread.currentThread().getName());
+
+                    Thread.sleep(1000);
+
+                    // 退出Barrier
+                    System.out.printf("[%s] [%s] 退出Barrier %n", new Date(), Thread.currentThread().getName());
+                    distributedDoubleBarrier.leave();
+
+                    // 全部退出了，结束。。。
+                    System.out.printf("[%s] [%s] 全部退出了，结束。。。 %n", new Date(), Thread.currentThread().getName());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }).start();
+        }
 
         Thread.sleep(Integer.MAX_VALUE);
     }
