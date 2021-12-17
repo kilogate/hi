@@ -17,7 +17,7 @@ import java.util.concurrent.CountDownLatch;
  **/
 public class ClientUsage {
     public static void main(String[] args) throws IOException, InterruptedException, KeeperException {
-        test8();
+        test9();
     }
 
     // 创建会话
@@ -264,6 +264,48 @@ public class ClientUsage {
 
         // 2、异步检测节点是否存在
         zooKeeper.exists("/notExist", false, new MyStatCallback(), "MyContext");
+
+        Thread.sleep(1000000);
+    }
+
+    // 权限控制
+    private static void test9() throws IOException, InterruptedException, KeeperException {
+        String connectString = "127.0.0.1:2181,127.0.0.1:2182,127.0.0.1:2183/client";
+
+        // 1、创建有权限的会话
+        CountDownLatch countDownLatch1 = new CountDownLatch(1);
+        ZooKeeper authZooKeeper = new ZooKeeper(connectString, 5000, new MyWatcher(countDownLatch1));
+
+        // 等待会话创建成功
+        countDownLatch1.await();
+
+        // 添加权限
+        authZooKeeper.addAuthInfo("digest", "foo:true".getBytes(StandardCharsets.UTF_8));
+
+        Thread.sleep(1000);
+
+        // 2、创建无权限的会话
+        CountDownLatch countDownLatch2 = new CountDownLatch(1);
+        ZooKeeper noAuthZooKeeper = new ZooKeeper(connectString, 5000, new MyWatcher(countDownLatch2));
+
+        // 等待会话创建成功
+        countDownLatch2.await();
+
+        // 3、使用有权限的会话同步创建临时节点（注意使用 Ids.CREATOR_ALL_ACL 模式）
+        String path1 = authZooKeeper.create("/path1", "PATH1".getBytes(StandardCharsets.UTF_8), ZooDefs.Ids.CREATOR_ALL_ACL, CreateMode.EPHEMERAL);
+        System.out.printf("[%s] [%s] 同步创建临时节点完成:%s %n", new Date(), Thread.currentThread().getName(), path1);
+
+        Thread.sleep(1000);
+
+        // 4、使用有权限的会话同步读取数据
+        Stat stat1 = new Stat();
+        byte[] data1 = authZooKeeper.getData(path1, false, stat1);
+        System.out.printf("[%s] [%s] 同步读取数据完成, data1: %s, stat1: %s %n", new Date(), Thread.currentThread().getName(), new String(data1), stat1);
+
+        // 5、使用无权限的会话同步读取数据
+        Stat stat2 = new Stat();
+        byte[] data2 = noAuthZooKeeper.getData(path1, false, stat2);
+        System.out.printf("[%s] [%s] 同步读取数据完成, data2: %s, stat2: %s %n", new Date(), Thread.currentThread().getName(), new String(data2), stat2);
 
         Thread.sleep(1000000);
     }
