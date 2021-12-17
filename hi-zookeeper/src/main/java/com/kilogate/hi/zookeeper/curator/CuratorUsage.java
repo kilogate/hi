@@ -5,6 +5,8 @@ import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.framework.api.BackgroundCallback;
 import org.apache.curator.framework.api.CuratorEvent;
+import org.apache.curator.framework.recipes.cache.NodeCache;
+import org.apache.curator.framework.recipes.cache.NodeCacheListener;
 import org.apache.curator.retry.ExponentialBackoffRetry;
 import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.data.Stat;
@@ -22,7 +24,7 @@ import java.util.concurrent.Executors;
  **/
 public class CuratorUsage {
     public static void main(String[] args) throws Exception {
-        test2();
+        test3();
     }
 
     // 创建会话、创建节点、删除节点、读取数据、更新数据
@@ -95,10 +97,75 @@ public class CuratorUsage {
         Thread.sleep(30000);
     }
 
+    // 事件监听
+    private static void test3() throws Exception {
+        // 创建会话
+        String connectString = "127.0.0.1:2181,127.0.0.1:2182,127.0.0.1:2183";
+        RetryPolicy retryPolicy = new ExponentialBackoffRetry(1000, 3);
+        CuratorFramework client = CuratorFrameworkFactory.builder()
+                .connectString(connectString)
+                .namespace("curator")
+                .sessionTimeoutMs(50000)
+                .connectionTimeoutMs(3000)
+                .retryPolicy(retryPolicy)
+                .build();
+
+        // 启动会话
+        client.start();
+        System.out.printf("[%s] [%s] 完成创建会话 %n", new Date(), Thread.currentThread().getName());
+
+        // 1、节点监听
+        NodeCache nodeCache = new NodeCache(client, "/p1");
+        nodeCache.start();
+        nodeCache.getListenable().addListener(new MyNodeCacheListener(nodeCache));
+        System.out.printf("[%s] [%s] 监听节点 /p1 完成 %n", new Date(), Thread.currentThread().getName());
+
+        Thread.sleep(1000);
+
+        // 创建节点
+        client.create()
+                .creatingParentsIfNeeded()
+                .withMode(CreateMode.EPHEMERAL)
+                .forPath("/p1", "P1".getBytes(StandardCharsets.UTF_8));
+        System.out.printf("[%s] [%s] 创建节点 /p1 完成 %n", new Date(), Thread.currentThread().getName());
+
+        Thread.sleep(1000);
+
+        // 更新数据
+        client.setData().forPath("/p1", "NewP1".getBytes(StandardCharsets.UTF_8));
+        System.out.printf("[%s] [%s] 更新节点 /p1 完成 %n", new Date(), Thread.currentThread().getName());
+
+        Thread.sleep(1000);
+
+        // 删除节点
+        client.delete().forPath("/p1");
+        System.out.printf("[%s] [%s] 删除节点 /p1 完成 %n", new Date(), Thread.currentThread().getName());
+
+        Thread.sleep(1000);
+
+        // 2、子节点监听
+
+        Thread.sleep(30000);
+    }
+
     private static class MyBackgroundCallback implements BackgroundCallback {
         @Override
         public void processResult(CuratorFramework client, CuratorEvent event) throws Exception {
             System.out.printf("[%s] [%s] MyBackgroundCallback 收到事件通知: %s %n", new Date(), Thread.currentThread().getName(), event);
+        }
+    }
+
+    private static class MyNodeCacheListener implements NodeCacheListener {
+        private NodeCache nodeCache;
+
+        public MyNodeCacheListener(NodeCache nodeCache) {
+            this.nodeCache = nodeCache;
+        }
+
+        @Override
+        public void nodeChanged() throws Exception {
+            System.out.printf("[%s] [%s] MyNodeCacheListener 收到事件通知, currentData: %s %n",
+                    new Date(), Thread.currentThread().getName(), nodeCache.getCurrentData());
         }
     }
 }
