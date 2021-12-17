@@ -6,6 +6,10 @@ import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.framework.api.BackgroundCallback;
 import org.apache.curator.framework.api.CuratorEvent;
 import org.apache.curator.framework.recipes.cache.*;
+import org.apache.curator.framework.recipes.leader.CancelLeadershipException;
+import org.apache.curator.framework.recipes.leader.LeaderSelector;
+import org.apache.curator.framework.recipes.leader.LeaderSelectorListener;
+import org.apache.curator.framework.state.ConnectionState;
 import org.apache.curator.retry.ExponentialBackoffRetry;
 import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.data.Stat;
@@ -23,7 +27,7 @@ import java.util.concurrent.Executors;
  **/
 public class CuratorUsage {
     public static void main(String[] args) throws Exception {
-        test4();
+        test5();
     }
 
     // 创建会话、创建节点、删除节点、读取数据、更新数据
@@ -209,6 +213,59 @@ public class CuratorUsage {
         System.out.printf("[%s] [%s] 删除节点 /p1 完成 %n", new Date(), Thread.currentThread().getName());
 
         Thread.sleep(30000);
+    }
+
+    // Master选举
+    private static void test5() throws Exception {
+        // 创建会话
+        String connectString = "127.0.0.1:2181,127.0.0.1:2182,127.0.0.1:2183";
+        RetryPolicy retryPolicy = new ExponentialBackoffRetry(1000, 3);
+        CuratorFramework client = CuratorFrameworkFactory.builder()
+                .connectString(connectString)
+                .namespace("curator")
+                .sessionTimeoutMs(50000)
+                .connectionTimeoutMs(3000)
+                .retryPolicy(retryPolicy)
+                .build();
+
+        // 启动会话
+        client.start();
+        System.out.printf("[%s] [%s] 创建会话完成 %n", new Date(), Thread.currentThread().getName());
+
+        // Master选举
+        String leaderPath = "/master" + System.currentTimeMillis() + "-";
+
+        // 开启十个线程抢 Master
+        for (int i = 0; i < 10; i++) {
+            new Thread(() -> {
+                LeaderSelector leaderSelector = new LeaderSelector(client, leaderPath, new LeaderSelectorListener() {
+                    @Override
+                    public void takeLeadership(CuratorFramework client) throws Exception {
+                        System.out.printf("[%s] [%s] takeLeadership start %n", new Date(), Thread.currentThread().getName());
+                        Thread.sleep(3000);
+                        System.out.printf("[%s] [%s] takeLeadership end %n", new Date(), Thread.currentThread().getName());
+                    }
+
+                    @Override
+                    public void stateChanged(CuratorFramework client, ConnectionState newState) {
+                        if (ConnectionState.SUSPENDED == newState || ConnectionState.LOST == newState) {
+                            throw new CancelLeadershipException();
+                        }
+                    }
+                });
+
+                leaderSelector.autoRequeue();
+                leaderSelector.start();
+
+                try {
+                    Thread.sleep(Integer.MAX_VALUE);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }).start();
+        }
+
+        Thread.sleep(Integer.MAX_VALUE);
     }
 
     private static class MyBackgroundCallback implements BackgroundCallback {
