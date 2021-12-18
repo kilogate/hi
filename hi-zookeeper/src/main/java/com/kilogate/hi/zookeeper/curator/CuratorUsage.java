@@ -17,12 +17,14 @@ import org.apache.curator.framework.recipes.locks.InterProcessMutex;
 import org.apache.curator.framework.state.ConnectionState;
 import org.apache.curator.retry.ExponentialBackoffRetry;
 import org.apache.curator.retry.RetryNTimes;
+import org.apache.curator.test.TestingServer;
 import org.apache.curator.utils.EnsurePath;
 import org.apache.curator.utils.ZKPaths;
 import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.ZooKeeper;
 import org.apache.zookeeper.data.Stat;
 
+import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.List;
@@ -38,7 +40,7 @@ import java.util.concurrent.Executors;
  **/
 public class CuratorUsage {
     public static void main(String[] args) throws Exception {
-        test11();
+        test12();
     }
 
     // 创建会话、创建节点、删除节点、读取数据、更新数据
@@ -582,6 +584,44 @@ public class CuratorUsage {
         ensurePath.ensure(client.getZookeeperClient());
 
         Thread.sleep(300000);
+    }
+
+    // TestingServer
+    private static void test12() throws Exception {
+        // 启动 TestingServer
+        TestingServer testingServer = new TestingServer(2188, new File("/opt/work/test"));
+
+        // 创建会话
+        String connectString = "127.0.0.1:2188";
+        RetryPolicy retryPolicy = new ExponentialBackoffRetry(1000, 3);
+        CuratorFramework client = CuratorFrameworkFactory.builder()
+                .connectString(connectString)
+                .namespace("curator")
+                .sessionTimeoutMs(50000)
+                .connectionTimeoutMs(3000)
+                .retryPolicy(retryPolicy)
+                .build();
+
+        // 启动会话
+        client.start();
+        System.out.printf("[%s] [%s] 创建会话完成 %n", new Date(), Thread.currentThread().getName());
+
+        // 测试 TestingServer
+        client.create().creatingParentsIfNeeded().forPath("/p1/p11");
+        client.create().creatingParentsIfNeeded().forPath("/p1/p12");
+        client.create().creatingParentsIfNeeded().forPath("/p1/p13");
+        System.out.printf("[%s] [%s] create完成 %n", new Date(), Thread.currentThread().getName());
+
+        Thread.sleep(10000);
+
+        List<String> children = client.getChildren().forPath("/p1");
+        System.out.printf("[%s] [%s] getChildren完成, children: %s %n", new Date(), Thread.currentThread().getName(), children);
+
+        client.delete().deletingChildrenIfNeeded().forPath("/p1");
+        System.out.printf("[%s] [%s] delete完成 %n", new Date(), Thread.currentThread().getName());
+
+        // 关闭 TestingServer
+        testingServer.close();
     }
 
     private static class MyBackgroundCallback implements BackgroundCallback {
