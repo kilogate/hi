@@ -17,6 +17,7 @@ import org.apache.curator.framework.recipes.locks.InterProcessMutex;
 import org.apache.curator.framework.state.ConnectionState;
 import org.apache.curator.retry.ExponentialBackoffRetry;
 import org.apache.curator.retry.RetryNTimes;
+import org.apache.curator.utils.EnsurePath;
 import org.apache.curator.utils.ZKPaths;
 import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.ZooKeeper;
@@ -37,7 +38,7 @@ import java.util.concurrent.Executors;
  **/
 public class CuratorUsage {
     public static void main(String[] args) throws Exception {
-        test10();
+        test11();
     }
 
     // 创建会话、创建节点、删除节点、读取数据、更新数据
@@ -545,6 +546,40 @@ public class CuratorUsage {
 
         ZKPaths.deleteChildren(zooKeeper, "/curator/p1", true);
         System.out.printf("[%s] [%s] deleteChildren完成 %n", new Date(), Thread.currentThread().getName());
+
+        Thread.sleep(300000);
+    }
+
+    // 工具：EnsurePath
+    private static void test11() throws Exception {
+        // 创建会话
+        String connectString = "127.0.0.1:2181,127.0.0.1:2182,127.0.0.1:2183";
+        RetryPolicy retryPolicy = new ExponentialBackoffRetry(1000, 3);
+        CuratorFramework client = CuratorFrameworkFactory.builder()
+                .connectString(connectString)
+                .namespace("curator")
+                .sessionTimeoutMs(50000)
+                .connectionTimeoutMs(3000)
+                .retryPolicy(retryPolicy)
+                .build();
+
+        // 启动会话
+        client.start();
+        System.out.printf("[%s] [%s] 创建会话完成 %n", new Date(), Thread.currentThread().getName());
+
+        // EnsurePath
+        EnsurePath ensurePath = new EnsurePath("/p1");
+
+        System.out.printf("[%s] [%s] 开始第1次ensure %n", new Date(), Thread.currentThread().getName());
+        ensurePath.ensure(client.getZookeeperClient());
+        Thread.sleep(10000);
+
+        System.out.printf("[%s] [%s] 开始第2次ensure %n", new Date(), Thread.currentThread().getName());
+        ensurePath.ensure(client.getZookeeperClient());
+        Thread.sleep(10000);
+
+        System.out.printf("[%s] [%s] 开始第3次ensure %n", new Date(), Thread.currentThread().getName());
+        ensurePath.ensure(client.getZookeeperClient());
 
         Thread.sleep(300000);
     }
