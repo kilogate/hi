@@ -17,7 +17,9 @@ import org.apache.curator.framework.recipes.locks.InterProcessMutex;
 import org.apache.curator.framework.state.ConnectionState;
 import org.apache.curator.retry.ExponentialBackoffRetry;
 import org.apache.curator.retry.RetryNTimes;
+import org.apache.curator.test.TestingCluster;
 import org.apache.curator.test.TestingServer;
+import org.apache.curator.test.TestingZooKeeperServer;
 import org.apache.curator.utils.EnsurePath;
 import org.apache.curator.utils.ZKPaths;
 import org.apache.zookeeper.CreateMode;
@@ -28,6 +30,7 @@ import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -40,7 +43,7 @@ import java.util.concurrent.Executors;
  **/
 public class CuratorUsage {
     public static void main(String[] args) throws Exception {
-        test12();
+        test13();
     }
 
     // 创建会话、创建节点、删除节点、读取数据、更新数据
@@ -622,6 +625,49 @@ public class CuratorUsage {
 
         // 关闭 TestingServer
         testingServer.close();
+    }
+
+    // TestingCluster
+    private static void test13() throws Exception {
+        // 启动 TestingCluster
+        TestingCluster cluster = new TestingCluster(3);
+        cluster.start();
+
+        Thread.sleep(2000);
+
+        // 打印各 ZooKeeperServer
+        TestingZooKeeperServer leader = null;
+        for (TestingZooKeeperServer zooKeeperServer : cluster.getServers()) {
+            int serverId = zooKeeperServer.getInstanceSpec().getServerId();
+            String serverState = zooKeeperServer.getQuorumPeer().getServerState();
+            String dataDirectory = zooKeeperServer.getInstanceSpec().getDataDirectory().getAbsolutePath();
+
+            System.out.printf("[%s] [%s] serverId: %s, serverState: %s, dataDirectory: %s %n",
+                    new Date(), Thread.currentThread().getName(), serverId, serverState, dataDirectory);
+
+            if (Objects.equals(serverState, "leading")) {
+                leader = zooKeeperServer;
+            }
+        }
+
+        // kill leader
+        leader.kill();
+
+        System.out.printf("[%s] [%s] leader已经被kill %n", new Date(), Thread.currentThread().getName());
+        Thread.sleep(1000);
+
+        // 再次打印各 ZooKeeperServer
+        for (TestingZooKeeperServer zooKeeperServer : cluster.getServers()) {
+            int serverId = zooKeeperServer.getInstanceSpec().getServerId();
+            String serverState = zooKeeperServer.getQuorumPeer().getServerState();
+            String dataDirectory = zooKeeperServer.getInstanceSpec().getDataDirectory().getAbsolutePath();
+
+            System.out.printf("[%s] [%s] serverId: %s, serverState: %s, dataDirectory: %s %n",
+                    new Date(), Thread.currentThread().getName(), serverId, serverState, dataDirectory);
+        }
+
+        // 停止 TestingCluster
+        cluster.stop();
     }
 
     private static class MyBackgroundCallback implements BackgroundCallback {
