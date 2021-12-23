@@ -21,7 +21,6 @@ public class MySessionServlet extends HttpServlet {
         HttpSession session = req.getSession();
         System.out.printf("session id: %s", session.getId());
 
-
         Object a = session.getAttribute("a");
         System.out.println(a);
 

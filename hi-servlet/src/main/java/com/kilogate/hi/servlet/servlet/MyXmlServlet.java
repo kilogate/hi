@@ -13,6 +13,7 @@ import java.io.PrintWriter;
  * @author kilogate
  * @create 2021/12/4 17:41
  **/
+// 配置在 web.xml 中
 public class MyXmlServlet extends HttpServlet {
     @Override
     public void init() {
