@@ -22,6 +22,13 @@ public class ResourceUsage {
 
     // 获取 URL
     private static void test1() {
+        // 1、Class.getResource
+        // 以 / 开头从 classpath 下获取资源，不以 / 开头从当前目录下获取资源
+        // 底层还是使用 ClassLoader().getResource
+
+        // 2、ClassLoader().getResource
+        // 以 / 开头不支持，不以 / 开头从 classpath 下获取资源
+
         // 当前目录
         // file:/Users/fengquanwei/IdeaProjects/hi/hi-java/target/classes/com/kilogate/hi/java/basic/
         URL url1 = ResourceUsage.class.getResource("");
