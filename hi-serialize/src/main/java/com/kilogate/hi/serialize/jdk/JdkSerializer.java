@@ -1,5 +1,6 @@
 package com.kilogate.hi.serialize.jdk;
 
+import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
@@ -42,5 +43,26 @@ public class JdkSerializer {
             log.error("deserialize error, bytes: {}", bytes, e);
             return null;
         }
+    }
+
+    @Getter
+    @Setter
+    @ToString
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class Student implements Serializable {
+        private int sno;
+        private String name;
+        private Integer age;
+    }
+
+    public static void main(String[] args) {
+        Student student = new Student(110, "Kilogate", 17);
+
+        byte[] bytes = JdkSerializer.serialize(student);
+        log.info("bytes: {}", bytes);
+
+        Object object = JdkSerializer.deserialize(bytes);
+        log.info("object: {}", object);
     }
 }
