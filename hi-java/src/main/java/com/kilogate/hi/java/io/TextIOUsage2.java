@@ -1,4 +1,4 @@
-package com.kilogate.hi.java.io.file;
+package com.kilogate.hi.java.io;
 
 import java.io.FileOutputStream;
 import java.io.IOException;

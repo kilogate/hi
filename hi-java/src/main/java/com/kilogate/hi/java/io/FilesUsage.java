@@ -1,4 +1,4 @@
-package com.kilogate.hi.java.io.file;
+package com.kilogate.hi.java.io;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
