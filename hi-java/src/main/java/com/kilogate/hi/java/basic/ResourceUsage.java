@@ -30,17 +30,17 @@ public class ResourceUsage {
         // 以 / 开头不支持，不以 / 开头从 classpath 下获取资源
 
         // 当前目录
-        // file:/Users/fengquanwei/IdeaProjects/hi/hi-java/target/classes/com/kilogate/hi/java/basic/
+        // file:/Users/kilogate/IdeaProjects/hi/hi-java/target/classes/com/kilogate/hi/java/basic/
         URL url1 = ResourceUsage.class.getResource("");
         System.out.println(url1);
 
         // classpath
-        // file:/Users/fengquanwei/IdeaProjects/hi/hi-java/target/classes/
+        // file:/Users/kilogate/IdeaProjects/hi/hi-java/target/classes/
         URL url2 = ResourceUsage.class.getResource("/");
         System.out.println(url2);
 
         // 当前目录下的 ResourceUsage.class
-        // file:/Users/fengquanwei/IdeaProjects/hi/hi-java/target/classes/com/kilogate/hi/java/basic/ResourceUsage.class
+        // file:/Users/kilogate/IdeaProjects/hi/hi-java/target/classes/com/kilogate/hi/java/basic/ResourceUsage.class
         URL url3 = ResourceUsage.class.getResource("ResourceUsage.class");
         System.out.println(url3);
 
@@ -50,12 +50,12 @@ public class ResourceUsage {
         System.out.println(url4);
 
         // classpath 下的 /com/kilogate/hi/java/basic/ResourceUsage.class 文件
-        // file:/Users/fengquanwei/IdeaProjects/hi/hi-java/target/classes/com/kilogate/hi/java/basic/ResourceUsage.class
+        // file:/Users/kilogate/IdeaProjects/hi/hi-java/target/classes/com/kilogate/hi/java/basic/ResourceUsage.class
         url4 = ResourceUsage.class.getResource("/com/kilogate/hi/java/basic/ResourceUsage.class");
         System.out.println(url4);
 
         // classpath
-        // file:/Users/fengquanwei/IdeaProjects/hi/hi-java/target/classes/
+        // file:/Users/kilogate/IdeaProjects/hi/hi-java/target/classes/
         URL url5 = ResourceUsage.class.getClassLoader().getResource("");
         System.out.println(url5);
 
@@ -65,7 +65,7 @@ public class ResourceUsage {
         System.out.println(url6);
 
         // classpath 下的 com/kilogate/hi/java/basic/ResourceUsage.class 文件
-        // file:/Users/fengquanwei/IdeaProjects/hi/hi-java/target/classes/com/kilogate/hi/java/basic/ResourceUsage.class
+        // file:/Users/kilogate/IdeaProjects/hi/hi-java/target/classes/com/kilogate/hi/java/basic/ResourceUsage.class
         URL url7 = ResourceUsage.class.getClassLoader().getResource("com/kilogate/hi/java/basic/ResourceUsage.class");
         System.out.println(url7);
 
