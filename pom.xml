@@ -35,6 +35,7 @@
         <module>hi-servlet-initializer</module>
         <module>hi-test</module>
         <module>hi-zookeeper</module>
+        <module>hi-kafka</module>
     </modules>
 
     <build>
