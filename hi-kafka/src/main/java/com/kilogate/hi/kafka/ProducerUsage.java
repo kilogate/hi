@@ -1,13 +1,11 @@
 package com.kilogate.hi.kafka;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.kafka.clients.producer.KafkaProducer;
-import org.apache.kafka.clients.producer.ProducerConfig;
-import org.apache.kafka.clients.producer.ProducerRecord;
-import org.apache.kafka.clients.producer.RecordMetadata;
+import org.apache.kafka.clients.producer.*;
 import org.apache.kafka.clients.producer.internals.DefaultPartitioner;
 import org.apache.kafka.common.serialization.StringSerializer;
 
+import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.Future;
 
@@ -20,7 +18,7 @@ import java.util.concurrent.Future;
 @Slf4j
 public class ProducerUsage {
     public static void main(String[] args) {
-        test1();
+        test3();
     }
 
     // 快速上手
@@ -87,9 +85,6 @@ public class ProducerUsage {
         KafkaProducer<String, String> kafkaProducer = new KafkaProducer<>(properties);
         log.info("创建生产者实例完成");
 
-        // 消息体
-        String value = "MessageForAsyncSend";
-
         // 构建消息
         ProducerRecord<String, String> producerRecord = new ProducerRecord<>(topic, "MessageForAsyncSend");
 
@@ -104,5 +99,62 @@ public class ProducerUsage {
 
         // 关闭生产者实例
         kafkaProducer.close();
+    }
+
+    // 生产者拦截器
+    private static void test3() {
+        String bootstrapServers = "localhost:9092,localhost:9093,localhost:9094";
+        String topic = "topic-demo";
+
+        // 生产者配置
+        Properties properties = new Properties();
+        properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
+        properties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+        properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+        properties.put(ProducerConfig.INTERCEPTOR_CLASSES_CONFIG, MyProducerInterceptor.class.getName());
+
+        // 创建生产者实例
+        KafkaProducer<String, String> kafkaProducer = new KafkaProducer<>(properties);
+        log.info("创建生产者实例完成");
+
+        // 构建消息
+        ProducerRecord<String, String> producerRecord = new ProducerRecord<>(topic, "MessageForProducerInterceptor");
+
+        // 发送消息
+        try {
+            kafkaProducer.send(producerRecord).get();
+        } catch (Exception e) {
+            log.error("发送消息异常", e);
+        }
+
+        // 关闭生产者实例
+        kafkaProducer.close();
+    }
+
+    /**
+     * 生产者拦截器
+     */
+    @Slf4j
+    public static class MyProducerInterceptor implements ProducerInterceptor {
+        @Override
+        public ProducerRecord onSend(ProducerRecord producerRecord) {
+            log.info("onSend, producerRecord: {}", producerRecord);
+            return producerRecord;
+        }
+
+        @Override
+        public void onAcknowledgement(RecordMetadata recordMetadata, Exception e) {
+            log.info("onAcknowledgement, recordMetadata: {}, e: {}", recordMetadata, e);
+        }
+
+        @Override
+        public void close() {
+            log.info("close");
+        }
+
+        @Override
+        public void configure(Map<String, ?> map) {
+            log.info("configure");
+        }
     }
 }
