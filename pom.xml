@@ -36,6 +36,7 @@
         <module>hi-test</module>
         <module>hi-zookeeper</module>
         <module>hi-serialize</module>
+        <module>hi-kafka</module>
     </modules>
 
     <build>
