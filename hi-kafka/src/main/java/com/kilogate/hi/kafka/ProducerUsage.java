@@ -5,6 +5,7 @@ import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
+import org.apache.kafka.clients.producer.internals.DefaultPartitioner;
 import org.apache.kafka.common.serialization.StringSerializer;
 
 import java.util.Properties;
@@ -30,11 +31,12 @@ public class ProducerUsage {
 
         // 生产者配置
         Properties properties = new Properties();
-        properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
-        properties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
-        properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
-        properties.put(ProducerConfig.CLIENT_ID_CONFIG, clientId);
-        properties.put(ProducerConfig.RETRIES_CONFIG, 3);
+        properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers); // brokers
+        properties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName()); // key序列化器
+        properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName()); // value序列化器
+        properties.put(ProducerConfig.CLIENT_ID_CONFIG, clientId); // 客户端id
+        properties.put(ProducerConfig.RETRIES_CONFIG, 3); // 重试次数
+        properties.put(ProducerConfig.PARTITIONER_CLASS_CONFIG, DefaultPartitioner.class.getName()); // 分区器
 
         // 创建生产者实例
         KafkaProducer<String, String> kafkaProducer = new KafkaProducer<>(properties);
@@ -65,6 +67,40 @@ public class ProducerUsage {
                 e.printStackTrace();
             }
         }
+
+        // 关闭生产者实例
+        kafkaProducer.close();
+    }
+
+    // 异步发送
+    private static void test2() {
+        String bootstrapServers = "localhost:9092,localhost:9093,localhost:9094";
+        String topic = "topic-demo";
+
+        // 生产者配置
+        Properties properties = new Properties();
+        properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
+        properties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+        properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+
+        // 创建生产者实例
+        KafkaProducer<String, String> kafkaProducer = new KafkaProducer<>(properties);
+        log.info("创建生产者实例完成");
+
+        // 消息体
+        String value = "MessageForAsyncSend";
+
+        // 构建消息
+        ProducerRecord<String, String> producerRecord = new ProducerRecord<>(topic, "MessageForAsyncSend");
+
+        // 异步发送
+        kafkaProducer.send(producerRecord, (recordMetadata, e) -> {
+            if (e != null) {
+                log.error("异步发送消息异常", e);
+            } else {
+                log.info("异步发送消息成功, recordMetadata: {}", recordMetadata);
+            }
+        });
 
         // 关闭生产者实例
         kafkaProducer.close();
