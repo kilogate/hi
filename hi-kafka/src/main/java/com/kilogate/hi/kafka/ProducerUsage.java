@@ -26,12 +26,15 @@ public class ProducerUsage {
     private static void test1() {
         String bootstrapServers = "localhost:9092,localhost:9093,localhost:9094";
         String topic = "topic-demo";
+        String clientId = "producer-demo";
 
         // 生产者配置
         Properties properties = new Properties();
         properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         properties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+        properties.put(ProducerConfig.CLIENT_ID_CONFIG, clientId);
+        properties.put(ProducerConfig.RETRIES_CONFIG, 3);
 
         // 创建生产者实例
         KafkaProducer<String, String> kafkaProducer = new KafkaProducer<>(properties);
