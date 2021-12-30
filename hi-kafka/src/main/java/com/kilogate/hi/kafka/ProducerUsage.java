@@ -22,27 +22,45 @@ public class ProducerUsage {
         test1();
     }
 
+    // 快速上手
     private static void test1() {
+        String bootstrapServers = "localhost:9092,localhost:9093,localhost:9094";
+        String topic = "topic-demo";
+
+        // 生产者配置
         Properties properties = new Properties();
-        properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092,localhost:9093,localhost:9094");
+        properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         properties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
 
         // 创建生产者实例
         KafkaProducer<String, String> kafkaProducer = new KafkaProducer<>(properties);
+        log.info("创建生产者实例完成");
 
-        // 构建消息
-        ProducerRecord<String, String> producerRecord = new ProducerRecord<>("topic-demo", "FirstMessage");
+        // 发送100条消息
+        for (int i = 0; i < 100; i++) {
+            // 消息体
+            String value = "Message" + i;
 
-        // 发送消息
-        Future<RecordMetadata> future = kafkaProducer.send(producerRecord);
+            // 构建消息
+            ProducerRecord<String, String> producerRecord = new ProducerRecord<>(topic, value);
 
-        // 等待发送结果
-        try {
-            RecordMetadata recordMetadata = future.get();
-            log.info("send result: {}", recordMetadata);
-        } catch (Exception e) {
-            log.error("send message occur error", e);
+            // 发送消息
+            Future<RecordMetadata> future = kafkaProducer.send(producerRecord);
+
+            // 等待发送结果
+            try {
+                RecordMetadata recordMetadata = future.get();
+                log.info("发送结果: {}, 消息: {}", recordMetadata, value);
+            } catch (Exception e) {
+                log.error("发送消息异常", e);
+            }
+
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
 
         // 关闭生产者实例
