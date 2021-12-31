@@ -58,10 +58,11 @@ public class ConsumerUsage {
             index++;
 
             ConsumerRecords<Object, Object> records = kafkaConsumer.poll(Duration.ofMillis(1000));
-            log.info("收到 {} 条消息", records.count());
+            log.info("本次拉取了 {} 条消息", records.count());
 
             for (ConsumerRecord record : records) {
-                log.info("收到消息: {}", record.value());
+                log.info("收到消息, topic: {}, partition: {}, offset: {}, timestamp: {}, timestampType: {}, key: {}, value: {}",
+                        record.topic(), record.partition(), record.offset(), record.timestamp(), record.timestampType(), record.key(), record.value());
             }
         }
 

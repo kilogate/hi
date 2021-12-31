@@ -74,30 +74,32 @@ public class ProducerUsage {
         properties.put(ProducerConfig.MAX_BLOCK_MS_CONFIG, 60000);
         // 生产者拦截器链
         properties.put(ProducerConfig.INTERCEPTOR_CLASSES_CONFIG, "");
-        // 是否开启幂等性功能
-        properties.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, false);
-        // 事务id，必须唯一
-        properties.put(ProducerConfig.TRANSACTIONAL_ID_CONFIG, null);
 
         // 二、创建生产者实例
         KafkaProducer<String, String> kafkaProducer = new KafkaProducer<>(properties);
         log.info("创建生产者实例完成");
 
-        // 消息体
-        String value = "Message";
+        // 发送100条消息
+        for (int i = 0; i < 100; i++) {
+            // 消息体
+            String value = "Message" + i;
 
-        // 三、构建消息
-        ProducerRecord<String, String> producerRecord = new ProducerRecord<>(topic, value);
+            // 三、构建消息
+            ProducerRecord<String, String> producerRecord = new ProducerRecord<>(topic, value);
 
-        // 四、发送消息
-        Future<RecordMetadata> future = kafkaProducer.send(producerRecord);
+            // 四、发送消息
+            Future<RecordMetadata> future = kafkaProducer.send(producerRecord);
 
-        // 等待发送结果
-        try {
-            RecordMetadata recordMetadata = future.get();
-            log.info("发送结果: {}, 消息: {}", recordMetadata, value);
-        } catch (Exception e) {
-            log.error("发送消息异常", e);
+            // 等待发送结果
+            try {
+                RecordMetadata recordMetadata = future.get();
+                log.info("发送消息成功, topic: {}, partition: {}, offset: {}, timestamp: {}, value: {}",
+                        recordMetadata.topic(), recordMetadata.partition(), recordMetadata.offset(), recordMetadata.timestamp(), value);
+
+                Thread.sleep(1000);
+            } catch (Exception e) {
+                log.error("发送消息异常", e);
+            }
         }
 
         // 五、关闭生产者实例
@@ -120,14 +122,16 @@ public class ProducerUsage {
         log.info("创建生产者实例完成");
 
         // 构建消息
-        ProducerRecord<String, String> producerRecord = new ProducerRecord<>(topic, "MessageForAsyncSend");
+        String value = "MessageForAsyncSend";
+        ProducerRecord<String, String> producerRecord = new ProducerRecord<>(topic, value);
 
         // 异步发送
         kafkaProducer.send(producerRecord, (recordMetadata, e) -> {
             if (e != null) {
                 log.error("异步发送消息异常", e);
             } else {
-                log.info("异步发送消息成功, recordMetadata: {}", recordMetadata);
+                log.info("异步发送消息成功, topic: {}, partition: {}, offset: {}, timestamp: {}, value: {}",
+                        recordMetadata.topic(), recordMetadata.partition(), recordMetadata.offset(), recordMetadata.timestamp(), value);
             }
         });
 
@@ -153,11 +157,14 @@ public class ProducerUsage {
         log.info("创建生产者实例完成");
 
         // 构建消息
-        ProducerRecord<String, String> producerRecord = new ProducerRecord<>(topic, "MessageForProducerInterceptor");
+        String value = "MessageForProducerInterceptor";
+        ProducerRecord<String, String> producerRecord = new ProducerRecord<>(topic, value);
 
         // 发送消息
         try {
-            kafkaProducer.send(producerRecord).get();
+            RecordMetadata recordMetadata = kafkaProducer.send(producerRecord).get();
+            log.info("发送消息成功, topic: {}, partition: {}, offset: {}, timestamp: {}, value: {}",
+                    recordMetadata.topic(), recordMetadata.partition(), recordMetadata.offset(), recordMetadata.timestamp(), value);
         } catch (Exception e) {
             log.error("发送消息异常", e);
         }
@@ -166,9 +173,6 @@ public class ProducerUsage {
         kafkaProducer.close();
     }
 
-    /**
-     * 生产者拦截器
-     */
     @Slf4j
     public static class MyProducerInterceptor implements ProducerInterceptor {
         @Override
