@@ -111,7 +111,8 @@ public class ProducerUsage {
         properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         properties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
-        properties.put(ProducerConfig.INTERCEPTOR_CLASSES_CONFIG, MyProducerInterceptor.class.getName());
+        // 生产者拦截器链
+        properties.put(ProducerConfig.INTERCEPTOR_CLASSES_CONFIG, MyProducerInterceptor.class.getName() + "," + MyProducerInterceptor.class.getName());
 
         // 创建生产者实例
         KafkaProducer<String, String> kafkaProducer = new KafkaProducer<>(properties);
