@@ -18,7 +18,7 @@ import java.util.concurrent.Future;
 @Slf4j
 public class ProducerUsage {
     public static void main(String[] args) {
-        test3();
+        test1();
     }
 
     // 快速上手
@@ -27,46 +27,54 @@ public class ProducerUsage {
         String topic = "topic-demo";
         String clientId = "producer-demo";
 
-        // 生产者配置
+        // 一、生产者配置
         Properties properties = new Properties();
-        properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers); // brokers
-        properties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName()); // key序列化器
-        properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName()); // value序列化器
-        properties.put(ProducerConfig.CLIENT_ID_CONFIG, clientId); // 客户端id
-        properties.put(ProducerConfig.RETRIES_CONFIG, 3); // 重试次数
-        properties.put(ProducerConfig.PARTITIONER_CLASS_CONFIG, DefaultPartitioner.class.getName()); // 分区器
 
-        // 创建生产者实例
+        // brokers
+        properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
+        // key序列化器
+        properties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+        // value序列化器
+        properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+        // 客户端id
+        properties.put(ProducerConfig.CLIENT_ID_CONFIG, clientId);
+        // 重试次数
+        properties.put(ProducerConfig.RETRIES_CONFIG, 3);
+        // 分区器
+        properties.put(ProducerConfig.PARTITIONER_CLASS_CONFIG, DefaultPartitioner.class.getName());
+        // RecordAccumulator缓存大小，默认32M
+        properties.put(ProducerConfig.BUFFER_MEMORY_CONFIG, 33554432);
+        // RecordAccumulator缓存不足时 send 方法的超时时间，默认60s
+        properties.put(ProducerConfig.MAX_BLOCK_MS_CONFIG, 60000);
+        // ProducerBatch的大小，默认16K
+        properties.put(ProducerConfig.BATCH_SIZE_CONFIG, 16384);
+        // 每个连接最多只能缓存5个未响应的请求
+        properties.put(ProducerConfig.MAX_IN_FLIGHT_REQUESTS_PER_CONNECTION, 5);
+        // 元数据最大有效时间，过期后自动更新
+        properties.put(ProducerConfig.METADATA_MAX_AGE_CONFIG, 300000);
+
+        // 二、创建生产者实例
         KafkaProducer<String, String> kafkaProducer = new KafkaProducer<>(properties);
         log.info("创建生产者实例完成");
 
-        // 发送100条消息
-        for (int i = 0; i < 100; i++) {
-            // 消息体
-            String value = "Message" + i;
+        // 消息体
+        String value = "Message";
 
-            // 构建消息
-            ProducerRecord<String, String> producerRecord = new ProducerRecord<>(topic, value);
+        // 三、构建消息
+        ProducerRecord<String, String> producerRecord = new ProducerRecord<>(topic, value);
 
-            // 发送消息
-            Future<RecordMetadata> future = kafkaProducer.send(producerRecord);
+        // 四、发送消息
+        Future<RecordMetadata> future = kafkaProducer.send(producerRecord);
 
-            // 等待发送结果
-            try {
-                RecordMetadata recordMetadata = future.get();
-                log.info("发送结果: {}, 消息: {}", recordMetadata, value);
-            } catch (Exception e) {
-                log.error("发送消息异常", e);
-            }
-
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+        // 等待发送结果
+        try {
+            RecordMetadata recordMetadata = future.get();
+            log.info("发送结果: {}, 消息: {}", recordMetadata, value);
+        } catch (Exception e) {
+            log.error("发送消息异常", e);
         }
 
-        // 关闭生产者实例
+        // 五、关闭生产者实例
         kafkaProducer.close();
     }
 
