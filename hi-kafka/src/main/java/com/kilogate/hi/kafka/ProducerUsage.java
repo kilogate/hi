@@ -40,6 +40,8 @@ public class ProducerUsage {
         properties.put(ProducerConfig.CLIENT_ID_CONFIG, clientId);
         // 重试次数
         properties.put(ProducerConfig.RETRIES_CONFIG, 3);
+        // 两次重试之间的间隔，默认 100ms
+        properties.put(ProducerConfig.RETRY_BACKOFF_MS_CONFIG, 100);
         // 分区器
         properties.put(ProducerConfig.PARTITIONER_CLASS_CONFIG, DefaultPartitioner.class.getName());
         // RecordAccumulator缓存大小，默认32M
@@ -52,6 +54,22 @@ public class ProducerUsage {
         properties.put(ProducerConfig.MAX_IN_FLIGHT_REQUESTS_PER_CONNECTION, 5);
         // 元数据最大有效时间，过期后自动更新
         properties.put(ProducerConfig.METADATA_MAX_AGE_CONFIG, 300000);
+        // 分区中有多少副本收到消息生产者才认为写入成功：默认值 acks = 1，leader副本成功即可；acks = 0，零个副本成功即可；acks = -1 或 acks = all，所有副本成功才行
+        properties.put(ProducerConfig.ACKS_CONFIG, "1");
+        // 消息最大大小，默认 1M
+        properties.put(ProducerConfig.MAX_REQUEST_SIZE_CONFIG, 1048576);
+        // 消息压缩方式（压缩：以时间换空间），默认值 none：不压缩，gzip，snappy，lz4
+        properties.put(ProducerConfig.COMPRESSION_TYPE_CONFIG, "none");
+        // 连接最大空闲时间，默认540s
+        properties.put(ProducerConfig.CONNECTIONS_MAX_IDLE_MS_CONFIG, 540000);
+        // 生产者发送 ProducerBatch 之前等待更多消息加入的时间，默认 0
+        properties.put(ProducerConfig.LINGER_MS_CONFIG, 0);
+        // 消息接收缓冲区大小，默认 32K
+        properties.put(ProducerConfig.RECEIVE_BUFFER_CONFIG, 32768);
+        // 消息发送缓冲区大小，默认 128K
+        properties.put(ProducerConfig.SEND_BUFFER_CONFIG, 131072);
+        // 请求超时时间，默认30s
+        properties.put(ProducerConfig.REQUEST_TIMEOUT_MS_CONFIG, 30000);
 
         // 二、创建生产者实例
         KafkaProducer<String, String> kafkaProducer = new KafkaProducer<>(properties);
