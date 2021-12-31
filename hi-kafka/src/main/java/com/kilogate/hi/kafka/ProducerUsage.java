@@ -70,6 +70,14 @@ public class ProducerUsage {
         properties.put(ProducerConfig.SEND_BUFFER_CONFIG, 131072);
         // 请求超时时间，默认30s
         properties.put(ProducerConfig.REQUEST_TIMEOUT_MS_CONFIG, 30000);
+        // KafkaProducer send 和 partitionsFor 方法最大阻塞时间，当生产者的发送缓冲区已满或者没有可用的元数据时，这些方法会阻塞
+        properties.put(ProducerConfig.MAX_BLOCK_MS_CONFIG, 60000);
+        // 生产者拦截器链
+        properties.put(ProducerConfig.INTERCEPTOR_CLASSES_CONFIG, "");
+        // 是否开启幂等性功能
+        properties.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, false);
+        // 事务id，必须唯一
+        properties.put(ProducerConfig.TRANSACTIONAL_ID_CONFIG, null);
 
         // 二、创建生产者实例
         KafkaProducer<String, String> kafkaProducer = new KafkaProducer<>(properties);
