@@ -44,6 +44,10 @@ public class ConsumerUsage {
         properties.put(ConsumerConfig.GROUP_ID_CONFIG, groupId);
         // 客户端id
         properties.put(ConsumerConfig.CLIENT_ID_CONFIG, clientId);
+        // 是否开启自动提交，默认 true
+        properties.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, true);
+        // 开启自动提交之后，自动定时提交的时间间隔，默认 5s
+        properties.put(ConsumerConfig.AUTO_COMMIT_INTERVAL_MS_CONFIG, 5000);
 
         // 二、创建消费者实例
         KafkaConsumer<Object, Object> kafkaConsumer = new KafkaConsumer<>(properties);
