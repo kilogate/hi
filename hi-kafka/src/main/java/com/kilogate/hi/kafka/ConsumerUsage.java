@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 @Slf4j
 public class ConsumerUsage {
     public static void main(String[] args) {
-        test5();
+        test6();
     }
 
     // 快速上手
@@ -66,7 +66,7 @@ public class ConsumerUsage {
             index++;
 
             ConsumerRecords<Object, Object> records = kafkaConsumer.poll(Duration.ofMillis(1000));
-            log.info("本次拉取了 {} 条消息", records.count());
+            log.info("第 {} 次拉取了 {} 条消息", index, records.count());
 
             for (ConsumerRecord record : records) {
                 log.info("收到消息, topic: {}, partition: {}, offset: {}, timestamp: {}, timestampType: {}, key: {}, value: {}",
@@ -343,6 +343,90 @@ public class ConsumerUsage {
                 // 从尾开始消费
 //                kafkaConsumer.seekToEnd(topicPartitions);
             }
+        }
+
+        // 五、提交消费位移
+        // 自动提交
+
+        // 六、关闭消费者实例
+        kafkaConsumer.close();
+    }
+
+    // 再均衡
+    private static void test6() {
+        // 开启一个消费者
+        new Thread(() -> doTest6()).start();
+
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // 再开启一个消费者触发再均衡
+        new Thread(() -> doTest6()).start();
+    }
+
+    private static void doTest6() {
+        String bootstrapServers = "localhost:9092,localhost:9093,localhost:9094";
+        String topic = "topic-demo";
+        String groupId = "group-demo";
+
+        // 一、消费者配置
+        Properties properties = new Properties();
+
+        // brokers
+        properties.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
+        // key反序列化器
+        properties.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
+        // value反序列化器
+        properties.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
+        // 消费组id
+        properties.put(ConsumerConfig.GROUP_ID_CONFIG, groupId);
+
+        // 二、创建消费者实例
+        KafkaConsumer<Object, Object> kafkaConsumer = new KafkaConsumer<>(properties);
+        log.info("创建消费者实例完成");
+
+        // 三、订阅主题，同时设置再均衡监听器（可以使用再均衡监听器将消费位移存储到DB去，onPartitionsRevoked时入库，onPartitionsAssigned时查库并seek）
+        Map<TopicPartition, OffsetAndMetadata> currentOffsets = new HashMap<>();
+        kafkaConsumer.subscribe(Collections.singleton(topic), new ConsumerRebalanceListener() {
+            @Override
+            public void onPartitionsRevoked(Collection<TopicPartition> collection) {
+                // 在再均衡开始之前和消费者停止消费之后被调用，一般用于处理消费位移提交，collection 表示再均衡之前分配的分区
+                log.info("要开始再均衡操作了, 涉及分区: {}", collection);
+
+                // 提交消费位移
+                kafkaConsumer.commitSync(currentOffsets);
+                currentOffsets.clear();
+            }
+
+            @Override
+            public void onPartitionsAssigned(Collection<TopicPartition> collection) {
+                // 在再均衡完成之后和消费者开始消费之前被调用，collection 表示再均衡之后分配的分区
+                log.info("再均衡操作完成了, 涉及分区: {}", collection);
+            }
+        });
+        log.info("订阅主题 {} 完成，并设置了再均衡监听器", topic);
+
+        // 四、循环消费消息100次
+        int index = 0;
+        while (index < 100) {
+            index++;
+
+            ConsumerRecords<Object, Object> records = kafkaConsumer.poll(Duration.ofMillis(1000));
+            log.info("第 {} 次拉取了 {} 条消息", index, records.count());
+
+            for (ConsumerRecord record : records) {
+                log.info("收到消息, topic: {}, partition: {}, offset: {}, timestamp: {}, timestampType: {}, key: {}, value: {}",
+                        record.topic(), record.partition(), record.offset(), record.timestamp(), record.timestampType(), record.key(), record.value());
+
+                // 暂存消费位移
+                currentOffsets.put(new TopicPartition(record.topic(), record.partition()), new OffsetAndMetadata(record.offset() + 1));
+            }
+
+            // 异步提交消费位移
+            kafkaConsumer.commitAsync(currentOffsets, null);
         }
 
         // 五、提交消费位移
