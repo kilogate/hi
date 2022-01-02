@@ -7,10 +7,7 @@ import org.apache.kafka.common.TopicPartition;
 import org.apache.kafka.common.serialization.StringDeserializer;
 
 import java.time.Duration;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Properties;
+import java.util.*;
 
 /**
  * ConsumerUsage
@@ -21,7 +18,7 @@ import java.util.Properties;
 @Slf4j
 public class ConsumerUsage {
     public static void main(String[] args) {
-        test3();
+        test4();
     }
 
     // 快速上手
@@ -205,6 +202,69 @@ public class ConsumerUsage {
         // 下一条要消费的消息的offset
         long position = kafkaConsumer.position(topicPartition);
         log.info("position: {}", position);
+
+        // 六、关闭消费者实例
+        kafkaConsumer.close();
+    }
+
+    // 暂停与恢复消费
+    private static void test4() {
+        String bootstrapServers = "localhost:9092,localhost:9093,localhost:9094";
+        String topic = "topic-demo";
+        String groupId = "group-demo";
+
+        // 一、消费者配置
+        Properties properties = new Properties();
+
+        // brokers
+        properties.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
+        // key反序列化器
+        properties.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
+        // value反序列化器
+        properties.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
+        // 消费组id
+        properties.put(ConsumerConfig.GROUP_ID_CONFIG, groupId);
+
+        // 二、创建消费者实例
+        KafkaConsumer<Object, Object> kafkaConsumer = new KafkaConsumer<>(properties);
+        log.info("创建消费者实例完成");
+
+        // 三、订阅主题
+        kafkaConsumer.subscribe(Collections.singleton(topic));
+        log.info("订阅主题 {} 完成", topic);
+
+        // 获取分区信息
+        PartitionInfo partitionInfo = kafkaConsumer.partitionsFor(topic).get(0);
+        Set<TopicPartition> topicPartitions = Collections.singleton(new TopicPartition(partitionInfo.topic(), partitionInfo.partition()));
+
+        // 四、循环消费消息100次
+        int index = 0;
+        while (index < 100) {
+            index++;
+
+            ConsumerRecords<Object, Object> records = kafkaConsumer.poll(Duration.ofMillis(1000));
+            log.info("第 {} 次拉取了 {} 条消息", index, records.count());
+
+            for (ConsumerRecord record : records) {
+                log.info("收到消息, topic: {}, partition: {}, offset: {}, timestamp: {}, timestampType: {}, key: {}, value: {}",
+                        record.topic(), record.partition(), record.offset(), record.timestamp(), record.timestampType(), record.key(), record.value());
+            }
+
+            if (index == 20) {
+                // 暂停一个分区的消费
+                kafkaConsumer.pause(topicPartitions);
+                log.info("暂停分区 {} 完成", partitionInfo.partition());
+            }
+
+            if (index == 40) {
+                // 恢复该分区的消费
+                kafkaConsumer.resume(topicPartitions);
+                log.info("恢复分区 {} 完成", partitionInfo.partition());
+            }
+        }
+
+        // 五、提交消费位移
+        // 自动提交
 
         // 六、关闭消费者实例
         kafkaConsumer.close();

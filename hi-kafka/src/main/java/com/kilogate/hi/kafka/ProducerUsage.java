@@ -79,8 +79,8 @@ public class ProducerUsage {
         KafkaProducer<String, String> kafkaProducer = new KafkaProducer<>(properties);
         log.info("创建生产者实例完成");
 
-        // 发送100条消息
-        for (int i = 0; i < 100; i++) {
+        // 发送1000条消息
+        for (int i = 0; i < 1000; i++) {
             // 消息体
             String value = "Message" + i;
 
