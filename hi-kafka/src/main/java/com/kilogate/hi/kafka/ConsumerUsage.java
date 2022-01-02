@@ -254,6 +254,10 @@ public class ConsumerUsage {
                 // 暂停一个分区的消费
                 kafkaConsumer.pause(topicPartitions);
                 log.info("暂停分区 {} 完成", partitionInfo.partition());
+
+                // 获取被暂停的分区
+                Set<TopicPartition> paused = kafkaConsumer.paused();
+                log.info("被暂停的分区: {}", paused);
             }
 
             if (index == 40) {
