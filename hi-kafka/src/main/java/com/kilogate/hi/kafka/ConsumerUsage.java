@@ -45,6 +45,8 @@ public class ConsumerUsage {
         properties.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, true);
         // 开启自动提交之后，自动定时提交的时间间隔，默认 5s
         properties.put(ConsumerConfig.AUTO_COMMIT_INTERVAL_MS_CONFIG, 5000);
+        // 没有消费位移时自动重置 offset，默认值 latest：从分区末尾开始消费，earliest：从头开始消费
+        properties.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "latest");
 
         // 二、创建消费者实例
         KafkaConsumer<Object, Object> kafkaConsumer = new KafkaConsumer<>(properties);
