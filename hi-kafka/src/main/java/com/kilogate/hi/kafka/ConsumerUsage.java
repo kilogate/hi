@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 @Slf4j
 public class ConsumerUsage {
     public static void main(String[] args) {
-        test7();
+        test1();
     }
 
     // 快速上手
@@ -53,6 +53,35 @@ public class ConsumerUsage {
         properties.put(ConsumerConfig.REQUEST_TIMEOUT_MS_CONFIG, 30000);
         // 消费者拦截器链，默认值为空
         properties.put(ConsumerConfig.INTERCEPTOR_CLASSES_CONFIG, "");
+        // 每次拉取最小字节数，默认 1B
+        properties.put(ConsumerConfig.FETCH_MIN_BYTES_CONFIG, 1);
+        // 每次拉取最大字节数，默认 50M
+        properties.put(ConsumerConfig.FETCH_MAX_BYTES_CONFIG, 52428800);
+        // 每次拉取最大等待毫秒数，默认 500ms
+        properties.put(ConsumerConfig.FETCH_MAX_WAIT_MS_CONFIG, 500);
+        // 每次拉取单分区最大字节数，默认 1M
+        properties.put(ConsumerConfig.MAX_PARTITION_FETCH_BYTES_CONFIG, 1048576);
+        // 每次拉取消息最多条数，默认 500
+        properties.put(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, 500);
+        // 连接最大闲置时间，默认 9 分钟
+        properties.put(ConsumerConfig.CONNECTIONS_MAX_IDLE_MS_CONFIG, 540000);
+        // 使用 Pattern 方式订阅主题时是否忽略内部主题，默认值 true
+        properties.put(ConsumerConfig.EXCLUDE_INTERNAL_TOPICS_CONFIG, true);
+        // Socket 接收消息缓冲区大小，默认 64K
+        properties.put(ConsumerConfig.RECEIVE_BUFFER_CONFIG, 65536);
+        // Socket 发送消息缓冲区大小，默认 128K
+        properties.put(ConsumerConfig.SEND_BUFFER_CONFIG, 131072);
+        // 元数据过期时间，默认 5 分钟
+        properties.put(ConsumerConfig.METADATA_MAX_AGE_CONFIG, 300000);
+        // 重连之前的退避时间，默认 50ms
+        properties.put(ConsumerConfig.RECONNECT_BACKOFF_MS_CONFIG, 50);
+        // 重试之前的退避时间，默认 100ms
+        properties.put(ConsumerConfig.RETRY_BACKOFF_MS_CONFIG, 100);
+        // 消费者的事务隔离级别，表示消费者所能消费到的位置
+        // read_committed：忽略事务未提交的消息，只能消费到 LSO
+        // read_uncommitted：默认值，可以消费到 HW
+        properties.put(ConsumerConfig.ISOLATION_LEVEL_CONFIG, "read_uncommitted");
+
 
         // 二、创建消费者实例
         KafkaConsumer<Object, Object> kafkaConsumer = new KafkaConsumer<>(properties);
