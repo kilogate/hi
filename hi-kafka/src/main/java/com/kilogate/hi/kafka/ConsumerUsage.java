@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 @Slf4j
 public class ConsumerUsage {
     public static void main(String[] args) {
-        test6();
+        test7();
     }
 
     // 快速上手
@@ -51,6 +51,8 @@ public class ConsumerUsage {
         properties.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "latest");
         // 请求超时时间，默认值 30s
         properties.put(ConsumerConfig.REQUEST_TIMEOUT_MS_CONFIG, 30000);
+        // 消费者拦截器链，默认值为空
+        properties.put(ConsumerConfig.INTERCEPTOR_CLASSES_CONFIG, "");
 
         // 二、创建消费者实例
         KafkaConsumer<Object, Object> kafkaConsumer = new KafkaConsumer<>(properties);
@@ -434,5 +436,78 @@ public class ConsumerUsage {
 
         // 六、关闭消费者实例
         kafkaConsumer.close();
+    }
+
+    // 消费者拦截器
+    private static void test7() {
+        String bootstrapServers = "localhost:9092,localhost:9093,localhost:9094";
+        String topic = "topic-demo";
+        String groupId = "group-demo";
+
+        // 一、消费者配置
+        Properties properties = new Properties();
+
+        // brokers
+        properties.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
+        // key反序列化器
+        properties.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
+        // value反序列化器
+        properties.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
+        // 消费组id
+        properties.put(ConsumerConfig.GROUP_ID_CONFIG, groupId);
+        // 消费者拦截器链，默认值为空
+        properties.put(ConsumerConfig.INTERCEPTOR_CLASSES_CONFIG, MyConsumerInterceptor.class.getName());
+
+        // 二、创建消费者实例
+        KafkaConsumer<Object, Object> kafkaConsumer = new KafkaConsumer<>(properties);
+        log.info("创建消费者实例完成");
+
+        // 三、订阅主题
+        kafkaConsumer.subscribe(Collections.singleton(topic));
+        log.info("订阅主题 {} 完成", topic);
+
+        // 四、循环消费消息100次
+        int index = 0;
+        while (index < 100) {
+            index++;
+
+            ConsumerRecords<Object, Object> records = kafkaConsumer.poll(Duration.ofMillis(1000));
+            log.info("第 {} 次拉取了 {} 条消息", index, records.count());
+
+            for (ConsumerRecord record : records) {
+                log.info("收到消息, topic: {}, partition: {}, offset: {}, timestamp: {}, timestampType: {}, key: {}, value: {}",
+                        record.topic(), record.partition(), record.offset(), record.timestamp(), record.timestampType(), record.key(), record.value());
+            }
+        }
+
+        // 五、提交消费位移
+        // 自动提交
+
+        // 六、关闭消费者实例
+        kafkaConsumer.close();
+    }
+
+    @Slf4j
+    public static class MyConsumerInterceptor implements ConsumerInterceptor {
+        @Override
+        public ConsumerRecords onConsume(ConsumerRecords consumerRecords) {
+            log.info("onConsume, consumerRecords: {}", consumerRecords);
+            return consumerRecords;
+        }
+
+        @Override
+        public void close() {
+            log.info("close");
+        }
+
+        @Override
+        public void onCommit(Map map) {
+            log.info("onCommit, map: {}", map);
+        }
+
+        @Override
+        public void configure(Map<String, ?> map) {
+            log.info("configure, map: {}", map);
+        }
     }
 }
