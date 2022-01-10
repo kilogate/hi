@@ -12,11 +12,14 @@
     <artifactId>hi-logger-logback-slf4j</artifactId>
 
     <dependencies>
+        <!--logback-->
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>1.2.3</version>
         </dependency>
+
+        <!--slf4j-->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>

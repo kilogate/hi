@@ -13,6 +13,7 @@
     <packaging>war</packaging>
 
     <dependencies>
+        <!--servlet-->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
@@ -26,12 +27,14 @@
             <scope>provided</scope>
         </dependency>
 
+        <!--webfragment-->
         <dependency>
             <groupId>com.kilogate</groupId>
             <artifactId>hi-servlet-webfragment</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
+        <!--initializer-->
         <dependency>
             <groupId>com.kilogate</groupId>
             <artifactId>hi-servlet-initializer</artifactId>
