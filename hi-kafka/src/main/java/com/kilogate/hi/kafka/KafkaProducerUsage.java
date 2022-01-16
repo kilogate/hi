@@ -10,13 +10,13 @@ import java.util.Properties;
 import java.util.concurrent.Future;
 
 /**
- * ProducerUsage
+ * KafkaProducerUsage
  *
  * @author kilogate
  * @create 2021/12/30 11:15
  **/
 @Slf4j
-public class ProducerUsage {
+public class KafkaProducerUsage {
     public static void main(String[] args) {
         test1();
     }

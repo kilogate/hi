@@ -12,13 +12,13 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
- * ConsumerUsage
+ * KafkaConsumerUsage
  *
  * @author kilogate
  * @create 2021/12/30 11:42
  **/
 @Slf4j
-public class ConsumerUsage {
+public class KafkaConsumerUsage {
     public static void main(String[] args) {
         test1();
     }

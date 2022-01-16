@@ -8,13 +8,13 @@ import java.util.Collections;
 import java.util.Properties;
 
 /**
- * AdminUsage
+ * KafkaAdminUsage
  *
  * @author kilogate
  * @create 2022/1/5 20:33
  **/
 @Slf4j
-public class AdminUsage {
+public class KafkaAdminUsage {
     public static void main(String[] args) {
         test2();
     }
