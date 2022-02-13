@@ -9,11 +9,11 @@ package com.kilogate.hi.algorithm.leetcode;
  * @author fengquanwei
  * @create 2022/2/13 14:52
  **/
-public class Lc704 {
+public class Lc0704 {
     public static void main(String[] args) {
-        Lc704 lc704 = new Lc704();
-        System.out.println(lc704.binarySearch(new int[]{1}, 4));
-        System.out.println(lc704.binarySearch(new int[]{1, 2, 3, 4, 5}, 4));
+        Lc0704 lc0704 = new Lc0704();
+        System.out.println(lc0704.binarySearch(new int[]{1}, 4));
+        System.out.println(lc0704.binarySearch(new int[]{1, 2, 3, 4, 5}, 4));
     }
 
     public int binarySearch(int[] nums, int target) {

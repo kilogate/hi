@@ -9,11 +9,11 @@ package com.kilogate.hi.algorithm.leetcode;
  * @author fengquanwei
  * @create 2022/2/13 16:14
  **/
-public class Lc35 {
+public class Lc0035 {
     public static void main(String[] args) {
-        Lc35 lc35 = new Lc35();
+        Lc0035 lc0035 = new Lc0035();
 
-        System.out.println(lc35.searchInsert(new int[]{1, 3, 5, 7}, 4));
+        System.out.println(lc0035.searchInsert(new int[]{1, 3, 5, 7}, 4));
     }
 
     public int searchInsert(int[] nums, int target) {

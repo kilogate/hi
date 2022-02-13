@@ -12,14 +12,14 @@ package com.kilogate.hi.algorithm.leetcode;
  * @author fengquanwei
  * @create 2022/2/13 15:45
  **/
-public class Lc278 {
+public class Lc0278 {
     private int badVersion = 1;
 
     public static void main(String[] args) {
-        Lc278 lc278 = new Lc278();
-        lc278.badVersion = 1702766719;
+        Lc0278 lc0278 = new Lc0278();
+        lc0278.badVersion = 1702766719;
 
-        int i = lc278.firstBadVersion(2126753390);
+        int i = lc0278.firstBadVersion(2126753390);
         System.out.println(i);
     }
 
