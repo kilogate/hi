@@ -9,9 +9,6 @@ import java.util.*;
  * <p>
  * 给你一个数组 changed ，如果 change 是 双倍 数组，那么请你返回 original数组，否则请返回空数组。original 的元素可以以 任意 顺序返回。
  * <p>
- * 来源：力扣（LeetCode）
- * 链接：https://leetcode-cn.com/problems/find-original-array-from-doubled-array
- * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  *
  * @author fengquanwei
  * @create 2022/2/14 11:53
