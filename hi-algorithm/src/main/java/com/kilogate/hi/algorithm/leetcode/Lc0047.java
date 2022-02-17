@@ -9,7 +9,7 @@ import java.util.List;
  * 给定一个可包含重复数字的序列 nums ，按任意顺序 返回所有不重复的全排列。
  *
  * @author fengquanwei
- * @create 2022/2/17 19:10
+ * @create 2022/2/17 23:10
  **/
 public class Lc0047 {
     public static void main(String[] args) {
