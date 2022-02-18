@@ -1,4 +1,4 @@
-package com.kilogate.hi.algorithm.sort.s4;
+package com.kilogate.hi.algorithm.sort;
 
 import java.util.Arrays;
 
@@ -8,7 +8,7 @@ import java.util.Arrays;
  * @author kilogate
  * @create 2021/6/13 22:08
  **/
-public class BubbleSort {
+public class Sort04 {
     /**
      * 冒泡排序
      *

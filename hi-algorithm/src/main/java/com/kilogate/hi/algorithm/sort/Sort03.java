@@ -1,4 +1,4 @@
-package com.kilogate.hi.algorithm.sort.s3;
+package com.kilogate.hi.algorithm.sort;
 
 import java.util.Arrays;
 
@@ -8,7 +8,7 @@ import java.util.Arrays;
  * @author kilogate
  * @create 2021/6/13 16:48
  **/
-public class ShellSort {
+public class Sort03 {
     /**
      * 希尔排序
      *

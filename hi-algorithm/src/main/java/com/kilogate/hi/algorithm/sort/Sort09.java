@@ -1,4 +1,4 @@
-package com.kilogate.hi.algorithm.sort.s9;
+package com.kilogate.hi.algorithm.sort;
 
 /**
  * 基数排序（非比较排序）
@@ -6,7 +6,7 @@ package com.kilogate.hi.algorithm.sort.s9;
  * @author kilogate
  * @create 2021/6/14 22:42
  **/
-public class RadixSort {
+public class Sort09 {
     /**
      * 基数排序
      *

@@ -1,4 +1,4 @@
-package com.kilogate.hi.algorithm.sort.s7;
+package com.kilogate.hi.algorithm.sort;
 
 import java.util.Arrays;
 
@@ -8,7 +8,7 @@ import java.util.Arrays;
  * @author kilogate
  * @create 2021/6/14 16:30
  **/
-public class HeapSort {
+public class Sort07 {
     /**
      * 堆排序
      *

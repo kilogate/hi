@@ -1,4 +1,4 @@
-package com.kilogate.hi.algorithm.sort.s5;
+package com.kilogate.hi.algorithm.sort;
 
 import java.util.Arrays;
 
@@ -8,7 +8,7 @@ import java.util.Arrays;
  * @author kilogate
  * @create 2021/6/13 22:38
  **/
-public class QuickSort {
+public class Sort05 {
     /**
      * 快速排序
      *

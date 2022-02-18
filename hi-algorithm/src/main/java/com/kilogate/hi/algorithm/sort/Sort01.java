@@ -1,4 +1,4 @@
-package com.kilogate.hi.algorithm.sort.s1;
+package com.kilogate.hi.algorithm.sort;
 
 import java.util.Arrays;
 
@@ -8,7 +8,7 @@ import java.util.Arrays;
  * @author kilogate
  * @create 2021/6/13 16:07
  **/
-public class InsertSort {
+public class Sort01 {
     /**
      * 直接插入排序
      *

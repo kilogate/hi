@@ -1,4 +1,4 @@
-package com.kilogate.hi.algorithm.sort.s8;
+package com.kilogate.hi.algorithm.sort;
 
 import java.util.Arrays;
 
@@ -8,7 +8,7 @@ import java.util.Arrays;
  * @author kilogate
  * @create 2021/6/14 17:56
  **/
-public class MergeSort {
+public class Sort08 {
     /**
      * 归并排序
      *

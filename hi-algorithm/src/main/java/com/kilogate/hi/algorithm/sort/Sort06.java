@@ -1,4 +1,4 @@
-package com.kilogate.hi.algorithm.sort.s6;
+package com.kilogate.hi.algorithm.sort;
 
 import java.util.Arrays;
 
@@ -8,7 +8,7 @@ import java.util.Arrays;
  * @author kilogate
  * @create 2021/6/13 23:14
  **/
-public class SelectSort {
+public class Sort06 {
     /**
      * 简单选择排序
      *
