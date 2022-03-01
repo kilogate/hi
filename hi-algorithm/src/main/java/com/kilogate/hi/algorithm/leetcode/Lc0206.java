@@ -10,16 +10,17 @@ package com.kilogate.hi.algorithm.leetcode;
  **/
 public class Lc0206 {
     public static void main(String[] args) {
-        ListNode listNode5 = new ListNode(5, null);
-        ListNode listNode4 = new ListNode(4, listNode5);
-        ListNode listNode3 = new ListNode(3, listNode4);
-        ListNode listNode2 = new ListNode(2, listNode3);
-        ListNode listNode1 = new ListNode(1, listNode2);
-        ListNode res = reverseList(listNode1);
+        Lc0206 lc0206 = new Lc0206();
+        ListNode listNode5 = lc0206.new ListNode(5, null);
+        ListNode listNode4 = lc0206.new ListNode(4, listNode5);
+        ListNode listNode3 = lc0206.new ListNode(3, listNode4);
+        ListNode listNode2 = lc0206.new ListNode(2, listNode3);
+        ListNode listNode1 = lc0206.new ListNode(1, listNode2);
+        ListNode res = lc0206.reverseList(listNode1);
         System.out.println(res);
     }
 
-    public static ListNode reverseList(ListNode head) {
+    public ListNode reverseList(ListNode head) {
         if (head == null || head.next == null) {
             return head;
         }
@@ -35,7 +36,7 @@ public class Lc0206 {
         return prev;
     }
 
-    public static class ListNode {
+    public class ListNode {
         int val;
         ListNode next;
 
