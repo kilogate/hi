@@ -39,17 +39,14 @@ public class Lc0567 {
         int[] stat2 = new int[26];
 
         for (char c : str1.toCharArray()) {
-            int index = (int) c - (int) 'a';
-            stat1[index]++;
+            stat1[c - 'a']++;
         }
 
         for (int i = 0; i < str2.length(); i++) {
-            int index = (int) str2.charAt(i) - (int) 'a';
-            stat2[index]++;
+            stat2[str2.charAt(i) - 'a']++;
 
             if (i >= str1.length()) {
-                int head = (int) str2.charAt(i - str1.length()) - (int) 'a';
-                stat2[head]--;
+                stat2[str2.charAt(i - str1.length()) - 'a']--;
             }
 
             if (i >= str1.length() - 1 && Arrays.equals(stat1, stat2)) {
