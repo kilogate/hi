@@ -1,5 +1,8 @@
 package com.kilogate.hi.algorithm.leetcode;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
  * 对称二叉树
  * <p>
@@ -16,8 +19,42 @@ public class Lc0101 {
         TreeNode right = new TreeNode(2, new TreeNode(4), new TreeNode(3));
         TreeNode root = new TreeNode(1, left, right);
 
-        boolean res = lc0101.isSymmetric(root);
+        boolean res = lc0101.isSymmetric2(root);
         System.out.println(res);
+    }
+
+    public boolean isSymmetric2(TreeNode root) {
+        if (root == null) {
+            return false;
+        }
+
+        Queue<TreeNode> queue = new LinkedList();
+        queue.offer(root);
+        queue.offer(root);
+
+        while (!queue.isEmpty()) {
+            TreeNode left = queue.poll();
+            TreeNode right = queue.poll();
+
+            if (left == null && right == null) {
+                continue;
+            }
+
+            if (left == null || right == null) {
+                return false;
+            }
+
+            if (left.val != right.val) {
+                return false;
+            }
+
+            queue.offer(left.left);
+            queue.offer(right.right);
+            queue.offer(left.right);
+            queue.offer(right.left);
+        }
+
+        return true;
     }
 
     public boolean isSymmetric(TreeNode root) {
