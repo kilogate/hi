@@ -1,5 +1,7 @@
 package com.kilogate.hi.algorithm.leetcode;
 
+import com.kilogate.hi.algorithm.leetcode.node.TreeNode;
+
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -79,24 +81,5 @@ public class Lc0101 {
         }
 
         return isSymmetric(left.left, right.right) && isSymmetric(left.right, right.left);
-    }
-
-    public static class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode() {
-        }
-
-        TreeNode(int val) {
-            this.val = val;
-        }
-
-        TreeNode(int val, TreeNode left, TreeNode right) {
-            this.val = val;
-            this.left = left;
-            this.right = right;
-        }
     }
 }
