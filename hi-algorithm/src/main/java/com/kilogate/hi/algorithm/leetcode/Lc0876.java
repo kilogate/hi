@@ -1,5 +1,7 @@
 package com.kilogate.hi.algorithm.leetcode;
 
+import com.kilogate.hi.algorithm.leetcode.node.ListNode;
+
 /**
  * 链表的中间结点
  * <p>
@@ -13,8 +15,8 @@ public class Lc0876 {
     public static void main(String[] args) {
         Lc0876 lc0876 = new Lc0876();
 
-//        ListNode listNode5 = new ListNode(5);
-        ListNode listNode4 = new ListNode(4, null);
+        ListNode listNode5 = new ListNode(5);
+        ListNode listNode4 = new ListNode(4, listNode5);
         ListNode listNode3 = new ListNode(3, listNode4);
         ListNode listNode2 = new ListNode(2, listNode3);
         ListNode listNode1 = new ListNode(1, listNode2);
@@ -32,32 +34,5 @@ public class Lc0876 {
         }
 
         return b;
-    }
-
-    public static class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode(int val) {
-            this.val = val;
-        }
-
-        ListNode(int val, ListNode next) {
-            this.val = val;
-            this.next = next;
-        }
-
-        @Override
-        public String toString() {
-            StringBuilder res = new StringBuilder();
-
-            ListNode node = this;
-            while (node != null) {
-                res.append(node.val).append("->");
-                node = node.next;
-            }
-
-            return res.substring(0, res.length() - 2);
-        }
     }
 }

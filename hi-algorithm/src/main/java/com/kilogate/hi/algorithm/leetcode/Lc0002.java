@@ -1,5 +1,7 @@
 package com.kilogate.hi.algorithm.leetcode;
 
+import com.kilogate.hi.algorithm.leetcode.node.ListNode;
+
 /**
  * 两数相加
  * <p>
@@ -81,28 +83,5 @@ public class Lc0002 {
         }
 
         return result;
-    }
-
-    public class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode(int val) {
-            this.val = val;
-        }
-
-        @Override
-        public String toString() {
-            StringBuilder result = new StringBuilder();
-            result.append(this.val);
-
-            ListNode node = this.next;
-            while (node != null) {
-                result.append(node.val);
-                node = node.next;
-            }
-
-            return result.reverse().toString();
-        }
     }
 }
