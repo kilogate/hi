@@ -1,4 +1,4 @@
-package com.kilogate.hi.test.future;
+package com.kilogate.hi.test;
 
 /**
  * Test
