@@ -36,7 +36,7 @@ public class Lc0236 {
     public static void main(String[] args) {
         Lc0236 lc0236 = new Lc0236();
 
-        TreeNode root = TreeNode.buildTreeNode(new Integer[]{3, 5, 1, 6, 2, 0, 8, null, null, 7, 4});
+        TreeNode root = TreeNode.buildTreeNode("[3,5,1,6,2,0,8,null,null,7,4]");
         TreeNode res = lc0236.lowestCommonAncestor(root, root.left.left, root.right.right);
         System.out.println(res);
     }
