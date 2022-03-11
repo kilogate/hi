@@ -1,6 +1,6 @@
 package com.kilogate.hi.algorithm.leetcode;
 
-import com.kilogate.hi.algorithm.leetcode.node.ListNode;
+import com.kilogate.hi.algorithm.common.ListNode;
 
 /**
  * K 个一组翻转链表

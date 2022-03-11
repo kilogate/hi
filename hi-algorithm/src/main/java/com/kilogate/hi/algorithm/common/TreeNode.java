@@ -1,4 +1,4 @@
-package com.kilogate.hi.algorithm.leetcode.node;
+package com.kilogate.hi.algorithm.common;
 
 import java.util.LinkedList;
 import java.util.Queue;

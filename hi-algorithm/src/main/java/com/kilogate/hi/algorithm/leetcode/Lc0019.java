@@ -1,6 +1,6 @@
 package com.kilogate.hi.algorithm.leetcode;
 
-import com.kilogate.hi.algorithm.leetcode.node.ListNode;
+import com.kilogate.hi.algorithm.common.ListNode;
 
 /**
  * 删除链表的倒数第 N 个结点

@@ -1,4 +1,4 @@
-package com.kilogate.hi.algorithm.leetcode.node;
+package com.kilogate.hi.algorithm.common;
 
 /**
  * 单链表的节点
