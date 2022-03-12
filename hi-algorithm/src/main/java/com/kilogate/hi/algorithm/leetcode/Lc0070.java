@@ -1,13 +1,9 @@
 package com.kilogate.hi.algorithm.leetcode;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * 爬楼梯
  * <p>
- * 假设你正在爬楼梯。需要 n 阶你才能到达楼顶。
- * 每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？
+ * https://leetcode-cn.com/problems/climbing-stairs/
  *
  * @author fengquanwei
  * @create 2022/2/20 01:13

@@ -5,8 +5,7 @@ import java.util.Arrays;
 /**
  * 按奇偶排序数组
  * <p>
- * 给定一个非负整数数组 A，返回一个数组，在该数组中， A 的所有偶数元素之后跟着所有奇数元素。
- * 你可以返回满足此条件的任何数组作为答案。
+ * https://leetcode-cn.com/problems/sort-array-by-parity/
  *
  * @author fengquanwei
  * @create 2022/3/3 00:50

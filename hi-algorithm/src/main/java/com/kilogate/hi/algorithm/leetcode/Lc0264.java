@@ -8,8 +8,7 @@ import java.util.Set;
 /**
  * 丑数 II
  * <p>
- * 给你一个整数 n ，请你找出并返回第 n 个 丑数 。
- * 丑数 就是只包含质因数 2、3 和/或 5 的正整数。
+ * https://leetcode-cn.com/problems/ugly-number-ii/
  *
  * @author fengquanwei
  * @create 2022/3/9 22:33

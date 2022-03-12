@@ -5,7 +5,7 @@ import com.kilogate.hi.algorithm.common.ListNode;
 /**
  * 删除链表的倒数第 N 个结点
  * <p>
- * 给你一个链表，删除链表的倒数第 n 个结点，并且返回链表的头结点。
+ * https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/
  *
  * @author fengquanwei
  * @create 2022/3/5 21:53

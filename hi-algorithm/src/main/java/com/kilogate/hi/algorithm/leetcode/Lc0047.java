@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * 全排列
  * <p>
- * 给定一个可包含重复数字的序列 nums ，按任意顺序 返回所有不重复的全排列。
+ * https://leetcode-cn.com/problems/permutations-ii/
  *
  * @author fengquanwei
  * @create 2022/2/17 23:10

@@ -8,7 +8,7 @@ import java.util.Queue;
 /**
  * 对称二叉树
  * <p>
- * 给你一个二叉树的根节点 root ， 检查它是否轴对称。
+ * https://leetcode-cn.com/problems/symmetric-tree/
  *
  * @author fengquanwei
  * @create 2022/3/5 17:16

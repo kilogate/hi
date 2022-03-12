@@ -5,13 +5,7 @@ import java.util.Arrays;
 /**
  * 按奇偶排序数组 II
  * <p>
- * 给定一个非负整数数组 nums，  nums 中一半整数是 奇数 ，一半整数是 偶数 。
- * 对数组进行排序，以便当 nums[i] 为奇数时，i 也是 奇数 ；当 nums[i] 为偶数时， i 也是 偶数 。
- * 你可以返回 任何满足上述条件的数组作为答案 。
- * <p>
- * 来源：力扣（LeetCode）
- * 链接：https://leetcode-cn.com/problems/sort-array-by-parity-ii
- * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+ * https://leetcode-cn.com/problems/sort-array-by-parity-ii
  *
  * @author fengquanwei
  * @create 2022/3/3 01:01

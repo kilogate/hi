@@ -3,7 +3,7 @@ package com.kilogate.hi.algorithm.leetcode;
 /**
  * 最长回文子串
  * <p>
- * 给你一个字符串 s，找到 s 中最长的回文子串。
+ * https://leetcode-cn.com/problems/longest-palindromic-substring/
  *
  * @author fengquanwei
  * @create 2022/2/19 17:32

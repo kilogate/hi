@@ -5,7 +5,7 @@ import java.util.Arrays;
 /**
  * 轮转数组
  * <p>
- * 给你一个数组，将数组中的元素向右轮转 k 个位置，其中 k 是非负数
+ * https://leetcode-cn.com/problems/rotate-array/
  *
  * @author fengquanwei
  * @create 2022/2/13 19:38

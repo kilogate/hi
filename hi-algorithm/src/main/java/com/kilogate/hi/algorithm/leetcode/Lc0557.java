@@ -3,15 +3,15 @@ package com.kilogate.hi.algorithm.leetcode;
 /**
  * 反转字符串中的单词 III
  * <p>
- * 给定一个字符串 s ，你需要反转字符串中每个单词的字符顺序，同时仍保留空格和单词的初始顺序。
+ * https://leetcode-cn.com/problems/reverse-words-in-a-string-iii/
  *
  * @author fengquanwei
  * @create 2022/3/1 01:04
  **/
 public class Lc0557 {
     public static void main(String[] args) {
-        Lc0057 lc0057 = new Lc0057();
-        String res = lc0057.reverseWords("How are you");
+        Lc0557 lc0557 = new Lc0557();
+        String res = lc0557.reverseWords("How are you");
         System.out.println(res);
     }
 
