@@ -1,7 +1,9 @@
 package com.kilogate.hi.algorithm.leetcode;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 全排列
@@ -19,31 +21,31 @@ public class Lc0046 {
     }
 
     public List<List<Integer>> permute(int[] nums) {
-        List<List<Integer>> result = new ArrayList<>();
+        List<List<Integer>> res = new ArrayList<>();
 
         if (nums == null || nums.length == 0) {
-            return result;
+            return res;
         }
 
-        doPermute(nums, 0, result);
+        doPermute(nums, res, 0);
 
-        return result;
+        return res;
     }
 
-    private void doPermute(int[] nums, int index, List<List<Integer>> result) {
-        if (index == nums.length - 1) {
-            result.add(buildList(nums));
+    private void doPermute(int[] nums, List<List<Integer>> res, int i) {
+        if (i == nums.length) {
+            res.add(Arrays.stream(nums).boxed().collect(Collectors.toList()));
             return;
         }
 
-        for (int i = index; i < nums.length; i++) {
-            swapNum(nums, index, i);
-            doPermute(nums, index + 1, result);
-            swapNum(nums, i, index);
+        for (int j = i; j < nums.length; j++) {
+            swap(nums, i, j);
+            doPermute(nums, res, i + 1);
+            swap(nums, j, i);
         }
     }
 
-    private void swapNum(int[] nums, int a, int b) {
+    private void swap(int[] nums, int a, int b) {
         if (a == b) {
             return;
         }
@@ -51,15 +53,5 @@ public class Lc0046 {
         int temp = nums[a];
         nums[a] = nums[b];
         nums[b] = temp;
-    }
-
-    private List<Integer> buildList(int[] nums) {
-        List<Integer> result = new ArrayList<>();
-
-        for (int num : nums) {
-            result.add(num);
-        }
-
-        return result;
     }
 }
