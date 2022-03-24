@@ -20,7 +20,7 @@ public class ListNode {
     }
 
     public static void main(String[] args) {
-        ListNode listNode = buildListNode("1->2->3->4->5->6");
+        ListNode listNode = buildListNode("1,2,3,4,5,6");
         System.out.println(listNode);
     }
 
@@ -29,7 +29,7 @@ public class ListNode {
             return null;
         }
 
-        String[] elements = data.split("->");
+        String[] elements = data.split(",");
         ListNode next = null;
         for (int i = elements.length - 1; i >= 0; i--) {
             ListNode node = new ListNode(Integer.valueOf(elements[i]));
@@ -46,10 +46,10 @@ public class ListNode {
 
         ListNode node = this;
         while (node != null) {
-            res.append(node.val).append("->");
+            res.append(node.val).append(",");
             node = node.next;
         }
 
-        return res.substring(0, res.length() - 2);
+        return res.substring(0, res.length() - 1);
     }
 }
