@@ -2,6 +2,7 @@ package com.kilogate.hi.algorithm.leetcode;
 
 import com.kilogate.hi.algorithm.common.ListNode;
 import com.kilogate.hi.algorithm.common.TreeNode;
+import com.kilogate.hi.algorithm.util.ListNodeUtil;
 
 /**
  * 有序链表转换二叉搜索树
@@ -14,7 +15,7 @@ import com.kilogate.hi.algorithm.common.TreeNode;
 public class Lc0109 {
     public static void main(String[] args) {
         Lc0109 lc0109 = new Lc0109();
-        TreeNode treeNode = lc0109.sortedListToBST(ListNode.buildListNode("-10,-3,0,5,9"));
+        TreeNode treeNode = lc0109.sortedListToBST(ListNodeUtil.buildListNode("-10,-3,0,5,9"));
         System.out.println(treeNode);
     }
 

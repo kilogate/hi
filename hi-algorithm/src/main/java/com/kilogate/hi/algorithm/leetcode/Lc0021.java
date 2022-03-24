@@ -1,6 +1,7 @@
 package com.kilogate.hi.algorithm.leetcode;
 
 import com.kilogate.hi.algorithm.common.ListNode;
+import com.kilogate.hi.algorithm.util.ListNodeUtil;
 
 /**
  * 合并两个有序链表
@@ -13,7 +14,7 @@ import com.kilogate.hi.algorithm.common.ListNode;
 public class Lc0021 {
     public static void main(String[] args) {
         Lc0021 lc0021 = new Lc0021();
-        ListNode res = lc0021.mergeTwoLists(ListNode.buildListNode("1,2,4"), ListNode.buildListNode("1,3,4"));
+        ListNode res = lc0021.mergeTwoLists(ListNodeUtil.buildListNode("1,2,4"), ListNodeUtil.buildListNode("1,3,4"));
         System.out.println(res);
     }
 
