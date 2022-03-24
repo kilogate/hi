@@ -1,6 +1,7 @@
 package com.kilogate.hi.algorithm.leetcode;
 
 import com.kilogate.hi.algorithm.common.TreeNode;
+import com.kilogate.hi.algorithm.util.TreeNodeUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +18,7 @@ public class Lc0257 {
     public static void main(String[] args) {
         Lc0257 lc0257 = new Lc0257();
 
-        TreeNode root = TreeNode.buildTreeNode("[1,2,3,null,5]");
+        TreeNode root = TreeNodeUtil.buildTreeNode("[1,2,3,null,5]");
         List<String> res = lc0257.binaryTreePaths(root);
         System.out.println(res);
     }
