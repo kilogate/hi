@@ -15,7 +15,7 @@ public class Lc0146 {
     public static void main(String[] args) {
         Lc0146 lc0146 = new Lc0146();
         LRUCache lruCache = lc0146.new LRUCache(2);
-        lruCache.put(1, 0);
+        lruCache.put(1, 1);
         lruCache.put(2, 2);
         System.out.println(lruCache.get(1));
         lruCache.put(3, 3);
@@ -27,19 +27,19 @@ public class Lc0146 {
     }
 
     class LRUCache {
-        private Map<Integer, Node> cache;
         private int capacity;
-        private Node headNode;
-        private Node tailNode;
+        private Map<Integer, Node> cache;
+        private Node head;
+        private Node tail;
 
         public LRUCache(int capacity) {
-            cache = new HashMap();
             this.capacity = capacity;
-            headNode = new Node();
-            tailNode = new Node();
+            cache = new HashMap();
+            head = new Node();
+            tail = new Node();
 
-            headNode.next = tailNode;
-            tailNode.prev = headNode;
+            head.next = tail;
+            tail.prev = head;
         }
 
         public int get(int key) {
@@ -50,7 +50,6 @@ public class Lc0146 {
             }
 
             moveToHead(node);
-
             return node.val;
         }
 
@@ -63,45 +62,42 @@ public class Lc0146 {
                 return;
             }
 
+            if (cache.size() >= capacity) {
+                removeFromTail();
+            }
+
             Node newNode = new Node();
             newNode.key = key;
             newNode.val = value;
             addToHead(newNode);
 
             cache.put(key, newNode);
-            if (cache.size() > capacity) {
-                removeFromTail();
-            }
+        }
+
+        private void addToHead(Node node) {
+            Node next = head.next;
+
+            head.next = node;
+            node.next = next;
+            next.prev = node;
+            node.prev = head;
         }
 
         private void removeFromTail() {
-            // remove from list
-            Node currNode = tailNode.prev;
-            Node prevNode = currNode.prev;
-            prevNode.next = tailNode;
-            tailNode.prev = prevNode;
-
-            // remove from cache
-            cache.remove(currNode.key);
+            cache.remove(tail.prev.key);
+            removeNode(tail.prev);
         }
 
-        private void addToHead(Node newNode) {
-            Node secondNode = headNode.next;
-            headNode.next = newNode;
-            newNode.next = secondNode;
-            secondNode.prev = newNode;
-            newNode.prev = headNode;
+        private void moveToHead(Node node) {
+            removeNode(node);
+            addToHead(node);
         }
 
-        private void moveToHead(Node currNode) {
-            // delete currNode
-            Node prevNode = currNode.prev;
-            Node nextNode = currNode.next;
-            prevNode.next = nextNode;
-            nextNode.prev = prevNode;
-
-            // add currNode to head
-            addToHead(currNode);
+        private void removeNode(Node node) {
+            Node prev = node.prev;
+            Node next = node.next;
+            prev.next = next;
+            next.prev = prev;
         }
 
         private class Node {
@@ -114,10 +110,10 @@ public class Lc0146 {
             public String toString() {
                 StringBuilder res = new StringBuilder();
 
-                Node currNode = this;
-                while (currNode != null) {
-                    res.append(currNode.key).append(",");
-                    currNode = currNode.next;
+                Node curr = this;
+                while (curr != null) {
+                    res.append(curr.key).append(",");
+                    curr = curr.next;
                 }
 
                 return res.toString();
