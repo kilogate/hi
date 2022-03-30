@@ -1,6 +1,9 @@
 package com.kilogate.hi.algorithm.leetcode;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.PriorityQueue;
+import java.util.Queue;
 
 /**
  * 找到处理最多请求的服务器
@@ -18,9 +21,9 @@ public class Lc1606 {
     }
 
     public List<Integer> busiestServers(int k, int[] arrival, int[] load) {
-        TreeSet<Integer> idle = new TreeSet<>();
+        PriorityQueue<Integer> idle = new PriorityQueue<>();
         for (int i = 0; i < k; i++) {
-            idle.add(i);
+            idle.offer(i);
         }
 
         Queue<int[]> busy = new PriorityQueue<>((a, b) -> a[0] - b[0]);
@@ -30,21 +33,17 @@ public class Lc1606 {
 
         for (int i = 0; i < arrival.length; i++) {
             while (!busy.isEmpty() && busy.peek()[0] <= arrival[i]) {
-                idle.add(busy.poll()[1]);
+                int id = busy.poll()[1];
+                idle.offer(i + ((id - i) % k + k) % k);
             }
 
             if (idle.isEmpty()) {
                 continue;
             }
 
-            Integer j = idle.ceiling(i % k);
-            if (j == null) {
-                j = idle.first();
-            }
-
+            int j = idle.poll() % k;
             request[j]++;
             max = Math.max(max, request[j]);
-            idle.remove(j);
             busy.offer(new int[]{arrival[i] + load[i], j});
         }
 
