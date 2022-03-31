@@ -20,9 +20,8 @@ public class Lc0172 {
         int ans = 0;
 
         while (n != 0) {
-            int c = n / 5;
-            ans += c;
-            n = c;
+            ans += n / 5;
+            n /= 5;
         }
 
         return ans;
