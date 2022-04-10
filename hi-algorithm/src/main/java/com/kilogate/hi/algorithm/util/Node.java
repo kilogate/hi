@@ -10,18 +10,18 @@ import java.util.Queue;
  * @author fengquanwei
  * @create 2022/4/10 17:46
  **/
-public class MultiTreeNode {
+public class Node {
     public int val;
-    public List<MultiTreeNode> children;
+    public List<Node> children;
 
-    public MultiTreeNode() {
+    public Node() {
     }
 
-    public MultiTreeNode(int _val) {
+    public Node(int _val) {
         val = _val;
     }
 
-    public MultiTreeNode(int _val, List<MultiTreeNode> _children) {
+    public Node(int _val, List<Node> _children) {
         val = _val;
         children = _children;
     }
@@ -30,11 +30,11 @@ public class MultiTreeNode {
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
-        Queue<MultiTreeNode> queue = new LinkedList<>();
+        Queue<Node> queue = new LinkedList<>();
         queue.offer(this);
         queue.offer(null);
         while (!queue.isEmpty()) {
-            MultiTreeNode node = queue.poll();
+            Node node = queue.poll();
             if (node == null) {
                 sb.append(",").append("null");
                 continue;
@@ -42,7 +42,7 @@ public class MultiTreeNode {
 
             sb.append(",").append(node.val);
             if (node.children != null) {
-                for (MultiTreeNode ch : node.children) {
+                for (Node ch : node.children) {
                     queue.offer(ch);
                 }
                 queue.offer(null);
