@@ -15,10 +15,16 @@ import java.util.List;
 public class Lc0204 {
     public static void main(String[] args) {
         Lc0204 lc0204 = new Lc0204();
-        System.out.println(lc0204.countPrimes1(1000));
-        System.out.println(lc0204.countPrimes2(1000));
+        System.out.println(lc0204.countPrimes1(499979));
+        System.out.println(lc0204.countPrimes2(499979));
     }
 
+    /**
+     * 埃氏筛
+     *
+     * @param n
+     * @return
+     */
     public int countPrimes1(int n) {
         boolean[] isPrime = new boolean[n];
         Arrays.fill(isPrime, true);
@@ -37,6 +43,12 @@ public class Lc0204 {
         return count;
     }
 
+    /**
+     * 线性筛
+     *
+     * @param n
+     * @return
+     */
     public int countPrimes2(int n) {
         List<Integer> primes = new ArrayList<>();
         boolean[] isPrime = new boolean[n];
@@ -47,7 +59,11 @@ public class Lc0204 {
                 primes.add(i);
             }
 
-            for (int j = 0; j < primes.size() && i * primes.get(j) < n; j++) {
+            for (int j = 0; j < primes.size(); j++) {
+                if (i * primes.get(j) >= n) {
+                    break;
+                }
+
                 isPrime[i * primes.get(j)] = false;
                 if (i % primes.get(j) == 0) {
                     break;
