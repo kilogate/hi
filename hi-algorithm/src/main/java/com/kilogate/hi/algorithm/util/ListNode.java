@@ -1,4 +1,4 @@
-package com.kilogate.hi.algorithm.common;
+package com.kilogate.hi.algorithm.util;
 
 /**
  * 单链表的节点

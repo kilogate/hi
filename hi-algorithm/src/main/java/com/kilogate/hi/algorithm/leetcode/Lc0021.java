@@ -1,6 +1,6 @@
 package com.kilogate.hi.algorithm.leetcode;
 
-import com.kilogate.hi.algorithm.common.ListNode;
+import com.kilogate.hi.algorithm.util.ListNode;
 import com.kilogate.hi.algorithm.util.ListNodeUtil;
 
 /**

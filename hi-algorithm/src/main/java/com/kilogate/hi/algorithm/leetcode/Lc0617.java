@@ -1,6 +1,6 @@
 package com.kilogate.hi.algorithm.leetcode;
 
-import com.kilogate.hi.algorithm.common.TreeNode;
+import com.kilogate.hi.algorithm.util.TreeNode;
 
 /**
  * 合并二叉树

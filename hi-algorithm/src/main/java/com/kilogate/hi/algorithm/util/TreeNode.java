@@ -1,4 +1,4 @@
-package com.kilogate.hi.algorithm.common;
+package com.kilogate.hi.algorithm.util;
 
 import java.util.LinkedList;
 import java.util.Queue;

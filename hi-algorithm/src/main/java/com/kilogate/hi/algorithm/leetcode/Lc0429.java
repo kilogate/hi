@@ -1,6 +1,6 @@
 package com.kilogate.hi.algorithm.leetcode;
 
-import com.kilogate.hi.algorithm.common.MultiTreeNode;
+import com.kilogate.hi.algorithm.util.MultiTreeNode;
 import com.kilogate.hi.algorithm.util.MultiTreeNodeUtil;
 
 import java.util.ArrayList;

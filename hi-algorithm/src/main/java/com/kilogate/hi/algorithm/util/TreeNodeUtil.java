@@ -1,7 +1,5 @@
 package com.kilogate.hi.algorithm.util;
 
-import com.kilogate.hi.algorithm.common.TreeNode;
-
 import java.util.Objects;
 
 /**
