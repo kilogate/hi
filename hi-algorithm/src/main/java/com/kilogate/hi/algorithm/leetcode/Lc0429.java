@@ -20,7 +20,6 @@ public class Lc0429 {
     public static void main(String[] args) {
         Lc0429 lc0429 = new Lc0429();
         Node root = NodeUtil.buildNode("[1,null,3,2,4,null,5,6]");
-        Node root2 = NodeUtil.buildNode("[1,null,2,3,4,5,null,null,6,7,null,8,null,9,10,null,null,11,null,12,null,13,null,null,14]");
         List<List<Integer>> res = lc0429.levelOrder(root);
         System.out.println(res);
     }
