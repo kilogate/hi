@@ -1,7 +1,6 @@
 package com.kilogate.hi.algorithm.leetcode;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * 迷你语法分析器
@@ -35,23 +34,23 @@ public class Lc0385 {
      * @param str
      * @return
      */
-    public NestedInteger deserialize(String str) {
-        if (str == null || str.length() == 0) {
-            return null;
-        }
-
-        if (str.charAt(0) != '[') {
-            return new NestedInteger(Integer.valueOf(str));
-        }
-
-        NestedInteger ni = new NestedInteger();
-        List<String> subStrList = getSubStrList(str.substring(1, str.length() - 1));
-        for (String subStr : subStrList) {
-            ni.add(deserialize(subStr));
-        }
-
-        return ni;
-    }
+//    public NestedInteger deserialize(String str) {
+//        if (str == null || str.length() == 0) {
+//            return null;
+//        }
+//
+//        if (str.charAt(0) != '[') {
+//            return new NestedInteger(Integer.valueOf(str));
+//        }
+//
+//        NestedInteger ni = new NestedInteger();
+//        List<String> subStrList = getSubStrList(str.substring(1, str.length() - 1));
+//        for (String subStr : subStrList) {
+//            ni.add(deserialize(subStr));
+//        }
+//
+//        return ni;
+//    }
 
     /**
      * 方法二：深度优先搜索
@@ -62,6 +61,46 @@ public class Lc0385 {
 //    public NestedInteger deserialize(String s) {
 //        return doDeserialize(s, new int[]{0});
 //    }
+
+    /**
+     * 方法三：栈
+     *
+     * @param str
+     * @return
+     */
+    public NestedInteger deserialize(String str) {
+        if (str.charAt(0) != '[') {
+            return new NestedInteger(Integer.parseInt(str));
+        }
+
+        Stack<NestedInteger> stack = new Stack<>();
+        int num = 0;
+        boolean negative = false;
+        for (int i = 0; i < str.length(); i++) {
+            char c = str.charAt(i);
+            if (c == '-') {
+                negative = true;
+            } else if (Character.isDigit(c)) {
+                num = num * 10 + c - '0';
+            } else if (c == '[') {
+                stack.push(new NestedInteger());
+            } else if (c == ',' || c == ']') {
+                if (Character.isDigit(str.charAt(i - 1))) {
+                    if (negative) {
+                        num *= -1;
+                    }
+                    stack.peek().add(new NestedInteger(num));
+                }
+                num = 0;
+                negative = false;
+                if (c == ']' && stack.size() > 1) {
+                    NestedInteger ni = stack.pop();
+                    stack.peek().add(ni);
+                }
+            }
+        }
+        return stack.pop();
+    }
 
     private List<String> getSubStrList(String str) {
         List<String> list = new ArrayList<>();
