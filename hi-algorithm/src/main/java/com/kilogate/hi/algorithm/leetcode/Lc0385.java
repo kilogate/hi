@@ -15,7 +15,9 @@ public class Lc0385 {
     public static void main(String[] args) {
         Lc0385 lc0385 = new Lc0385();
 
-        NestedInteger ni1 = lc0385.deserialize("123");
+        NestedInteger ni0 = lc0385.deserialize("-3");
+        System.out.println(ni0);
+        NestedInteger ni1 = lc0385.deserialize("[123,456,[788,799,833],[[]],10,[]]");
         System.out.println(ni1);
         NestedInteger ni2 = lc0385.deserialize("[123,456]");
         System.out.println(ni2);
@@ -27,6 +29,12 @@ public class Lc0385 {
         System.out.println(ni5);
     }
 
+    /**
+     * 方法一：模拟
+     *
+     * @param str
+     * @return
+     */
     public NestedInteger deserialize(String str) {
         if (str == null || str.length() == 0) {
             return null;
@@ -44,6 +52,16 @@ public class Lc0385 {
 
         return ni;
     }
+
+    /**
+     * 方法二：深度优先搜索
+     *
+     * @param str
+     * @return
+     */
+//    public NestedInteger deserialize(String s) {
+//        return doDeserialize(s, new int[]{0});
+//    }
 
     private List<String> getSubStrList(String str) {
         List<String> list = new ArrayList<>();
@@ -87,6 +105,35 @@ public class Lc0385 {
         }
 
         return str.length();
+    }
+
+    private NestedInteger doDeserialize(String str, int[] idx) {
+        if (str.charAt(idx[0]) != '[') {
+            boolean negative = false;
+            if (str.charAt(idx[0]) == '-') {
+                negative = true;
+                idx[0]++;
+            }
+
+            int num = 0;
+            while (idx[0] < str.length() && Character.isDigit(str.charAt(idx[0]))) {
+                num = num * 10 + str.charAt(idx[0]) - '0';
+                idx[0]++;
+            }
+            return new NestedInteger(negative ? num * -1 : num);
+        }
+
+        NestedInteger res = new NestedInteger();
+        idx[0]++;
+        while (str.charAt(idx[0]) != ']') {
+            res.add(doDeserialize(str, idx));
+
+            if (str.charAt(idx[0]) == ',') {
+                idx[0]++;
+            }
+        }
+        idx[0]++;
+        return res;
     }
 
     private static class NestedInteger {
