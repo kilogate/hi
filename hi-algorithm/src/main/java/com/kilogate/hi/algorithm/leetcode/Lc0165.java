@@ -1,8 +1,5 @@
 package com.kilogate.hi.algorithm.leetcode;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * 比较版本号
  * <p>
@@ -17,36 +14,31 @@ public class Lc0165 {
     }
 
     public int compareVersion(String version1, String version2) {
-        List<Integer> list1 = parseVersion(version1);
-        List<Integer> list2 = parseVersion(version2);
+        int m = version1.length(), n = version2.length();
+        int i = 0, j = 0;
 
-        int length = Math.max(list1.size(), list2.size());
-        for (int i = 0; i < length; i++) {
-            int v1 = i < list1.size() ? list1.get(i) : 0;
-            int v2 = i < list2.size() ? list2.get(i) : 0;
-
-            if (v1 == v2) {
-                continue;
+        while (i < m || j < n) {
+            int x = 0;
+            while (i < m && version1.charAt(i) != '.') {
+                x = x * 10 + version1.charAt(i) - '0';
+                i++;
             }
+            i++;
 
-            if (v1 > v2) {
+            int y = 0;
+            while (j < n && version2.charAt(j) != '.') {
+                y = y * 10 + version2.charAt(j) - '0';
+                j++;
+            }
+            j++;
+
+            if (x > y) {
                 return 1;
-            } else {
+            } else if (x < y) {
                 return -1;
             }
         }
 
         return 0;
-    }
-
-    private List<Integer> parseVersion(String version) {
-        List<Integer> list = new ArrayList();
-
-        String[] strs = version.split("\\.");
-        for (String str : strs) {
-            list.add(Integer.parseInt(str));
-        }
-
-        return list;
     }
 }
