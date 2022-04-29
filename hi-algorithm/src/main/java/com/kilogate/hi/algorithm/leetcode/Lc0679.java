@@ -1,7 +1,9 @@
 package com.kilogate.hi.algorithm.leetcode;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 24 点游戏
@@ -14,7 +16,7 @@ import java.util.List;
 public class Lc0679 {
     public static void main(String[] args) {
         Lc0679 lc0679 = new Lc0679();
-        boolean ans = lc0679.judgePoint24(new int[]{1, 2, 1, 2});
+        boolean ans = lc0679.judgePoint24(new int[]{1, 1, 2, 2});
         System.out.println(ans);
     }
 
@@ -55,7 +57,7 @@ public class Lc0679 {
                             plan.add("*");
                             break;
                         case 3:
-                            num = list.get(j) == 0 ? Double.NaN : list.get(i) / list.get(j);
+                            num = Math.abs(list.get(j)) < 1E-6 ? Double.NaN : list.get(i) / list.get(j);
                             plan.add("/");
                             break;
                     }
@@ -89,15 +91,45 @@ public class Lc0679 {
         idx[0]++;
         System.out.println("Plan" + idx[0] + ":");
 
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < plan.size(); i++) {
-            if (i != 0 && i % 3 == 0) {
-                sb.append(", ");
-            }
-            sb.append(plan.get(i)).append(" ");
-        }
-        sb.append(", ").append(list.get(0));
+        Map<Double, String> map = new HashMap<>();
+        int i = 0;
+        while (i < plan.size()) {
+            double x = Double.parseDouble(plan.get(i++));
+            String operation = plan.get(i++);
+            double y = Double.parseDouble(plan.get(i++));
 
-        System.out.println(sb);
+            StringBuilder sb = new StringBuilder();
+            if (map.containsKey(x)) {
+                sb.append("(" + map.get(x) + ")");
+                map.remove(x);
+            } else {
+                sb.append(x + "");
+            }
+            sb.append(" " + operation + " ");
+            if (map.containsKey(y)) {
+                sb.append("(" + map.get(y) + ")");
+                map.remove(y);
+            } else {
+                sb.append(y + "");
+            }
+            map.put(calRes(x, operation, y), sb.toString());
+        }
+
+        System.out.println(map.get(list.get(0)) + " = " + list.get(0));
+    }
+
+    private double calRes(double x, String operation, double y) {
+        switch (operation) {
+            case "+":
+                return x + y;
+            case "-":
+                return x - y;
+            case "*":
+                return x * y;
+            case "/":
+                return Math.abs(y) < 1E-6 ? Double.NaN : x / y;
+        }
+
+        return Double.NaN;
     }
 }
