@@ -16,7 +16,7 @@ import java.util.Map;
 public class Lc0679 {
     public static void main(String[] args) {
         Lc0679 lc0679 = new Lc0679();
-        boolean ans = lc0679.judgePoint24(new int[]{1, 1, 2, 2});
+        boolean ans = lc0679.judgePoint24(new int[]{6, 6, 8, 6});
         System.out.println(ans);
     }
 
@@ -91,7 +91,7 @@ public class Lc0679 {
         idx[0]++;
         System.out.println("Plan" + idx[0] + ":");
 
-        Map<Double, String> map = new HashMap<>();
+        Map<Double, List<String>> map = new HashMap<>();
         int i = 0;
         while (i < plan.size()) {
             double x = Double.parseDouble(plan.get(i++));
@@ -99,23 +99,30 @@ public class Lc0679 {
             double y = Double.parseDouble(plan.get(i++));
 
             StringBuilder sb = new StringBuilder();
-            if (map.containsKey(x)) {
-                sb.append("(" + map.get(x) + ")");
-                map.remove(x);
+            if (map.containsKey(x) && map.get(x).size() > 0) {
+                sb.append("(" + map.get(x).get(0) + ")");
+                map.get(x).remove(0);
             } else {
-                sb.append(x + "");
+                sb.append((int) x + "");
             }
             sb.append(" " + operation + " ");
-            if (map.containsKey(y)) {
-                sb.append("(" + map.get(y) + ")");
-                map.remove(y);
+            if (map.containsKey(y) && map.get(y).size() > 0) {
+                sb.append("(" + map.get(y).get(0) + ")");
+                map.get(y).remove(0);
             } else {
-                sb.append(y + "");
+                sb.append((int) y + "");
             }
-            map.put(calRes(x, operation, y), sb.toString());
+            double res = calRes(x, operation, y);
+            if (map.containsKey(res)) {
+                map.get(res).add(sb.toString());
+            } else {
+                List<String> subPlanList = new ArrayList<>();
+                subPlanList.add(sb.toString());
+                map.put(res, subPlanList);
+            }
         }
 
-        System.out.println(map.get(list.get(0)) + " = " + list.get(0));
+        System.out.println(map.get(list.get(0)).get(0) + " = " + list.get(0));
     }
 
     private double calRes(double x, String operation, double y) {
