@@ -8,8 +8,8 @@
        http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <!-- ioc 测试 -->
-    <bean id="serviceB" class="com.hi.spring.ioc.ServiceB"/>
-    <bean id="serviceA" class="com.hi.spring.ioc.ServiceA">
+    <bean id="serviceB" class="com.hi.spring.ioc.xmlconfig.ServiceB"/>
+    <bean id="serviceA" class="com.hi.spring.ioc.xmlconfig.ServiceA">
         <constructor-arg ref="serviceB"/>
     </bean>
 

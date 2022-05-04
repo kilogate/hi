@@ -1,4 +1,4 @@
-package com.hi.spring.ioc;
+package com.hi.spring.ioc.xmlconfig;
 
 /**
  * ServiceB
