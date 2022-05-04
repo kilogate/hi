@@ -14,8 +14,8 @@
     </bean>
 
     <!-- aop 测试 -->
-    <bean id="service" class="com.hi.spring.aop.Service"/>
-    <bean id="logAspect" class="com.hi.spring.aop.LogAspect"/>
+    <bean id="service" class="com.hi.spring.aop.xmlconfig.Service"/>
+    <bean id="logAspect" class="com.hi.spring.aop.xmlconfig.LogAspect"/>
     <aop:config>
         <aop:aspect ref="logAspect"> <!-- 切面 -->
             <aop:pointcut id="log" expression="execution(* *.service(..))"/> <!-- 切点 -->

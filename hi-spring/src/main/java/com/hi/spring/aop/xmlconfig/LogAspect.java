@@ -1,4 +1,4 @@
-package com.hi.spring.aop;
+package com.hi.spring.aop.xmlconfig;
 
 /**
  * LogAspect

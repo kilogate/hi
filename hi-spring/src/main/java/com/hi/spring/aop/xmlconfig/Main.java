@@ -1,15 +1,15 @@
-package com.hi.spring.aop;
+package com.hi.spring.aop.xmlconfig;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
- * AspectUsage
+ * Main
  *
  * @author fengquanwei
  * @create 2022/4/28 15:37
  **/
-public class AspectUsage {
+public class Main {
     public static void main(String[] args) {
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring.xml");
         Service service = applicationContext.getBean(Service.class);
