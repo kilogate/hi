@@ -8,19 +8,19 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
- * BaseTest
+ * BaseTest4XmlConfigIoc
  *
  * @author fengquanwei
  * @create 2022/5/4 22:20
  **/
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:spring.xml"})
-public class BaseTest {
+@ContextConfiguration(locations = {"classpath:ioc.xml"})
+public class BaseTest4XmlConfigIoc {
     @Autowired
     private ServiceA serviceA;
 
     @Test
-    public void testXmlConfig() {
-        serviceA.sayHello();
+    public void test() {
+        serviceA.hello();
     }
 }

@@ -7,7 +7,7 @@ package com.hi.spring.ioc.xmlconfig;
  * @create 2022/4/28 15:06
  **/
 public class ServiceB {
-    public void sayHello() {
-        System.out.println("hello");
+    public void hello() {
+        System.out.println("hello! xml config ioc, serviceB");
     }
 }

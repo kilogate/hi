@@ -13,7 +13,7 @@ public class ServiceA {
         this.serviceB = serviceB;
     }
 
-    public void sayHello() {
-        serviceB.sayHello();
+    public void hello() {
+        serviceB.hello();
     }
 }
