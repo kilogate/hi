@@ -11,8 +11,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  **/
 public class Main {
     public static void main(String[] args) {
-        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring.xml");
-        Service service = applicationContext.getBean(Service.class);
-        service.service();
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("aop.xml");
+        ServiceA serviceA = applicationContext.getBean(ServiceA.class);
+        serviceA.hello();
     }
 }

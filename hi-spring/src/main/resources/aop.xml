@@ -7,18 +7,12 @@
        http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <!-- ioc 测试 -->
-    <bean id="serviceB" class="com.hi.spring.ioc.xmlconfig.ServiceB"/>
-    <bean id="serviceA" class="com.hi.spring.ioc.xmlconfig.ServiceA">
-        <constructor-arg ref="serviceB"/>
-    </bean>
-
     <!-- aop 测试 -->
     <bean id="serviceA" class="com.hi.spring.aop.xmlconfig.ServiceA"/>
     <bean id="logAspect" class="com.hi.spring.aop.xmlconfig.LogAspect"/>
     <aop:config>
         <aop:aspect ref="logAspect"> <!-- 切面 -->
-            <aop:pointcut id="log" expression="execution(* *.serviceA(..))"/> <!-- 切点 -->
+            <aop:pointcut id="log" expression="execution(* *.hello(..))"/> <!-- 切点 -->
             <aop:before pointcut-ref="log" method="before"/> <!-- 前置通知 -->
             <aop:after pointcut-ref="log" method="after"/> <!-- 后置通知 -->
         </aop:aspect>
