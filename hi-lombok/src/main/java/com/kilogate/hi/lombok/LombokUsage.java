@@ -18,20 +18,8 @@ import lombok.extern.java.Log;
 @Log
 public class LombokUsage {
     public static void main(String[] args) {
-        // 基本用法
-        Student tom = Student.of(123, "Tom");
-        tom.setSex("M");
-
-        System.out.println(tom);
-
-        // builder 模式
-        Student bob = Student.builder()
-                .sno(223)
-                .name("Bob")
-                .sex("M")
-                .build();
-
-        System.out.println(bob);
+        Student3 bob = Student3.builder().no(123).name("Bob").build();
+        Student4 tom = Student4.of(123, "Tom");
 
         log.info("main end");
     }
