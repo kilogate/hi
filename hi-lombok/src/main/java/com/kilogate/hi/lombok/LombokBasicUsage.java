@@ -3,7 +3,7 @@ package com.kilogate.hi.lombok;
 import lombok.extern.java.Log;
 
 /**
- * LombokUsage
+ * LombokBasicUsage
  * <p>
  * Lombok 使用 JSR 269 Pluggable Annotation Processing API（java6 开始支持）
  * Oracle 的 javac 支持 JSR 269
@@ -16,7 +16,7 @@ import lombok.extern.java.Log;
  * @create 2021/6/24 19:46
  **/
 @Log
-public class LombokUsage {
+public class LombokBasicUsage {
     public static void main(String[] args) {
         Student3 bob = Student3.builder().no(123).name("Bob").build();
         Student4 tom = Student4.of(123, "Tom");
