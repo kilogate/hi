@@ -1,19 +1,22 @@
-## intellij idea
+# intellij idea
 .idea/
 *.iml
 
-## maven
+# maven
 target/
 
-## eclipse
+# eclipse
 .settings/
 .metadata/
 Servers/
 .classpath
 .project
 
-## mac
+# mac
 .DS_Store
 
-## log
+# log
 logs/
+
+# test
+onepiece.jpg
