@@ -39,6 +39,7 @@
         <module>hi-zookeeper</module>
         <module>hi-serialize</module>
         <module>hi-kafka</module>
+        <module>hi-mybatis</module>
     </modules>
 
     <build>
