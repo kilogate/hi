@@ -1,6 +1,7 @@
 package com.kilogate.hi.mybatis.dao;
 
 import com.kilogate.hi.mybatis.pojo.User;
+import com.kilogate.hi.mybatis.pojo.UserInfo;
 
 import java.util.List;
 
@@ -12,4 +13,6 @@ import java.util.List;
  **/
 public interface UserDao {
     List<User> getUserList();
+
+    List<UserInfo> getUserInfoList();
 }

@@ -1,6 +1,7 @@
 package com.kilogate.hi.mybatis.dao;
 
 import com.kilogate.hi.mybatis.pojo.User;
+import com.kilogate.hi.mybatis.pojo.UserInfo;
 import com.kilogate.hi.mybatis.utils.MybatisUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
@@ -21,9 +22,15 @@ public class UserDaoTest {
         try {
             sqlSession = MybatisUtils.getSqlSession();
             UserDao mapper = sqlSession.getMapper(UserDao.class);
+
             List<User> userList = mapper.getUserList();
             for (User user : userList) {
                 System.out.println(user);
+            }
+
+            List<UserInfo> userInfoList = mapper.getUserInfoList();
+            for (UserInfo userInfo : userInfoList) {
+                System.out.println(userInfo);
             }
         } catch (Exception e) {
             e.printStackTrace();

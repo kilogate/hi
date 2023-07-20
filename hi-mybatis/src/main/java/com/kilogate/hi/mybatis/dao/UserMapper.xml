@@ -9,4 +9,15 @@
         select *
         from mybatis.user
     </select>
+
+    <!-- 使用 resultMap -->
+    <resultMap id="userInfo" type="com.kilogate.hi.mybatis.pojo.UserInfo">
+        <id property="id" column="id"/>
+        <result property="username" column="name"/>
+        <result property="password" column="pwd"/>
+    </resultMap>
+    <select id="getUserInfoList" resultMap="userInfo">
+        select *
+        from mybatis.user
+    </select>
 </mapper>
