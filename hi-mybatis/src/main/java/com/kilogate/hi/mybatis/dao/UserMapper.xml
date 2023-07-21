@@ -36,6 +36,7 @@
         </where>
     </select>
 
+    <!-- SQL片段 -->
     <sql id="nameAndPwdIf">
         <if test="name != null">
             name = #{name},
