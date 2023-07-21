@@ -10,7 +10,10 @@ import lombok.Data;
  **/
 @Data
 public class UserInfo {
-    private int id;  //id
-    private String username;   //姓名
-    private String password;   //密码
+    // id
+    private int id;
+    // 姓名
+    private String username;
+    // 密码
+    private String password;
 }
