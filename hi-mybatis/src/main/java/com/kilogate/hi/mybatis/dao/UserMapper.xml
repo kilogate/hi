@@ -22,7 +22,8 @@
     </select>
 
     <!-- 使用参数，使用动态SQL -->
-    <select id="getUserListByParam" parameterType="com.kilogate.hi.mybatis.param.QueryUserParam" resultType="com.kilogate.hi.mybatis.pojo.User">
+    <select id="getUserListByParam" parameterType="com.kilogate.hi.mybatis.param.QueryUserParam"
+            resultType="com.kilogate.hi.mybatis.pojo.User">
         select *
         from mybatis.user
         <where>
@@ -35,15 +36,20 @@
         </where>
     </select>
 
+    <sql id="nameAndPwdIf">
+        <if test="name != null">
+            name = #{name},
+        </if>
+        <if test="pwd != null">
+            pwd = #{pwd},
+        </if>
+    </sql>
+
+    <!-- 更新数据 -->
     <update id="updateUser" parameterType="com.kilogate.hi.mybatis.pojo.User">
         update mybatis.user
         <set>
-            <if test="name != null">
-                name = #{name},
-            </if>
-            <if test="pwd != null">
-                pwd = #{pwd},
-            </if>
+            <include refid="nameAndPwdIf"></include>
         </set>
         where id = #{id}
     </update>

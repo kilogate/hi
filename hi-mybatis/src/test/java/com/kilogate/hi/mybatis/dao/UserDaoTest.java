@@ -36,7 +36,7 @@ public class UserDaoTest {
                 System.out.println(user);
             }
 
-            User user = User.builder().id(1).name("王三").pwd("123").build();
+            User user = User.builder().id(1).name("王三麻子").pwd("123").build();
             int update = mapper.updateUser(user);
             System.out.println(update);
             sqlSession.commit();
