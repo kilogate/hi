@@ -5,6 +5,7 @@ import com.kilogate.hi.mybatis.pojo.User;
 import com.kilogate.hi.mybatis.pojo.UserInfo;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * UserDao
@@ -20,4 +21,6 @@ public interface UserDao {
     List<User> getUserListByParam(QueryUserParam param);
 
     int updateUser(User user);
+
+    List<User> selectByIn(Map<String, Object> param);
 }

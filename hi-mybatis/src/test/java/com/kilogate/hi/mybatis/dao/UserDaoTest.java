@@ -1,5 +1,7 @@
 package com.kilogate.hi.mybatis.dao;
 
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import com.kilogate.hi.mybatis.param.QueryUserParam;
 import com.kilogate.hi.mybatis.pojo.User;
 import com.kilogate.hi.mybatis.pojo.UserInfo;
@@ -43,6 +45,9 @@ public class UserDaoTest {
             for (UserInfo userInfo : userInfoList) {
                 System.out.println(userInfo);
             }
+
+            List<User> users = mapper.selectByIn(ImmutableMap.of("ids", ImmutableList.of(2, 3)));
+            System.out.println(users);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
