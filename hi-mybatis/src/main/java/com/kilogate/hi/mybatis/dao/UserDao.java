@@ -18,4 +18,6 @@ public interface UserDao {
     List<UserInfo> getUserInfoList();
 
     List<User> getUserListByParam(QueryUserParam param);
+
+    int updateUser(User user);
 }

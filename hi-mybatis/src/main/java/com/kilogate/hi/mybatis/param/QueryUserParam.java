@@ -13,4 +13,5 @@ import lombok.Data;
 @Builder
 public class QueryUserParam {
     private String nameLike;
+    private String passwordLike;
 }

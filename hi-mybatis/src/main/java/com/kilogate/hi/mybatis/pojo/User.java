@@ -1,5 +1,6 @@
 package com.kilogate.hi.mybatis.pojo;
 
+import lombok.Builder;
 import lombok.Data;
 
 /**
@@ -9,6 +10,7 @@ import lombok.Data;
  * @create 2023/7/17 23:01
  **/
 @Data
+@Builder
 public class User {
     // id
     private int id;

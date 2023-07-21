@@ -21,10 +21,30 @@
         from mybatis.user
     </select>
 
-    <!-- 使用参数 -->
+    <!-- 使用参数，使用动态SQL -->
     <select id="getUserListByParam" parameterType="com.kilogate.hi.mybatis.param.QueryUserParam" resultType="com.kilogate.hi.mybatis.pojo.User">
         select *
         from mybatis.user
-        where name like #{nameLike}
+        <where>
+            <if test="nameLike != null">
+                and name like #{nameLike}
+            </if>
+            <if test="passwordLike != null">
+                and pwd like #{passwordLike}
+            </if>
+        </where>
     </select>
+
+    <update id="updateUser" parameterType="com.kilogate.hi.mybatis.pojo.User">
+        update mybatis.user
+        <set>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="pwd != null">
+                pwd = #{pwd},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
 </mapper>

@@ -29,16 +29,20 @@ public class UserDaoTest {
                 System.out.println(user);
             }
 
+            userList = mapper.getUserListByParam(QueryUserParam.builder().nameLike("%三%").passwordLike("%123%").build());
+            for (User user : userList) {
+                System.out.println(user);
+            }
+
+            User user = User.builder().id(1).name("王三").pwd("123").build();
+            int update = mapper.updateUser(user);
+            System.out.println(update);
+            sqlSession.commit();
+
             List<UserInfo> userInfoList = mapper.getUserInfoList();
             for (UserInfo userInfo : userInfoList) {
                 System.out.println(userInfo);
             }
-
-            List<User> userListByParam = mapper.getUserListByParam(QueryUserParam.builder().nameLike("%三%").build());
-            for (User user : userListByParam) {
-                System.out.println(user);
-            }
-
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
