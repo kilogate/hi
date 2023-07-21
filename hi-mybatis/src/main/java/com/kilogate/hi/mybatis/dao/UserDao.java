@@ -1,5 +1,6 @@
 package com.kilogate.hi.mybatis.dao;
 
+import com.kilogate.hi.mybatis.param.QueryUserParam;
 import com.kilogate.hi.mybatis.pojo.User;
 import com.kilogate.hi.mybatis.pojo.UserInfo;
 
@@ -15,4 +16,6 @@ public interface UserDao {
     List<User> getUserList();
 
     List<UserInfo> getUserInfoList();
+
+    List<User> getUserListByParam(QueryUserParam param);
 }

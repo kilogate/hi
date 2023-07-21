@@ -1,5 +1,6 @@
 package com.kilogate.hi.mybatis.dao;
 
+import com.kilogate.hi.mybatis.param.QueryUserParam;
 import com.kilogate.hi.mybatis.pojo.User;
 import com.kilogate.hi.mybatis.pojo.UserInfo;
 import com.kilogate.hi.mybatis.utils.MybatisUtils;
@@ -32,6 +33,12 @@ public class UserDaoTest {
             for (UserInfo userInfo : userInfoList) {
                 System.out.println(userInfo);
             }
+
+            List<User> userListByParam = mapper.getUserListByParam(QueryUserParam.builder().nameLike("%三%").build());
+            for (User user : userListByParam) {
+                System.out.println(user);
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

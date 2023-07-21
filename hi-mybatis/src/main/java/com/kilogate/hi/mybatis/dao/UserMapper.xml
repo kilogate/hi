@@ -20,4 +20,11 @@
         select *
         from mybatis.user
     </select>
+
+    <!-- 使用参数 -->
+    <select id="getUserListByParam" parameterType="com.kilogate.hi.mybatis.param.QueryUserParam" resultType="com.kilogate.hi.mybatis.pojo.User">
+        select *
+        from mybatis.user
+        where name like #{nameLike}
+    </select>
 </mapper>
