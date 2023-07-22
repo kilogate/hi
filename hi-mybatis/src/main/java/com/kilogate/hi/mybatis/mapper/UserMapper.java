@@ -1,4 +1,4 @@
-package com.kilogate.hi.mybatis.dao;
+package com.kilogate.hi.mybatis.mapper;
 
 import com.kilogate.hi.mybatis.param.QueryUserParam;
 import com.kilogate.hi.mybatis.pojo.User;
@@ -8,12 +8,12 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * UserDao
+ * UserMapper
  *
  * @author kilogate
  * @create 2023/7/17 23:02
  **/
-public interface UserDao {
+public interface UserMapper {
     List<User> getUserList();
 
     List<UserInfo> getUserInfoList();

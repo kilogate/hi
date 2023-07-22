@@ -17,6 +17,6 @@
     </environments>
 
     <mappers>
-        <mapper resource="com/kilogate/hi/mybatis/dao/UserMapper.xml"/>
+        <mapper resource="com/kilogate/hi/mybatis/mapper/UserMapper.xml"/>
     </mappers>
 </configuration>
