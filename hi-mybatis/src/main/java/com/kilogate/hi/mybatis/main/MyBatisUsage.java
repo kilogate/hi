@@ -9,9 +9,7 @@ import com.kilogate.hi.mybatis.pojo.UserInfo;
 import lombok.Cleanup;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.io.Resources;
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.apache.ibatis.session.*;
 
 import java.io.InputStream;
 import java.util.List;
@@ -25,11 +23,11 @@ import java.util.List;
 @Slf4j
 public class MyBatisUsage {
     public static void main(String[] args) throws Exception {
-        baseUsage();
+        rawUsage();
     }
 
     private static void baseUsage() throws Exception {
-        // 从XML配置中构建 SqlSessionFactory
+        // 从 XML 配置中构建 SqlSessionFactory
         InputStream inputStream = Resources.getResourceAsStream("mybatis-config.xml");
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 
@@ -60,5 +58,19 @@ public class MyBatisUsage {
         // foreach 函数
         List<User> users = mapper.selectByIn(ImmutableMap.of("ids", ImmutableList.of(2, 3)));
         log.info("selectByIn end, result: {}", users);
+    }
+
+    private static void rawUsage() throws Exception {
+        // 从 XML 配置中构建 SqlSessionFactory
+        InputStream inputStream = Resources.getResourceAsStream("mybatis-config.xml");
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+
+        // 打开数据库连接
+        @Cleanup SqlSession sqlSession = sqlSessionFactory.openSession();
+
+        // 执行SQL查询语句（原生方式）
+        List<Object> list = sqlSession.selectList("com.kilogate.hi.mybatis.mapper.UserMapper.getUserList");
+        log.info("selectList end, res: {}", list);
+
     }
 }
