@@ -9,7 +9,9 @@ import com.kilogate.hi.mybatis.pojo.UserInfo;
 import lombok.Cleanup;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.io.Resources;
-import org.apache.ibatis.session.*;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import java.io.InputStream;
 import java.util.List;
@@ -23,7 +25,7 @@ import java.util.List;
 @Slf4j
 public class MyBatisUsage {
     public static void main(String[] args) throws Exception {
-        rawUsage();
+        javaConfig();
     }
 
     private static void baseUsage() throws Exception {
@@ -71,6 +73,19 @@ public class MyBatisUsage {
         // 执行SQL查询语句（原生方式）
         List<Object> list = sqlSession.selectList("com.kilogate.hi.mybatis.mapper.UserMapper.getUserList");
         log.info("selectList end, res: {}", list);
+    }
 
+    private static void javaConfig() throws Exception {
+        // 从 XML 配置中构建 SqlSessionFactory
+        InputStream inputStream = Resources.getResourceAsStream("mybatis-config.xml");
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+
+        // 打开数据库连接
+        @Cleanup SqlSession sqlSession = sqlSessionFactory.openSession();
+
+        // 使用 Java 配置映射 SQL 语句
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+        List<User> list = mapper.getUserListWithJavaConfig();
+        log.info("getUserListWithJavaConfig end, res: {}", list);
     }
 }
