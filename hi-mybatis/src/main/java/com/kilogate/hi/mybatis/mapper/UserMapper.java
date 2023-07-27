@@ -3,6 +3,7 @@ package com.kilogate.hi.mybatis.mapper;
 import com.kilogate.hi.mybatis.param.QueryUserParam;
 import com.kilogate.hi.mybatis.pojo.User;
 import com.kilogate.hi.mybatis.pojo.UserInfo;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -32,4 +33,7 @@ public interface UserMapper {
      */
     @Select("select * from mybatis.user")
     List<User> getUserListWithJavaConfig();
+
+    @Select("select * from user where ${column} = #{value}")
+    List<User> selectListBy(@Param("column") String key, @Param("value") String val);
 }

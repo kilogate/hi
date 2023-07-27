@@ -87,5 +87,12 @@ public class MyBatisUsage {
         UserMapper mapper = sqlSession.getMapper(UserMapper.class);
         List<User> list = mapper.getUserListWithJavaConfig();
         log.info("getUserListWithJavaConfig end, res: {}", list);
+
+        List<User> list1 = mapper.selectListBy("id", "1");
+        System.out.println(list1);
+        List<User> list2 = mapper.selectListBy("name", "张三");
+        System.out.println(list2);
+        List<User> list3 = mapper.selectListBy("pwd", "123");
+        System.out.println(list3);
     }
 }
