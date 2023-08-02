@@ -34,7 +34,7 @@
         </javaModelGenerator>
 
         <!-- 生成映射器 -->
-        <sqlMapGenerator targetPackage="com.kilogate.hi.mybatis.generator.mapper" targetProject="src/main/java">
+        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources">
             <property name="enableSubPackages" value="false"/>
         </sqlMapGenerator>
 
