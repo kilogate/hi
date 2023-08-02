@@ -41,6 +41,7 @@
         <module>hi-kafka</module>
         <module>hi-mybatis</module>
         <module>hi-mybatis-generator</module>
+        <module>hi-mybatis-spring</module>
     </modules>
 
     <build>
