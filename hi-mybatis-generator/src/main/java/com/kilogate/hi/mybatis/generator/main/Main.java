@@ -38,8 +38,7 @@ public class Main {
         log.info("selectByExample end, res: {}", list);
 
         UserExample example = new UserExample();
-        UserExample.Criteria criteria = example.createCriteria();
-        criteria.andNameLike("%三%");
+        example.createCriteria().andNameLike("%三%");
 
         list = mapper.selectByExample(example);
         log.info("selectByExample end, res: {}", list);
