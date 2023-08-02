@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <context id="testTables" targetRuntime="MyBatis3" defaultModelType="flat">
+        <!-- 分隔符 -->
+        <property name="beginningDelimiter" value="'"/>
+        <property name="endingDelimiter" value="'"/>
+
+        <!-- 生成注释 -->
+        <commentGenerator>
+            <property name="suppressAllComments" value="false"/>
+            <property name="addRemarkComments" value="true"/>
+        </commentGenerator>
+
+        <!-- 数据库连接 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/mybatis"
+                        userId="root"
+                        password="kilogate">
+        </jdbcConnection>
+
+        <!-- 类型转换 -->
+        <javaTypeResolver>
+            <!-- 是否将 Decimal 和 NUMERIC 类型转换为 Java 类型的 java.math.decimal -->
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!-- 生成实体类 -->
+        <javaModelGenerator targetPackage="com.kilogate.hi.mybatis.generator.model" targetProject="src/main/java">
+            <property name="enableSubPackages" value="false"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <!-- 生成映射器 -->
+        <sqlMapGenerator targetPackage="com.kilogate.hi.mybatis.generator.mapper" targetProject="src/main/java">
+            <property name="enableSubPackages" value="false"/>
+        </sqlMapGenerator>
+
+        <!-- 生成映射器接口 -->
+        <!-- type="XMLMAPPER" 所有的方法都在XMl中，推荐使用，接口和XML完全分离，接口中不出现SQL语句，修改SQL不需要重新编译 -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.kilogate.hi.mybatis.generator.mapper"
+                             targetProject="src/main/java">
+            <property name="enableSubPackages" value="false"/>
+        </javaClientGenerator>
+
+        <!-- 指定数据库表 -->
+        <!-- 生成全部的表：tableName="%" -->
+        <table tableName="user" domainObjectName="User">
+            <!-- 用来指定生成的主键，会在Insert语句中添加 selectKey标签 -->
+            <generatedKey column="id" sqlStatement="MySql"/>
+        </table>
+    </context>
+</generatorConfiguration>
