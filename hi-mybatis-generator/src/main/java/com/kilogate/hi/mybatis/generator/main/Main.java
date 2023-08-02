@@ -2,6 +2,7 @@ package com.kilogate.hi.mybatis.generator.main;
 
 import com.kilogate.hi.mybatis.generator.mapper.UserMapper;
 import com.kilogate.hi.mybatis.generator.model.User;
+import com.kilogate.hi.mybatis.generator.model.UserExample;
 import lombok.Cleanup;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.io.Resources;
@@ -34,6 +35,13 @@ public class Main {
 
         // 查询数据
         List<User> list = mapper.selectByExample(null);
+        log.info("selectByExample end, res: {}", list);
+
+        UserExample example = new UserExample();
+        UserExample.Criteria criteria = example.createCriteria();
+        criteria.andNameLike("%三%");
+
+        list = mapper.selectByExample(example);
         log.info("selectByExample end, res: {}", list);
     }
 }
