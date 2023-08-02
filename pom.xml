@@ -40,6 +40,7 @@
         <module>hi-serialize</module>
         <module>hi-kafka</module>
         <module>hi-mybatis</module>
+        <module>hi-mybatis-generator</module>
     </modules>
 
     <build>
