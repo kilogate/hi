@@ -16,7 +16,7 @@
 
         <!-- 数据库连接 -->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://localhost:3306/mybatis"
+                        connectionURL="jdbc:mysql://localhost:3306/mybatis?nullCatalogMeansCurrent=true"
                         userId="root"
                         password="kilogate">
         </jdbcConnection>
