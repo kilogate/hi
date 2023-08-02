@@ -8,6 +8,20 @@
         <property name="beginningDelimiter" value="'"/>
         <property name="endingDelimiter" value="'"/>
 
+        <plugin type="com.softwareloop.mybatis.generator.plugins.LombokPlugin">
+            <property name="builder" value="true"/>
+            <property name="builder.fluent" value="true"/>
+            <property name="builder.builderMethodName" value="myBuilder"/>
+
+            <property name="data" value="true"/>
+
+            <property name="accessors" value="true"/>
+            <property name="accessors.prefix" value="m_, _"/>
+
+            <property name="noArgsConstructor" value="true"/>
+            <property name="allArgsConstructor" value="true"/>
+        </plugin>
+
         <!-- 生成注释 -->
         <commentGenerator>
             <property name="suppressAllComments" value="false"/>
