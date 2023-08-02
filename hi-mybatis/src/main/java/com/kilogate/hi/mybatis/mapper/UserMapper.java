@@ -34,6 +34,7 @@ public interface UserMapper {
     @Select("select * from mybatis.user")
     List<User> getUserListWithJavaConfig();
 
+    // ignore_security_alert
     @Select("select * from user where ${column} = #{value}")
     List<User> selectListBy(@Param("column") String key, @Param("value") String val);
 }
