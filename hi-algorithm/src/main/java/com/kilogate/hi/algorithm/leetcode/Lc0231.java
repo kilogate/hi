@@ -5,7 +5,7 @@ package com.kilogate.hi.algorithm.leetcode;
  * <p>
  * https://leetcode-cn.com/problems/power-of-two/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/3/13 14:47
  **/
 public class Lc0231 {

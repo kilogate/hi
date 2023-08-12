@@ -5,7 +5,7 @@ package com.kilogate.hi.algorithm.leetcode;
  * <p>
  * https://leetcode-cn.com/problems/reverse-string
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/2/27 21:43
  **/
 public class Lc0344 {

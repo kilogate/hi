@@ -3,7 +3,7 @@ package com.kilogate.hi.algorithm.leetcode;
 /**
  * 二进制表示中质数个计算置位
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/4/10 22:34
  **/
 public class Lc0762 {

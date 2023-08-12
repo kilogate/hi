@@ -7,7 +7,7 @@ import java.util.Arrays;
  * <p>
  * https://leetcode-cn.com/problems/permutation-in-string
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/3/5 22:14
  **/
 public class Lc0567 {

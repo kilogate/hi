@@ -10,7 +10,7 @@ import java.util.Set;
  * <p>
  * https://leetcode-cn.com/problems/ugly-number-ii/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/3/9 22:33
  **/
 public class Lc0264 {

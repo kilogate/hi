@@ -8,7 +8,7 @@ import java.util.List;
  * <p>
  * https://leetcode-cn.com/problems/binary-watch/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/3/12 14:46
  **/
 public class Lc0401 {

@@ -5,7 +5,7 @@ package com.kilogate.hi.algorithm.leetcode;
  * <p>
  * https://leetcode-cn.com/problems/reverse-words-in-a-string-iii/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/3/1 01:04
  **/
 public class Lc0557 {

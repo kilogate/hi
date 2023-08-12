@@ -5,7 +5,7 @@ package com.kilogate.hi.algorithm.leetcode;
  * <p>
  * https://leetcode-cn.com/problems/sqrtx
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/2/18 00:10
  **/
 public class Lc0069 {

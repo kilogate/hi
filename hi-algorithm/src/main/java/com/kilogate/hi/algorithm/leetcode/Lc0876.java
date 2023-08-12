@@ -7,7 +7,7 @@ import com.kilogate.hi.algorithm.util.ListNode;
  * <p>
  * https://leetcode-cn.com/problems/middle-of-the-linked-list/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/3/1 01:19
  **/
 public class Lc0876 {

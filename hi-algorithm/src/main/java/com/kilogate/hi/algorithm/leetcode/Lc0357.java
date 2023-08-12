@@ -5,7 +5,7 @@ package com.kilogate.hi.algorithm.leetcode;
  * <p>
  * https://leetcode-cn.com/problems/count-numbers-with-unique-digits/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/4/11 23:11
  **/
 public class Lc0357 {

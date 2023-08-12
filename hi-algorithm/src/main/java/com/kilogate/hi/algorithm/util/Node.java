@@ -7,7 +7,7 @@ import java.util.Queue;
 /**
  * 多叉树的节点
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/4/10 17:46
  **/
 public class Node {

@@ -5,7 +5,7 @@ package com.kilogate.hi.algorithm.leetcode;
  * <p>
  * https://leetcode-cn.com/problems/maximize-the-confusion-of-an-exam/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/3/30 00:15
  **/
 public class Lc2024 {

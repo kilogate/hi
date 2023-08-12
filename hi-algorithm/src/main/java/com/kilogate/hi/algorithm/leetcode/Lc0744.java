@@ -5,7 +5,7 @@ package com.kilogate.hi.algorithm.leetcode;
  * <p>
  * https://leetcode-cn.com/problems/find-smallest-letter-greater-than-target/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/4/11 23:17
  **/
 public class Lc0744 {

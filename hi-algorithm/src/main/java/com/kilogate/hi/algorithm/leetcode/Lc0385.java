@@ -7,7 +7,7 @@ import java.util.*;
  * <p>
  * https://leetcode-cn.com/problems/mini-parser/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/4/15 17:51
  **/
 public class Lc0385 {

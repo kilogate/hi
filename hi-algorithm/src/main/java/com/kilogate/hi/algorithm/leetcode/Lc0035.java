@@ -5,7 +5,7 @@ package com.kilogate.hi.algorithm.leetcode;
  * <p>
  * https://leetcode-cn.com/problems/search-insert-position/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/2/13 16:14
  **/
 public class Lc0035 {

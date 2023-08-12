@@ -5,7 +5,7 @@ package com.kilogate.hi.algorithm.leetcode;
  * <p>
  * https://leetcode-cn.com/problems/house-robber/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/3/12 22:34
  **/
 public class Lc0198 {

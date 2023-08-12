@@ -8,7 +8,7 @@ import java.util.List;
  * <p>
  * https://leetcode-cn.com/problems/permutations-ii/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/2/17 23:10
  **/
 public class Lc0047 {

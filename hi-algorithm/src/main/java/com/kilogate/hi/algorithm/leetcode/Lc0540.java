@@ -5,7 +5,7 @@ package com.kilogate.hi.algorithm.leetcode;
  * <p>
  * https://leetcode-cn.com/problems/single-element-in-a-sorted-array/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/3/13 20:45
  **/
 public class Lc0540 {

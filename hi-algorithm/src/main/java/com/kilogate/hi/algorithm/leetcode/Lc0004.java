@@ -5,7 +5,7 @@ package com.kilogate.hi.algorithm.leetcode;
  * <p>
  * https://leetcode-cn.com/problems/median-of-two-sorted-arrays/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/3/28 00:23
  **/
 public class Lc0004 {

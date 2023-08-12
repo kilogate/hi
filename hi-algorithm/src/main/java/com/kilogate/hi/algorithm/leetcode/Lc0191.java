@@ -5,7 +5,7 @@ package com.kilogate.hi.algorithm.leetcode;
  * <p>
  * https://leetcode-cn.com/problems/number-of-1-bits/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/3/13 14:54
  **/
 public class Lc0191 {

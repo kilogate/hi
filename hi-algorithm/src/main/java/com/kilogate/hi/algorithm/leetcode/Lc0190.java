@@ -5,7 +5,7 @@ package com.kilogate.hi.algorithm.leetcode;
  * <p>
  * https://leetcode-cn.com/problems/reverse-bits/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/3/13 15:06
  **/
 public class Lc0190 {

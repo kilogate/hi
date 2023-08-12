@@ -7,7 +7,7 @@ import java.util.Arrays;
  * <p>
  * https://leetcode-cn.com/problems/find-missing-observations/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/2/26 23:13
  **/
 public class Lc2028 {

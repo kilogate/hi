@@ -7,7 +7,7 @@ import com.kilogate.hi.algorithm.util.ListNode;
  * <p>
  * https://leetcode-cn.com/problems/reverse-linked-list/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/3/2 00:05
  **/
 public class Lc0206 {

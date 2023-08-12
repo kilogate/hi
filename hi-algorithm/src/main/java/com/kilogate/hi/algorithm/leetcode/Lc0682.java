@@ -8,7 +8,7 @@ import java.util.List;
  * <p>
  * https://leetcode-cn.com/problems/baseball-game/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/3/26 11:54
  **/
 public class Lc0682 {

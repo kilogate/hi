@@ -8,7 +8,7 @@ import java.util.Map;
  * <p>
  * https://leetcode-cn.com/problems/longest-absolute-file-path/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/4/20 12:09
  **/
 public class Lc0388 {

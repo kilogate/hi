@@ -7,7 +7,7 @@ import java.util.*;
  * <p>
  * https://leetcode-cn.com/problems/insert-delete-getrandom-o1/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/4/13 23:24
  **/
 public class Lc0380 {

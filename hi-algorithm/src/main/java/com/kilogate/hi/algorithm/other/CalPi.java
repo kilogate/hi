@@ -3,7 +3,7 @@ package com.kilogate.hi.algorithm.other;
 /**
  * 计算圆周率
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/3/27 00:33
  **/
 public class CalPi {

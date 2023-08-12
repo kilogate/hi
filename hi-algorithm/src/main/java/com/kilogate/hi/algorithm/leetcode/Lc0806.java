@@ -7,7 +7,7 @@ import java.util.Arrays;
  * <p>
  * https://leetcode-cn.com/problems/number-of-lines-to-write-string/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/4/12 23:30
  **/
 public class Lc0806 {

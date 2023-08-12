@@ -5,7 +5,7 @@ package com.kilogate.hi.algorithm.leetcode;
  * <p>
  * https://leetcode-cn.com/problems/first-bad-version/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/2/13 15:45
  **/
 public class Lc0278 {

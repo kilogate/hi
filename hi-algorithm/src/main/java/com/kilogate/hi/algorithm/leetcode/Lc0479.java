@@ -5,7 +5,7 @@ package com.kilogate.hi.algorithm.leetcode;
  * <p>
  * https://leetcode-cn.com/problems/largest-palindrome-product/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/4/17 14:48
  **/
 public class Lc0479 {

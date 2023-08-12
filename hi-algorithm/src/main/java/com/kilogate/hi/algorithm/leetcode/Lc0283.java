@@ -7,7 +7,7 @@ import java.util.Arrays;
  * <p>
  * https://leetcode-cn.com/problems/move-zeroes/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/2/26 11:17
  **/
 public class Lc0283 {

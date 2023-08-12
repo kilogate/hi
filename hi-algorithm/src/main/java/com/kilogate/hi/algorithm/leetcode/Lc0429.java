@@ -13,7 +13,7 @@ import java.util.Queue;
  * <p>
  * https://leetcode-cn.com/problems/n-ary-tree-level-order-traversal/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/4/10 17:00
  **/
 public class Lc0429 {

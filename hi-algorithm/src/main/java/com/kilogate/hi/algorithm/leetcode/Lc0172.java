@@ -5,7 +5,7 @@ package com.kilogate.hi.algorithm.leetcode;
  * <p>
  * https://leetcode-cn.com/problems/factorial-trailing-zeroes/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/3/26 12:47
  **/
 public class Lc0172 {

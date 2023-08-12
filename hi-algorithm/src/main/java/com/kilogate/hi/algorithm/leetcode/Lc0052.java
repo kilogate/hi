@@ -9,7 +9,7 @@ import java.util.Set;
  * <p>
  * https://leetcode-cn.com/problems/n-queens-ii
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/3/9 22:04
  **/
 public class Lc0052 {

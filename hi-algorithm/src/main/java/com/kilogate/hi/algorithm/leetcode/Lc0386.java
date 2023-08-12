@@ -8,7 +8,7 @@ import java.util.List;
  * <p>
  * https://leetcode-cn.com/problems/lexicographical-numbers/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/4/18 14:27
  **/
 public class Lc0386 {

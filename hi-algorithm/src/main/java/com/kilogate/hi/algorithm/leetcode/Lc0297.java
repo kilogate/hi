@@ -11,7 +11,7 @@ import java.util.Queue;
  * <p>
  * https://leetcode-cn.com/problems/serialize-and-deserialize-binary-tree/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/3/11 10:48
  **/
 public class Lc0297 {

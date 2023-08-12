@@ -7,7 +7,7 @@ import java.util.Arrays;
  * <p>
  * https://leetcode-cn.com/problems/next-permutation/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/3/12 00:52
  **/
 public class Lc0031 {

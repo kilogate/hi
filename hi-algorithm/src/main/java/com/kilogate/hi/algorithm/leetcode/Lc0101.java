@@ -10,7 +10,7 @@ import java.util.Queue;
  * <p>
  * https://leetcode-cn.com/problems/symmetric-tree/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/3/5 17:16
  **/
 public class Lc0101 {

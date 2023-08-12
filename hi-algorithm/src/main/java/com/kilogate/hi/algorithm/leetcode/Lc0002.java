@@ -7,7 +7,7 @@ import com.kilogate.hi.algorithm.util.ListNode;
  * <p>
  * https://leetcode-cn.com/problems/add-two-numbers/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/2/19 13:15
  **/
 public class Lc0002 {

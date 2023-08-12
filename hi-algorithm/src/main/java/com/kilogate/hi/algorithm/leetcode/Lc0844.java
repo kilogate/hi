@@ -5,7 +5,7 @@ package com.kilogate.hi.algorithm.leetcode;
  * <p>
  * https://leetcode-cn.com/problems/backspace-string-compare
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/3/4 00:14
  **/
 public class Lc0844 {

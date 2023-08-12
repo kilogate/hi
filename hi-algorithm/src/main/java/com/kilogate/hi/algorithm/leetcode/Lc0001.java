@@ -9,7 +9,7 @@ import java.util.Map;
  * <p>
  * https://leetcode-cn.com/problems/two-sum/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/2/19 12:05
  **/
 public class Lc0001 {

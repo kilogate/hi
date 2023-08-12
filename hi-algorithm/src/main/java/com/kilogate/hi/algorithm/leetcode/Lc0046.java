@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
  * <p>
  * https://leetcode-cn.com/problems/permutations/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/2/17 19:10
  **/
 public class Lc0046 {

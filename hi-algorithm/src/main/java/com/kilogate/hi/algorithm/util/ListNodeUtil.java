@@ -3,7 +3,7 @@ package com.kilogate.hi.algorithm.util;
 /**
  * ListNodeUtil
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/3/24 22:58
  **/
 public class ListNodeUtil {

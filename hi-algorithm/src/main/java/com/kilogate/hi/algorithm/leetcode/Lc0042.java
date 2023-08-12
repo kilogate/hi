@@ -5,7 +5,7 @@ package com.kilogate.hi.algorithm.leetcode;
  * <p>
  * https://leetcode-cn.com/problems/trapping-rain-water/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/3/6 17:00
  **/
 public class Lc0042 {

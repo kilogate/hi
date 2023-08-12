@@ -9,7 +9,7 @@ import java.util.Queue;
  * <p>
  * https://leetcode-cn.com/problems/01-matrix/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/3/12 17:29
  **/
 public class Lc0542 {

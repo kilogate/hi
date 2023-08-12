@@ -7,7 +7,7 @@ import com.kilogate.hi.algorithm.util.ListNode;
  * <p>
  * https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/3/5 21:53
  **/
 public class Lc0019 {

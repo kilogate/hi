@@ -11,7 +11,7 @@ import java.util.stream.Stream;
  * <p>
  * https://leetcode-cn.com/problems/most-common-word/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/4/17 15:09
  **/
 public class Lc0819 {

@@ -8,7 +8,7 @@ import com.kilogate.hi.algorithm.util.ListNodeUtil;
  * <p>
  * https://leetcode-cn.com/problems/merge-two-sorted-lists/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/3/12 21:24
  **/
 public class Lc0021 {

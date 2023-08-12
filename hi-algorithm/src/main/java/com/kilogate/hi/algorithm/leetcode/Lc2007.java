@@ -7,7 +7,7 @@ import java.util.*;
  * <p>
  * https://leetcode-cn.com/problems/find-original-array-from-doubled-array/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/2/14 11:53
  **/
 public class Lc2007 {

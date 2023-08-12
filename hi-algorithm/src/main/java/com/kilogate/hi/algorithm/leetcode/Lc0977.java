@@ -7,7 +7,7 @@ import java.util.Arrays;
  * <p>
  * https://leetcode-cn.com/problems/squares-of-a-sorted-array/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/2/13 22:49
  **/
 public class Lc0977 {

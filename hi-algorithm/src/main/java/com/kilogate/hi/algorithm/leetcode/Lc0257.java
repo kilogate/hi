@@ -11,7 +11,7 @@ import java.util.List;
  * <p>
  * https://leetcode-cn.com/problems/binary-tree-paths/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/3/12 11:12
  **/
 public class Lc0257 {

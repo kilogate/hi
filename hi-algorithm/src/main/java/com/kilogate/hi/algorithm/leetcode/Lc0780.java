@@ -5,7 +5,7 @@ package com.kilogate.hi.algorithm.leetcode;
  * <p>
  * https://leetcode-cn.com/problems/reaching-points/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/4/10 15:59
  **/
 public class Lc0780 {

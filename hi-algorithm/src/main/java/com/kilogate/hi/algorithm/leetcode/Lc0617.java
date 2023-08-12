@@ -7,7 +7,7 @@ import com.kilogate.hi.algorithm.util.TreeNode;
  * <p>
  * https://leetcode-cn.com/problems/merge-two-binary-trees
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/3/6 10:23
  **/
 public class Lc0617 {

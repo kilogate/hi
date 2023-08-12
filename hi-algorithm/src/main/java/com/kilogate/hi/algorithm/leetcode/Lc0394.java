@@ -5,7 +5,7 @@ package com.kilogate.hi.algorithm.leetcode;
  * <p>
  * https://leetcode-cn.com/problems/decode-string
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/3/2 00:19
  */
 public class Lc0394 {

@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 /**
  * ArrayUtil
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/3/24 22:22
  **/
 public class ArrayUtil {

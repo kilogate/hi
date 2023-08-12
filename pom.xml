@@ -42,6 +42,7 @@
         <module>hi-mybatis</module>
         <module>hi-mybatis-generator</module>
         <module>hi-mybatis-spring</module>
+        <module>hi-junit</module>
     </modules>
 
     <build>

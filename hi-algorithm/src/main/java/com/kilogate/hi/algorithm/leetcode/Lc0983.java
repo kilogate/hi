@@ -5,7 +5,7 @@ package com.kilogate.hi.algorithm.leetcode;
  * <p>
  * https://leetcode-cn.com/problems/minimum-cost-for-tickets/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/2/26 23:53
  **/
 public class Lc0983 {

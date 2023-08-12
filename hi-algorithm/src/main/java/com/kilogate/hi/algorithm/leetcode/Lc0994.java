@@ -8,7 +8,7 @@ import java.util.List;
  * <p>
  * https://leetcode-cn.com/problems/rotting-oranges/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/3/12 18:33
  **/
 public class Lc0994 {

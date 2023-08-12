@@ -5,7 +5,7 @@ package com.kilogate.hi.algorithm.leetcode;
  * <p>
  * https://leetcode-cn.com/problems/regular-expression-matching/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/3/26 00:00
  **/
 public class Lc0010 {

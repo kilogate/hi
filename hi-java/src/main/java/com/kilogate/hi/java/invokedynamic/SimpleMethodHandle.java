@@ -7,7 +7,7 @@ import java.lang.invoke.MethodType;
 /**
  * SimpleMethodHandle
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/3/26 17:21
  **/
 public class SimpleMethodHandle {

@@ -8,7 +8,7 @@ import java.util.List;
  * <p>
  * https://leetcode-cn.com/problems/zigzag-conversion
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/2/19 22:29
  **/
 public class Lc0006 {

@@ -7,7 +7,7 @@ import java.util.Arrays;
  * <p>
  * https://leetcode-cn.com/problems/sort-array-by-parity-ii
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/3/3 01:01
  **/
 public class Lc0922 {

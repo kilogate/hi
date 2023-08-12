@@ -5,7 +5,7 @@ package com.kilogate.hi.algorithm.leetcode;
  * <p>
  * https://leetcode-cn.com/problems/richest-customer-wealth/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/4/16 12:38
  **/
 public class Lc1672 {

@@ -5,7 +5,7 @@ package com.kilogate.hi.algorithm.leetcode;
  * <p>
  * https://leetcode-cn.com/problems/largest-time-for-given-digits/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/3/14 17:38
  **/
 public class Lc0949 {

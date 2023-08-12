@@ -10,7 +10,7 @@ import java.util.Queue;
  * <p>
  * https://leetcode-cn.com/problems/find-servers-that-handled-most-number-of-requests/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/3/31 00:25
  **/
 public class Lc1606 {

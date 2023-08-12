@@ -10,7 +10,7 @@ import java.util.stream.Stream;
  * <p>
  * https://leetcode-cn.com/problems/image-smoother/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/3/24 22:19
  **/
 public class Lc0661 {

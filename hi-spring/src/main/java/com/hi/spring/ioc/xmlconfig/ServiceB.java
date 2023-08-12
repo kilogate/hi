@@ -3,7 +3,7 @@ package com.hi.spring.ioc.xmlconfig;
 /**
  * ServiceB
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/4/28 15:06
  **/
 public class ServiceB {

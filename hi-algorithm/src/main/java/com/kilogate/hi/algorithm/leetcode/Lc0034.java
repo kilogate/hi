@@ -7,7 +7,7 @@ import java.util.Arrays;
  * <p>
  * https://leetcode-cn.com/problems/find-first-and-last-position-of-element-in-sorted-array/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/2/19 10:54
  **/
 public class Lc0034 {

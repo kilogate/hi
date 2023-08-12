@@ -5,7 +5,7 @@ package com.kilogate.hi.algorithm.leetcode;
  * <p>
  * https://leetcode-cn.com/problems/climbing-stairs/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/2/20 01:13
  **/
 public class Lc0070 {

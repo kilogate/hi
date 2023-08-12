@@ -8,7 +8,7 @@ import com.kilogate.hi.algorithm.util.TreeNodeUtil;
  * <p>
  * https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/3/10 23:28
  **/
 public class Lc0236 {

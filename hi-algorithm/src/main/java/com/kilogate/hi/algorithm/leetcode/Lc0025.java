@@ -7,7 +7,7 @@ import com.kilogate.hi.algorithm.util.ListNode;
  * <p>
  * https://leetcode-cn.com/problems/reverse-nodes-in-k-group
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/3/6 22:49
  **/
 public class Lc0025 {

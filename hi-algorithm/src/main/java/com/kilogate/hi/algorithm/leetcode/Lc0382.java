@@ -10,7 +10,7 @@ import java.util.Random;
  * <p>
  * https://leetcode-cn.com/problems/linked-list-random-node/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/4/29 15:53
  **/
 public class Lc0382 {

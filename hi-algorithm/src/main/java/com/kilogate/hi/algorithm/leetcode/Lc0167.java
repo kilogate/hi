@@ -7,7 +7,7 @@ import java.util.Arrays;
  * <p>
  * https://leetcode-cn.com/problems/two-sum-ii-input-array-is-sorted
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/2/27 20:58
  **/
 public class Lc0167 {

@@ -6,7 +6,7 @@ import java.util.Queue;
 /**
  * 二叉树的节点
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/3/6 10:24
  **/
 public class TreeNode {

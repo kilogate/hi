@@ -5,7 +5,7 @@ package com.kilogate.hi.algorithm.leetcode;
  * <p>
  * https://leetcode-cn.com/problems/binary-search/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/2/13 14:52
  **/
 public class Lc0704 {

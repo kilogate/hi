@@ -8,7 +8,7 @@ import java.util.Queue;
  * <p>
  * https://leetcode-cn.com/problems/populating-next-right-pointers-in-each-node/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/3/6 11:11
  **/
 public class Lc0116 {

@@ -7,7 +7,7 @@ import java.util.*;
  * <p>
  * https://leetcode-cn.com/problems/n-queens
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/3/9 21:04
  **/
 public class Lc0051 {

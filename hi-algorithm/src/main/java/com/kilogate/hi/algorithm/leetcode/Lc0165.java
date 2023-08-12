@@ -5,7 +5,7 @@ package com.kilogate.hi.algorithm.leetcode;
  * <p>
  * https://leetcode-cn.com/problems/compare-version-numbers/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/4/29 17:59
  **/
 public class Lc0165 {

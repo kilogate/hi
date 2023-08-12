@@ -5,7 +5,7 @@ import java.util.concurrent.*;
 /**
  * ThreadPoolExecutorUsage
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/4/23 17:38
  **/
 public class ThreadPoolExecutorUsage {

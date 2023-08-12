@@ -3,7 +3,7 @@ package com.hi.spring.aop.xmlconfig;
 /**
  * LogAspect
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/4/28 15:27
  **/
 public class LogAspect {

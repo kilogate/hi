@@ -5,7 +5,7 @@ package com.kilogate.hi.algorithm.leetcode;
  * <p>
  * https://leetcode-cn.com/problems/binary-number-with-alternating-bits/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/3/28 23:47
  **/
 public class Lc0693 {

@@ -5,7 +5,7 @@ package com.kilogate.hi.algorithm.leetcode;
  * <p>
  * https://leetcode-cn.com/problems/first-missing-positive/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/3/13 16:44
  **/
 public class Lc0041 {

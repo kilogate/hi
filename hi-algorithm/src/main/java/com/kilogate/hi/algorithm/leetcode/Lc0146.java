@@ -8,7 +8,7 @@ import java.util.Map;
  * <p>
  * https://leetcode-cn.com/problems/lru-cache
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/2/20 12:04
  **/
 public class Lc0146 {

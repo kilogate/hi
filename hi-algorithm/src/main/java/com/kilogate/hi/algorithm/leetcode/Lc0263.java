@@ -5,7 +5,7 @@ package com.kilogate.hi.algorithm.leetcode;
  * <p>
  * https://leetcode-cn.com/problems/ugly-number
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/3/9 22:30
  **/
 public class Lc0263 {

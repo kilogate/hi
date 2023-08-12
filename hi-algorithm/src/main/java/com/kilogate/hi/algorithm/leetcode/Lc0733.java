@@ -7,7 +7,7 @@ import java.util.Arrays;
  * <p>
  * https://leetcode-cn.com/problems/flood-fill
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/3/5 23:41
  **/
 public class Lc0733 {

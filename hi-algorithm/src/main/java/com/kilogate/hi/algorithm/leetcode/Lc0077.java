@@ -8,7 +8,7 @@ import java.util.List;
  * <p>
  * https://leetcode-cn.com/problems/combinations/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/3/12 21:56
  **/
 public class Lc0077 {

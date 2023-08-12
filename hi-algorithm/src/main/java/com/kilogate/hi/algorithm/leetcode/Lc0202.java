@@ -8,7 +8,7 @@ import java.util.Set;
  * <p>
  * https://leetcode-cn.com/problems/happy-number
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/3/3 23:15
  **/
 public class Lc0202 {

@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * NodeUtil
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/4/10 17:48
  **/
 public class NodeUtil {

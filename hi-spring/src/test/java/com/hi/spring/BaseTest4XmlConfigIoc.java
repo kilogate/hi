@@ -10,7 +10,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 /**
  * BaseTest4XmlConfigIoc
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/5/4 22:20
  **/
 @RunWith(SpringJUnit4ClassRunner.class)

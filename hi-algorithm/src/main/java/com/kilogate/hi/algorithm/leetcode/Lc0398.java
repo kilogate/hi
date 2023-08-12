@@ -7,7 +7,7 @@ import java.util.Random;
  * <p>
  * https://leetcode-cn.com/problems/random-pick-index/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/4/29 16:13
  **/
 public class Lc0398 {

@@ -3,7 +3,7 @@ package com.kilogate.hi.algorithm.util;
 /**
  * 单链表的节点
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/3/6 10:34
  **/
 public class ListNode {

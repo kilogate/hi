@@ -5,7 +5,7 @@ package com.kilogate.hi.algorithm.leetcode;
  * <p>
  * https://leetcode-cn.com/problems/sum-of-all-subset-xor-totals/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/3/12 15:45
  **/
 public class Lc1863 {

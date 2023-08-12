@@ -7,7 +7,7 @@ import java.util.Arrays;
  * <p>
  * https://leetcode-cn.com/problems/shortest-distance-to-a-character/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/4/19 17:17
  **/
 public class Lc0821 {

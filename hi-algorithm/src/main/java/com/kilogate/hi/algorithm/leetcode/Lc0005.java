@@ -5,7 +5,7 @@ package com.kilogate.hi.algorithm.leetcode;
  * <p>
  * https://leetcode-cn.com/problems/longest-palindromic-substring/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/2/19 17:32
  **/
 public class Lc0005 {

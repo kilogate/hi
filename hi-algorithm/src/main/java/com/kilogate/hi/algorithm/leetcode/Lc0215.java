@@ -5,7 +5,7 @@ package com.kilogate.hi.algorithm.leetcode;
  * <p>
  * https://leetcode-cn.com/problems/kth-largest-element-in-an-array/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/3/22 23:15
  **/
 public class Lc0215 {

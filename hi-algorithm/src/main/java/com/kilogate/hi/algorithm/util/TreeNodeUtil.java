@@ -5,7 +5,7 @@ import java.util.Objects;
 /**
  * TreeNodeUtil
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/3/24 23:00
  **/
 public class TreeNodeUtil {

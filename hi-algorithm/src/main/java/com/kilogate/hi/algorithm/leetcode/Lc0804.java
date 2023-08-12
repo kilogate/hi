@@ -8,7 +8,7 @@ import java.util.Set;
  * <p>
  * https://leetcode-cn.com/problems/unique-morse-code-words/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/4/10 15:31
  **/
 public class Lc0804 {

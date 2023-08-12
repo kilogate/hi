@@ -10,7 +10,7 @@ import java.util.Map;
  * <p>
  * https://leetcode-cn.com/problems/24-game/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/4/28 23:38
  **/
 public class Lc0679 {

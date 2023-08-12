@@ -9,7 +9,7 @@ import com.kilogate.hi.algorithm.util.ListNodeUtil;
  * <p>
  * https://leetcode-cn.com/problems/convert-sorted-list-to-binary-search-tree/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/3/24 15:25
  **/
 public class Lc0109 {

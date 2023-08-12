@@ -7,7 +7,7 @@ import com.kilogate.hi.algorithm.util.ArrayUtil;
  * <p>
  * https://leetcode-cn.com/problems/container-with-most-water/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/3/25 23:11
  **/
 public class Lc0011 {

@@ -7,7 +7,7 @@ import java.util.Arrays;
  * <p>
  * https://leetcode-cn.com/problems/rotate-array/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/2/13 19:38
  **/
 public class Lc0189 {

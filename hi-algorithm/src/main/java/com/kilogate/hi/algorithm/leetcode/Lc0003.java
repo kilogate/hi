@@ -8,7 +8,7 @@ import java.util.Set;
  * <p>
  * https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/2/19 13:43
  **/
 public class Lc0003 {

@@ -3,7 +3,7 @@ package com.kilogate.hi.algorithm.leetcode;
 /**
  * 旋转字符串
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/4/10 21:40
  **/
 public class Lc0796 {

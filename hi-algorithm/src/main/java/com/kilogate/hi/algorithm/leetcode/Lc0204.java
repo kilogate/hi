@@ -9,7 +9,7 @@ import java.util.List;
  * <p>
  * https://leetcode-cn.com/problems/count-primes/
  *
- * @author fengquanwei
+ * @author kilogate
  * @create 2022/4/10 22:01
  **/
 public class Lc0204 {
