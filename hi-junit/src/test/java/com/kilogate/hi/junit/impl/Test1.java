@@ -37,4 +37,10 @@ public class Test1 {
     void case1() {
         log.info("case1");
     }
+
+    @Test
+    @Disabled
+    void case2() {
+        log.info("case2");
+    }
 }
