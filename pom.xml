@@ -43,6 +43,7 @@
         <module>hi-mybatis-generator</module>
         <module>hi-mybatis-spring</module>
         <module>hi-junit</module>
+        <module>hi-mockito</module>
     </modules>
 
     <build>
