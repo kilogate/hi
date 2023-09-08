@@ -1,0 +1,47 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+'消息的注释
+
+Alice -> Bob : hello
+note left: this is note left
+
+Bob -> Alice : ok
+note right: this is note right
+
+Bob -> Bob : I am thinking
+note left
+这是
+多行
+注释
+end note
+
+newpage
+
+'参与者的注释
+
+note left of Alice #aqua
+This
+is note left of Alice
+end note
+
+note right of Alice: This is note right of Alice
+
+note over Alice: This is note over Alice
+
+note over Alice, Bob #FFAAAA: This is note over Alice, Bob
+
+note over Bob, Alice
+This is yet another
+example of
+a long note.
+end note
+
+note across: 在所有参与者之间添加注释: note across
+
+note over Alice : 对齐下一个注释
+/ note over Bob : 对齐上一个注释
+
+Bob -> Alice : hello
+
+@enduml

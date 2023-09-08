@@ -1,0 +1,21 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+Alice -> Bob: 认证请求
+
+alt 成功情况
+    Bob -> Alice: 认证接受
+else 某种失败情况
+    Bob -> Alice: 认证失败
+    group 我自己的标签 [次级标签]
+        Alice -> Log : 开始记录攻击日志
+        loop 1000次
+            Alice -> Bob: DNS 攻击
+        end
+        Alice -> Log : 结束记录攻击日志
+    end
+else 另一种失败
+    Bob -> Alice: 请重复
+end
+
+@enduml

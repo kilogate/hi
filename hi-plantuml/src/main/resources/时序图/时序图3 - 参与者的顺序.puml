@@ -1,0 +1,8 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+participant 最后 order 30
+participant 中间 order 20
+participant 首个 order 10
+
+@enduml

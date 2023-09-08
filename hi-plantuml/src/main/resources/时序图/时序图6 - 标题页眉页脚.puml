@@ -1,0 +1,12 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+title Example
+
+header Page Header
+footer Page %page% of %lastpage%
+
+Alice -> Bob : message 1
+Alice -> Bob : message 2
+
+@enduml

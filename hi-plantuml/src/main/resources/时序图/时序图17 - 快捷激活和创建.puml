@@ -1,0 +1,15 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+
+A -> B ++ : 激活
+B -> A -- : 撤销
+
+B -> C ** : 创建
+B -> C !! : 销毁
+
+alice -> bob ++ : 激活
+bob -> charlie --++ : 撤销 + 激活
+charlie --> alice -- : 撤销
+
+@enduml

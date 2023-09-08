@@ -1,0 +1,9 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+Bob -> Alice : hello
+create Other
+Alice -> Other : new
+Alice --> Bob : ok
+
+@enduml

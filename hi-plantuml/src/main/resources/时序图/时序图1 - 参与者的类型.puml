@@ -1,0 +1,21 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+participant 参与者 as p1
+actor 用户 as p2
+boundary 边界 as p3
+control 控制 as p4
+entity 实体 as p5
+database 数据库 as p6
+collections 集合 as p7
+queue 队列 as p8
+
+p1 -> p2 : To actor
+p1 -> p3 : To boundary
+p1 -> p4 : To control
+p1 -> p5 : To entity
+p1 -> p6 : To database
+p1 -> p7 : To collections
+p1 -> p8 : To queue
+
+@enduml

@@ -1,0 +1,14 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+== 初始化 ==
+
+Alice -> Bob: 认证请求
+Bob --> Alice: 认证响应
+
+== 重复 ==
+
+Alice -> Bob: 认证请求
+Alice <-- Bob: 认证响应
+
+@enduml

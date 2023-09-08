@@ -1,0 +1,9 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+[-> A: DoWork
+A ->] : CreateRequest
+A<--] : RequestCreated
+[<- A: Done
+
+@enduml
