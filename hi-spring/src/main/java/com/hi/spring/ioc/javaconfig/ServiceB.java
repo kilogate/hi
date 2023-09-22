@@ -1,10 +1,10 @@
-package com.hi.spring.ioc.xmlconfig;
+package com.hi.spring.ioc.javaconfig;
 
 /**
  * ServiceB
  *
- * @author kilogate
- * @create 2022/4/28 15:06
+ * @author fengquanwei
+ * @create 2023/9/22 19:55
  **/
 public class ServiceB {
     public void hello() {

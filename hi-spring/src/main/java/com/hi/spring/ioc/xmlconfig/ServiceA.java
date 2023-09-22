@@ -14,6 +14,7 @@ public class ServiceA {
     }
 
     public void hello() {
+        System.out.println("hello, ServiceA");
         serviceB.hello();
     }
 }

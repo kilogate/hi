@@ -8,6 +8,6 @@ package com.hi.spring.aop.xmlconfig;
  **/
 public class ServiceA {
     public void hello() {
-        System.out.println("hello! xml config aop");
+        System.out.println("hello, ServiceA");
     }
 }
