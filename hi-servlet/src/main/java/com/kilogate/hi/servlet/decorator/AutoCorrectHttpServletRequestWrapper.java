@@ -4,7 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
 /**
- * AutoCorrectHttpServletRequestWrapper
+ * HttpServletRequest的包装器
  *
  * @author kilogate
  * @create 2021/12/5 01:11

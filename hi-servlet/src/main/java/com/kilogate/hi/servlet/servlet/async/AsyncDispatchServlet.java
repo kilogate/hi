@@ -1,4 +1,4 @@
-package com.kilogate.hi.servlet.async;
+package com.kilogate.hi.servlet.servlet.async;
 
 import com.kilogate.hi.servlet.listener.MyServletRequestAsyncListener;
 
@@ -11,12 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * AsyncDispatchServlet
+ * 异步转发的Servlet
+ * 注意：所有的 Filter 也得支持 asyncSupported
  *
  * @author kilogate
  * @create 2021/12/5 12:10
  **/
-// 注意：所有的 Filter 也得支持 asyncSupported
 @WebServlet(urlPatterns = "/asyncDispatchServlet", asyncSupported = true)
 public class AsyncDispatchServlet extends HttpServlet {
     @Override
@@ -24,7 +24,7 @@ public class AsyncDispatchServlet extends HttpServlet {
         req.setAttribute("mainThread", Thread.currentThread().getName());
 
         AsyncContext asyncContext = req.startAsync();
-        asyncContext.setTimeout(1000);
+        asyncContext.setTimeout(5000); // 如果超时，就是Tomcat的兜底报错页面了
         asyncContext.addListener(new MyServletRequestAsyncListener());
         asyncContext.start(() -> {
             try {

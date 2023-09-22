@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * DynRegServlet
+ * 测试用的Servlet
  *
  * @author kilogate
  * @create 2021/12/6 00:11

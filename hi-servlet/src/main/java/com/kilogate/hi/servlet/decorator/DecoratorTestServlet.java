@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * DecoratorTestServlet
+ * 测试用的Servlet
  *
  * @author kilogate
  * @create 2021/12/5 01:13

@@ -19,6 +19,7 @@ public class AutoCorrectFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+        // 将HttpServletRequest包装为AutoCorrectHttpServletRequestWrapper
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         AutoCorrectHttpServletRequestWrapper httpServletRequestWrapper = new AutoCorrectHttpServletRequestWrapper(httpServletRequest);
         chain.doFilter(httpServletRequestWrapper, response);

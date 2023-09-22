@@ -1,4 +1,4 @@
-package com.kilogate.hi.servlet.async;
+package com.kilogate.hi.servlet.servlet.async;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -12,7 +12,7 @@ import java.util.Date;
  * @author kilogate
  * @create 2021/12/5 01:33
  **/
-@WebFilter(urlPatterns = "/*", asyncSupported = true)
+@WebFilter(urlPatterns = "/*", asyncSupported = true) // 支持异步处理的Filter
 public class AccessLogFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

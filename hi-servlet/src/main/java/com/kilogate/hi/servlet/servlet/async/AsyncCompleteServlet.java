@@ -1,4 +1,4 @@
-package com.kilogate.hi.servlet.async;
+package com.kilogate.hi.servlet.servlet.async;
 
 import javax.servlet.AsyncContext;
 import javax.servlet.ServletException;
@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
- * AsyncCompleteServlet
+ * 异步完成的Servlet
  *
  * @author kilogate
  * @create 2021/12/5 15:24
@@ -26,6 +26,8 @@ public class AsyncCompleteServlet extends HttpServlet {
 
         AsyncContext asyncContext = req.startAsync();
         asyncContext.setTimeout(60000);
+
+        // 业务逻辑放到异步线程去执行，释放Tomcat请求线程资源（在客户端来看，其实和同步没有差别）
         asyncContext.start(() -> {
             System.out.println("new thread: " + Thread.currentThread());
             for (int i = 0; i < 10; i++) {

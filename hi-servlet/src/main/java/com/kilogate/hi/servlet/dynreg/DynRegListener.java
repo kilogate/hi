@@ -22,6 +22,7 @@ public class DynRegListener implements ServletContextListener {
             e.printStackTrace();
         }
 
+        // 动态注册
         if (servlet != null && servlet instanceof DynRegServlet) {
             ServletRegistration.Dynamic servletRegistration = servletContext.addServlet("dynRegServlet", servlet);
             servletRegistration.addMapping("/dynRegServlet");
