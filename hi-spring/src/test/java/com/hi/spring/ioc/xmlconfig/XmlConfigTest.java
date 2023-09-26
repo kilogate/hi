@@ -1,6 +1,5 @@
-package com.hi.spring;
+package com.hi.spring.ioc.xmlconfig;
 
-import com.hi.spring.ioc.xmlconfig.ServiceA;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,14 +7,14 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
- * BaseTest4XmlConfigIoc
+ * XmlConfigTest
  *
- * @author kilogate
- * @create 2022/5/4 22:20
+ * @author fengquanwei
+ * @create 2023/9/26 20:12
  **/
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:ioc.xml"})
-public class BaseTest4XmlConfigIoc {
+public class XmlConfigTest {
     @Autowired
     private ServiceA serviceA;
 
