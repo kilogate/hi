@@ -1,4 +1,4 @@
-package com.hi.spring.ioc.mixedconfig;
+package com.hi.spring.ioc.mixedconfig.javaMxml;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,7 +12,7 @@ import org.springframework.context.annotation.ImportResource;
  * @create 2023/10/7 10:31
  **/
 @Configuration
-@Import({SubConfigA.class, SubConfigB.class}) // 导入 JavaConfig
+@Import({SubConfigA.class, SubConfigB.class}) // 导入 JavaConfig（也可以使用组件扫描来导入 JavaConfig：@ComponentScan）
 @ImportResource("SubConfigC.xml") // 导入 XMLConfig
 public class Config {
     @Bean
