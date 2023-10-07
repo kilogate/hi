@@ -4,6 +4,6 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="serviceC" class="com.hi.spring.ioc.mixedconfig.javaMxml.ServiceC"/>
+    <bean id="serviceC" class="com.hi.spring.ioc.mixedconfig.ServiceC"/>
 
 </beans>

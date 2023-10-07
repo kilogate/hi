@@ -1,4 +1,4 @@
-package com.hi.spring.ioc.mixedconfig.javaMxml;
+package com.hi.spring.ioc.mixedconfig;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;

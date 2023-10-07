@@ -1,4 +1,4 @@
-package com.hi.spring.ioc.mixedconfig.javaMxml;
+package com.hi.spring.ioc.mixedconfig;
 
 /**
  * Service
