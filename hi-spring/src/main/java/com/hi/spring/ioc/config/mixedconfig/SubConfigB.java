@@ -1,23 +1,18 @@
-package com.hi.spring.ioc.javaconfig;
+package com.hi.spring.ioc.config.mixedconfig;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * Config
+ * SubConfigB
  *
- * @author kilogate
- * @create 2022/5/4 22:35
+ * @author fengquanwei
+ * @create 2023/10/7 10:27
  **/
 @Configuration
-public class Config {
+public class SubConfigB {
     @Bean
     public ServiceB serviceB() {
         return new ServiceB();
-    }
-
-    @Bean
-    public ServiceA serviceA() {
-        return new ServiceA(serviceB());
     }
 }

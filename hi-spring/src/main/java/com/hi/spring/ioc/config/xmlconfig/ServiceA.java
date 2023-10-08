@@ -1,10 +1,10 @@
-package com.hi.spring.ioc.javaconfig;
+package com.hi.spring.ioc.config.xmlconfig;
 
 /**
  * ServiceA
  *
  * @author kilogate
- * @create 2022/5/4 22:35
+ * @create 2022/4/28 15:06
  **/
 public class ServiceA {
     private ServiceB serviceB;

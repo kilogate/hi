@@ -1,8 +1,4 @@
-package com.hi.spring.ioc.autoconfig;
-
-import org.springframework.stereotype.Component;
-
-import javax.annotation.Resource;
+package com.hi.spring.ioc.config.javaconfig;
 
 /**
  * ServiceA
@@ -10,10 +6,12 @@ import javax.annotation.Resource;
  * @author kilogate
  * @create 2022/5/4 22:35
  **/
-@Component
 public class ServiceA {
-    @Resource
     private ServiceB serviceB;
+
+    public ServiceA(ServiceB serviceB) {
+        this.serviceB = serviceB;
+    }
 
     public void hello() {
         System.out.println("hello, ServiceA");

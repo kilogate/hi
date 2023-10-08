@@ -1,4 +1,4 @@
-package com.hi.spring.ioc.autoconfig;
+package com.hi.spring.ioc.config.autoconfig;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;

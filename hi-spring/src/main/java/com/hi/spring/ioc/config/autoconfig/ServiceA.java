@@ -1,17 +1,19 @@
-package com.hi.spring.ioc.xmlconfig;
+package com.hi.spring.ioc.config.autoconfig;
+
+import org.springframework.stereotype.Component;
+
+import javax.annotation.Resource;
 
 /**
  * ServiceA
  *
  * @author kilogate
- * @create 2022/4/28 15:06
+ * @create 2022/5/4 22:35
  **/
+@Component
 public class ServiceA {
+    @Resource
     private ServiceB serviceB;
-
-    public ServiceA(ServiceB serviceB) {
-        this.serviceB = serviceB;
-    }
 
     public void hello() {
         System.out.println("hello, ServiceA");

@@ -1,10 +1,10 @@
-package com.hi.spring.ioc.mixedconfig;
+package com.hi.spring.ioc.config.xmlconfig;
 
 /**
  * ServiceB
  *
- * @author fengquanwei
- * @create 2023/10/7 10:28
+ * @author kilogate
+ * @create 2022/4/28 15:06
  **/
 public class ServiceB {
     public void hello() {

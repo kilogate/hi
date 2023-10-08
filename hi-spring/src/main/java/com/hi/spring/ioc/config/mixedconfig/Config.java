@@ -1,4 +1,4 @@
-package com.hi.spring.ioc.mixedconfig;
+package com.hi.spring.ioc.config.mixedconfig;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
