@@ -2,7 +2,7 @@ package mockey
 
 import (
 	"fmt"
-	"hello/modules/mockey/other"
+	"hi-golang/modules/mockey/other"
 	"testing"
 
 	"github.com/bytedance/mockey"
