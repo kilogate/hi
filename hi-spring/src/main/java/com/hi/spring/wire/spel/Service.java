@@ -55,4 +55,19 @@ public class Service {
     @Value("#{systemProperties['os.name']}")
     private String osName;
 
+    // 使用运算符
+    @Value("#{2 * T(java.lang.Math).PI * stu.age}")
+    private double old;
+
+    // 使用运算符
+    @Value("#{'Hi ' + stu.name}")
+    private String hi;
+
+    // 使用运算符
+    @Value("#{stu.name == 'Tom'}")
+    private boolean eq;
+
+    // 使用运算符
+    @Value("#{stu.email matches '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.com'}")
+    private boolean match;
 }

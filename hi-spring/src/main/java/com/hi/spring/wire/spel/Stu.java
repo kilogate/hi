@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 public class Stu {
     public String name = "Tom";
     public int age = 17;
+    public String email = "tom@163.com";
 
     public String getName() {
         return this.name;
