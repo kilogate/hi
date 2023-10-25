@@ -13,7 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * @create 2023/9/26 20:12
  **/
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:ioc.xml"})
+@ContextConfiguration(locations = {"classpath:ioc/config/xmlconfig/spring.xml"})
 public class XmlConfigTest {
     @Autowired
     private ServiceA serviceA;

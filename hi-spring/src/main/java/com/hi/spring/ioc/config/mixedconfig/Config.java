@@ -15,7 +15,7 @@ import org.springframework.context.annotation.ImportResource;
  **/
 @Configuration
 @Import({SubConfigA.class, SubConfigB.class}) // 导入 JavaConfig（也可以使用组件扫描来导入 JavaConfig：@ComponentScan）
-@ImportResource("SubConfigC.xml") // 导入 XMLConfig
+@ImportResource("ioc/config/mixedconfig/spring.xml") // 导入 XMLConfig
 public class Config {
     @Bean
     public Service service(ServiceA serviceA, ServiceB serviceB, ServiceC serviceC) {
