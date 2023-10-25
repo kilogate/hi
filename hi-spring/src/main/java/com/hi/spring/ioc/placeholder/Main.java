@@ -13,6 +13,6 @@ public class Main {
     public static void main(String[] args) {
         ApplicationContext applicationContext = new AnnotationConfigApplicationContext(Config.class);
         Service service = applicationContext.getBean(Service.class);
-        System.out.println(service);
+        service.sayHi();
     }
 }
