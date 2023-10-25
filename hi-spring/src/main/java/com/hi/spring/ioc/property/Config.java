@@ -21,7 +21,13 @@ public class Config {
 
     @Bean
     public Stu stu() {
-        String name = env.getProperty("name"); // 检索属性值
+        // profile 相关数据
+        String[] activeProfiles = env.getActiveProfiles();
+        String[] defaultProfiles = env.getDefaultProfiles();
+        boolean acceptsProfiles = env.acceptsProfiles("dev");
+
+        // 检索属性值
+        String name = env.getProperty("name");
         Integer age = env.getProperty("age", int.class);
         return new Stu(name, age);
     }
