@@ -1,5 +1,6 @@
 package com.hi.spring.ioc.profile;
 
+import com.hi.spring.wire.profile.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
