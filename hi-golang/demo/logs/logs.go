@@ -1,4 +1,4 @@
-package logger
+package logs
 
 import (
 	"context"
@@ -10,11 +10,11 @@ import (
 
 const logIDKey = "LOG_ID"
 
-func Info(ctx context.Context, msg string, v ...interface{}) {
+func CtxInfo(ctx context.Context, msg string, v ...interface{}) {
 	fmt.Fprint(os.Stdout, fmt.Sprintf("%s [%s] %s\n", getDateTime(), getLogID(ctx), fmt.Sprintf(msg, v...)))
 }
 
-func Error(ctx context.Context, msg string, v ...interface{}) {
+func CtxError(ctx context.Context, msg string, v ...interface{}) {
 	fmt.Fprint(os.Stderr, fmt.Sprintf("%s [%s] %s\n", getDateTime(), getLogID(ctx), fmt.Sprintf(msg, v...)))
 }
 

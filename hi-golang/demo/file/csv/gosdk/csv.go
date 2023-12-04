@@ -3,7 +3,7 @@ package main
 import (
 	"context"
 	"encoding/csv"
-	"hi-golang/demo/logger"
+	"hi-golang/demo/logs"
 	"hi-golang/demo/util"
 	"io"
 	"os"
@@ -18,7 +18,7 @@ func readFromCSV(ctx context.Context) {
 	path := "demo/file/csv/gosdk/abc.csv"
 	file, err := os.Open(path)
 	if err != nil {
-		logger.Error(ctx, "readFromCSV err, os.Open err, path: %s, err: %+v", path, err)
+		logs.CtxError(ctx, "readFromCSV err, os.Open err, path: %s, err: %+v", path, err)
 		return
 	}
 	defer file.Close()
@@ -41,11 +41,11 @@ func readFromCSV(ctx context.Context) {
 			break
 		}
 		if err != nil {
-			logger.Error(ctx, "readFromCSV err, reader.Read err, err: %+v", err)
+			logs.CtxError(ctx, "readFromCSV err, reader.Read err, err: %+v", err)
 			return
 		}
 
-		logger.Info(ctx, "record: %s", util.ToString(ctx, record))
+		logs.CtxInfo(ctx, "record: %s", util.ToString(ctx, record))
 	}
 }
 
@@ -54,7 +54,7 @@ func writeToCSV(ctx context.Context) {
 	path := "demo/file/csv/gosdk/def.csv"
 	file, err := os.Create(path)
 	if err != nil {
-		logger.Error(ctx, "writeToCSV err, os.Create err, path: %s, err: %+v", path, err)
+		logs.CtxError(ctx, "writeToCSV err, os.Create err, path: %s, err: %+v", path, err)
 		return
 	}
 	defer file.Close()
@@ -67,9 +67,9 @@ func writeToCSV(ctx context.Context) {
 	record := []string{"Alice", "21", "F"}
 	err = writer.Write(record)
 	if err != nil {
-		logger.Error(ctx, "writeToCSV err, writer.Write err, record: %s, err: %+v", util.ToString(ctx, record), err)
+		logs.CtxError(ctx, "writeToCSV err, writer.Write err, record: %s, err: %+v", util.ToString(ctx, record), err)
 		return
 	}
 
-	logger.Info(ctx, "writeToCSV success")
+	logs.CtxInfo(ctx, "writeToCSV success")
 }
