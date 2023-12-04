@@ -2,16 +2,15 @@ package main
 
 import (
 	"context"
-	"fmt"
 	"hi-golang/demo/util"
+	"time"
 )
 
 func main() {
-	f(3)
+	bigSlowOperation(context.Background())
 }
 
-func f(n int) {
-	defer util.RecoverFromPanic(context.Background(), "f")
-	fmt.Println(10 / n)
-	f(n - 1)
+func bigSlowOperation(ctx context.Context) {
+	defer util.Trace(ctx)()
+	time.Sleep(3 * time.Second)
 }
