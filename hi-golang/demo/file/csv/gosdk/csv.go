@@ -45,7 +45,7 @@ func readFromCSV(ctx context.Context) {
 			return
 		}
 
-		logs.CtxInfo(ctx, "record: %s", util.ToString(ctx, record))
+		logs.CtxInfo(ctx, "record: %s", util.ToString(record))
 	}
 }
 
@@ -67,7 +67,7 @@ func writeToCSV(ctx context.Context) {
 	record := []string{"Alice", "21", "F"}
 	err = writer.Write(record)
 	if err != nil {
-		logs.CtxError(ctx, "writeToCSV err, writer.Write err, record: %s, err: %+v", util.ToString(ctx, record), err)
+		logs.CtxError(ctx, "writeToCSV err, writer.Write err, record: %s, err: %+v", util.ToString(record), err)
 		return
 	}
 

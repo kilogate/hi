@@ -7,7 +7,11 @@ import (
 	"hi-golang/demo/logs"
 )
 
-func ToBytes(ctx context.Context, v interface{}) []byte {
+func ToBytes(v interface{}) []byte {
+	return CtxToBytes(context.Background(), v)
+}
+
+func CtxToBytes(ctx context.Context, v interface{}) []byte {
 	data, err := json.Marshal(v)
 	if err != nil {
 		logs.CtxError(ctx, "ToBytes err, json.Marshal err, v: %+v, err: %+v", v, err)
@@ -17,7 +21,11 @@ func ToBytes(ctx context.Context, v interface{}) []byte {
 	return data
 }
 
-func ToString(ctx context.Context, v interface{}) string {
+func ToString(v interface{}) string {
+	return CtxToString(context.Background(), v)
+}
+
+func CtxToString(ctx context.Context, v interface{}) string {
 	data, err := json.Marshal(v)
 	if err != nil {
 		logs.CtxError(ctx, "ToString err, json.Marshal err, v: %+v, err: %+v", v, err)
@@ -27,7 +35,11 @@ func ToString(ctx context.Context, v interface{}) string {
 	return string(data)
 }
 
-func ParseInt(ctx context.Context, s string) int64 {
+func ParseInt(s string) int64 {
+	return CtxParseInt(context.Background(), s)
+}
+
+func CtxParseInt(ctx context.Context, s string) int64 {
 	if s == "" {
 		logs.CtxError(ctx, "ParseInt fail, empty param")
 		return 0
