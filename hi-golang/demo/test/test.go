@@ -2,12 +2,16 @@ package main
 
 import (
 	"context"
-	"hi-golang/demo/logs"
+	"fmt"
+	"hi-golang/demo/util"
 )
 
 func main() {
-	ctx := context.Background()
-	ctx = logs.NewContextWithLogID(ctx)
-	logs.CtxInfo(ctx, "hello: %s", "Lask")
-	logs.CtxError(ctx, "hello: %s", "Lask")
+	f(3)
+}
+
+func f(n int) {
+	defer util.RecoverFromPanic(context.Background(), "f")
+	fmt.Println(10 / n)
+	f(n - 1)
 }
