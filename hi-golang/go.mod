@@ -5,7 +5,7 @@ go 1.18
 require (
 	github.com/agiledragon/gomonkey v2.0.2+incompatible
 	github.com/apaxa-go/helper v0.0.0-20180607175117-61d31b1c31c3
-	github.com/bytedance/mockey v1.2.8
+	github.com/bytedance/mockey v1.2.9
 	github.com/cloudwego/hertz v0.7.1
 	github.com/pkg/errors v0.9.1
 	github.com/samber/lo v1.38.1
