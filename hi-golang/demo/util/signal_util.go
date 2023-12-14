@@ -2,10 +2,11 @@ package util
 
 import (
 	"context"
-	"hi-golang/demo/logs"
 	"os"
 	"os/signal"
 	"syscall"
+
+	"hi-golang/demo/logs"
 )
 
 // OnSignalNotify

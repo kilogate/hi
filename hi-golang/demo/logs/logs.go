@@ -9,7 +9,9 @@ import (
 	"time"
 )
 
-const logIDKey = "LOG_ID"
+const (
+	logIDKey = "LOG_ID"
+)
 
 func CtxInfo(ctx context.Context, msg string, v ...interface{}) {
 	fmt.Fprint(os.Stdout, fmt.Sprintf("INFO %s [%s] %s %s\n", getDateTime(), getLogID(ctx), getCaller(), fmt.Sprintf(msg, v...)))

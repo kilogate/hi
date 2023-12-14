@@ -1,9 +1,10 @@
 package mockey
 
 import (
+	"testing"
+
 	. "github.com/bytedance/mockey"
 	. "github.com/smartystreets/goconvey/convey"
-	"testing"
 )
 
 // cd hi-golang/demo/test/mockey/ && go test -gcflags="all=-l -N" -v

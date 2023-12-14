@@ -3,23 +3,20 @@ package main
 import (
 	"context"
 	"encoding/csv"
-	"hi-golang/demo/logs"
-	"hi-golang/demo/util"
 	"io"
 	"os"
+
+	"hi-golang/demo/logs"
+	"hi-golang/demo/util"
 )
 
-func main() {
-	writeToCSV(context.Background())
-}
-
-func readFromCSV(ctx context.Context) {
+func readFromCSV(ctx context.Context) error {
 	// 打开文件
-	path := "demo/file/csv/gosdk/abc.csv"
+	path := "input.csv"
 	file, err := os.Open(path)
 	if err != nil {
 		logs.CtxError(ctx, "readFromCSV err, os.Open err, path: %s, err: %+v", path, err)
-		return
+		return err
 	}
 	defer file.Close()
 
@@ -29,10 +26,10 @@ func readFromCSV(ctx context.Context) {
 	// 读取所有记录
 	//allRecords, err := reader.ReadAll()
 	//if err != nil {
-	//	logger.Error(ctx, "readFromCSV err, reader.ReadAll err, err: %+v", err)
-	//	return
+	//	logs.CtxError(ctx, "readFromCSV err, reader.ReadAll err, err: %+v", err)
+	//	return err
 	//}
-	//logger.Info(ctx, "allRecords: %s", util.ToString(ctx, allRecords))
+	//logs.CtxInfo(ctx, "allRecords: %s", util.ToString(allRecords))
 
 	// 循环读取记录
 	for {
@@ -42,20 +39,22 @@ func readFromCSV(ctx context.Context) {
 		}
 		if err != nil {
 			logs.CtxError(ctx, "readFromCSV err, reader.Read err, err: %+v", err)
-			return
+			return err
 		}
 
 		logs.CtxInfo(ctx, "record: %s", util.ToString(record))
 	}
+
+	return nil
 }
 
-func writeToCSV(ctx context.Context) {
+func writeToCSV(ctx context.Context) error {
 	// 创建文件
-	path := "demo/file/csv/gosdk/def.csv"
+	path := "output.csv"
 	file, err := os.Create(path)
 	if err != nil {
 		logs.CtxError(ctx, "writeToCSV err, os.Create err, path: %s, err: %+v", path, err)
-		return
+		return err
 	}
 	defer file.Close()
 
@@ -68,8 +67,9 @@ func writeToCSV(ctx context.Context) {
 	err = writer.Write(record)
 	if err != nil {
 		logs.CtxError(ctx, "writeToCSV err, writer.Write err, record: %s, err: %+v", util.ToString(record), err)
-		return
+		return err
 	}
 
 	logs.CtxInfo(ctx, "writeToCSV success")
+	return nil
 }
