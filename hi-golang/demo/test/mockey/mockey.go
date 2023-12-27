@@ -20,6 +20,11 @@ func (s *service) Hi(name string) string {
 	return "Hi " + name
 }
 
+// Bye 方法
+func (s *service) Bye(name string) string {
+	return "Bye " + name
+}
+
 // Hello 函数
 func Hello(name string) string {
 	return "Hello " + name

@@ -3,39 +3,44 @@ package mockey
 import (
 	"testing"
 
-	. "github.com/bytedance/mockey"
-	. "github.com/smartystreets/goconvey/convey"
+	"github.com/bytedance/mockey"
+	"github.com/smartystreets/goconvey/convey"
 )
 
 // cd hi-golang/demo/test/mockey/ && go test -gcflags="all=-l -N" -v
 func TestMockey(t *testing.T) {
-	PatchConvey("测试Mockey", t, func() { // PatchConvey外自动释放mock
+	mockey.PatchConvey("测试Mockey", t, func() { // PatchConvey外自动释放mock
 		// mock函数
-		Mock(Hello).Return("abc").Build()
-		So(Hello("Tom"), ShouldEqual, "abc")
+		mockey.Mock(Hello).Return("abc").Build()
+		convey.So(Hello("Tom"), convey.ShouldEqual, "abc")
 
-		Mock(Hi).To(func(name string) string {
+		mockey.Mock(Hi).To(func(name string) string {
 			return "abc"
 		}).Build()
-		So(Hi("Tom"), ShouldEqual, "abc")
+		convey.So(Hi("Tom"), convey.ShouldEqual, "abc")
 
 		// mock方法
-		Mock((*service).Hello).Return("abc").Build()
-		So(Service.Hello("Tom"), ShouldEqual, "abc")
+		mockey.Mock((*service).Hello).Return("abc").Build()
+		convey.So(Service.Hello("Tom"), convey.ShouldEqual, "abc")
 
-		Mock((*service).Hi).To(func(name string) string {
+		mockey.Mock((*service).Hi).To(func(name string) string {
 			return "abc"
 		}).Build()
-		So(Service.Hi("Tom"), ShouldEqual, "abc")
+		convey.So(Service.Hi("Tom"), convey.ShouldEqual, "abc")
+
+		// 获取方法
+		method := mockey.GetMethod(Service, "Bye")
+		mockey.Mock(method).Return("xxx").Build()
+		convey.So(Service.Bye("Tom"), convey.ShouldEqual, "xxx")
 
 		// mock变量
-		MockValue(&num).To(100)
-		So(num, ShouldEqual, 100)
+		mockey.MockValue(&num).To(100)
+		convey.So(num, convey.ShouldEqual, 100)
 
 		// mock函数变量
-		MockValue(&Hey).To(func(name string) string {
+		mockey.MockValue(&Hey).To(func(name string) string {
 			return "abc"
 		})
-		So(Hey("Tom"), ShouldEqual, "abc")
+		convey.So(Hey("Tom"), convey.ShouldEqual, "abc")
 	})
 }

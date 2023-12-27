@@ -4,7 +4,7 @@ import (
 	"reflect"
 	"testing"
 
-	. "github.com/agiledragon/gomonkey"
+	"github.com/agiledragon/gomonkey"
 	. "github.com/smartystreets/goconvey/convey"
 )
 
@@ -13,7 +13,7 @@ func TestApplyFuncDemo(t *testing.T) {
 	Convey("Mock函数", t, func() {
 
 		Convey("Mock单个函数", func() {
-			patches := ApplyFunc(Hello, func(_ string) string {
+			patches := gomonkey.ApplyFunc(Hello, func(_ string) string {
 				return "abc"
 			})
 			defer patches.Reset()
@@ -23,11 +23,11 @@ func TestApplyFuncDemo(t *testing.T) {
 		})
 
 		Convey("Mock多个函数", func() {
-			patches := ApplyFunc(Hello, func(_ string) string {
+			patches := gomonkey.ApplyFunc(Hello, func(_ string) string {
 				return "abc"
 			})
 			defer patches.Reset()
-			ApplyFunc(Hi, func(_ string) string {
+			gomonkey.ApplyFunc(Hi, func(_ string) string {
 				return "abc"
 			})
 
@@ -46,7 +46,7 @@ func TestApplyMethodDemo(t *testing.T) {
 	Convey("Mock方法", t, func() {
 
 		Convey("Mock单个方法", func() {
-			patches := ApplyMethod(reflect.TypeOf(Service), "Hello", func(_ *service, _ string) string {
+			patches := gomonkey.ApplyMethod(reflect.TypeOf(Service), "Hello", func(_ *service, _ string) string {
 				return "abc"
 			})
 			defer patches.Reset()
@@ -56,7 +56,7 @@ func TestApplyMethodDemo(t *testing.T) {
 		})
 
 		Convey("Mock多个方法", func() {
-			patches := ApplyMethod(reflect.TypeOf(Service), "Hello", func(_ *service, _ string) string {
+			patches := gomonkey.ApplyMethod(reflect.TypeOf(Service), "Hello", func(_ *service, _ string) string {
 				return "abc"
 			})
 			defer patches.Reset()
@@ -79,7 +79,7 @@ func TestApplyGlobalVar(t *testing.T) {
 	Convey("Mock全局变量", t, func() {
 
 		Convey("Mock全局变量", func() {
-			patches := ApplyGlobalVar(&num, 150)
+			patches := gomonkey.ApplyGlobalVar(&num, 150)
 			defer patches.Reset()
 			So(num, ShouldEqual, 150)
 		})
@@ -94,7 +94,7 @@ func TestApplyGlobalVar(t *testing.T) {
 // cd hi-golang/demo/test/gomonkey/ && GOARCH=amd64 go test -gcflags=all=-l -v -run=TestApplyFuncVarDemo
 func TestApplyFuncVarDemo(t *testing.T) {
 	Convey("Mock函数变量", t, func() {
-		patches := ApplyFuncVar(&Hey, func(name string) string {
+		patches := gomonkey.ApplyFuncVar(&Hey, func(name string) string {
 			return "abc"
 		})
 		defer patches.Reset()
@@ -107,12 +107,12 @@ func TestApplyFuncVarDemo(t *testing.T) {
 // cd hi-golang/demo/test/gomonkey/ && GOARCH=amd64 go test -gcflags=all=-l -v -run=TestApplyFuncSeq -gcflags=-l
 func TestApplyFuncSeq(t *testing.T) {
 	Convey("Mock函数输出序列", t, func() {
-		outputs := []OutputCell{
-			{Values: Params{"a"}, Times: 1},
-			{Values: Params{"b"}, Times: 2},
-			{Values: Params{"c"}, Times: 3},
+		outputs := []gomonkey.OutputCell{
+			{Values: gomonkey.Params{"a"}, Times: 1},
+			{Values: gomonkey.Params{"b"}, Times: 2},
+			{Values: gomonkey.Params{"c"}, Times: 3},
 		}
-		patches := ApplyFuncSeq(Hello, outputs)
+		patches := gomonkey.ApplyFuncSeq(Hello, outputs)
 		defer patches.Reset()
 
 		So(Hello("tom"), ShouldEqual, "a")
@@ -127,12 +127,12 @@ func TestApplyFuncSeq(t *testing.T) {
 // cd hi-golang/demo/test/gomonkey/ && GOARCH=amd64 go test -gcflags=all=-l -v -run=TestApplyMethodSeq
 func TestApplyMethodSeq(t *testing.T) {
 	Convey("Mock方法输出序列", t, func() {
-		outputs := []OutputCell{
-			{Values: Params{"a"}, Times: 1},
-			{Values: Params{"b"}, Times: 2},
-			{Values: Params{"c"}, Times: 3},
+		outputs := []gomonkey.OutputCell{
+			{Values: gomonkey.Params{"a"}, Times: 1},
+			{Values: gomonkey.Params{"b"}, Times: 2},
+			{Values: gomonkey.Params{"c"}, Times: 3},
 		}
-		patches := ApplyMethodSeq(reflect.TypeOf(Service), "Hello", outputs)
+		patches := gomonkey.ApplyMethodSeq(reflect.TypeOf(Service), "Hello", outputs)
 		defer patches.Reset()
 
 		So(Service.Hello("tom"), ShouldEqual, "a")
@@ -147,12 +147,12 @@ func TestApplyMethodSeq(t *testing.T) {
 // cd hi-golang/demo/test/gomonkey/ && GOARCH=amd64 go test -gcflags=all=-l -v -run=TestApplyFuncVarSeq
 func TestApplyFuncVarSeq(t *testing.T) {
 	Convey("Mock函数变量输出序列", t, func() {
-		outputs := []OutputCell{
-			{Values: Params{"a"}, Times: 1},
-			{Values: Params{"b"}, Times: 2},
-			{Values: Params{"c"}, Times: 3},
+		outputs := []gomonkey.OutputCell{
+			{Values: gomonkey.Params{"a"}, Times: 1},
+			{Values: gomonkey.Params{"b"}, Times: 2},
+			{Values: gomonkey.Params{"c"}, Times: 3},
 		}
-		patches := ApplyFuncVarSeq(&Hey, outputs)
+		patches := gomonkey.ApplyFuncVarSeq(&Hey, outputs)
 		defer patches.Reset()
 
 		So(Hey("tom"), ShouldEqual, "a")
@@ -181,7 +181,7 @@ func TestPatchPair(t *testing.T) {
 				},
 			},
 		}
-		patches := NewPatches()
+		patches := gomonkey.NewPatches()
 		defer patches.Reset()
 		for _, pair := range patchPairs {
 			patches.ApplyFunc(pair[0], pair[1])
