@@ -14,6 +14,7 @@ require (
 )
 
 require (
+	github.com/Knetic/govaluate v3.0.0+incompatible // indirect
 	github.com/bytedance/go-tagexpr/v2 v2.9.2 // indirect
 	github.com/bytedance/gopkg v0.0.0-20220413063733-65bf48ffb3a7 // indirect
 	github.com/bytedance/sonic v1.8.1 // indirect
