@@ -1,0 +1,7 @@
+@startuml
+
+autonumber
+
+A -> B : Hello
+
+@enduml
