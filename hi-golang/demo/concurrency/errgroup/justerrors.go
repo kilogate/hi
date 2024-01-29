@@ -6,15 +6,17 @@ import (
 	"time"
 
 	"hi-golang/demo/logs"
+	"hi-golang/demo/util"
 
 	"golang.org/x/sync/errgroup"
 )
 
 func main() {
-	ctx := logs.NewContextWithLogID(context.Background())
+	ctx := util.NewCtx()
 
 	logs.CtxInfo(ctx, "main start")
 
+	// 创建协程池
 	group, ctx := errgroup.WithContext(ctx)
 
 	// 提交任务

@@ -16,6 +16,20 @@ type Person struct {
 	Gender string `csv:"gender"`
 }
 
+func main() {
+	ctx := util.NewCtx()
+
+	err := readFromCSV(ctx)
+	if err != nil {
+		logs.CtxError(ctx, "readFromCSV err, err: %+v", err)
+	}
+
+	err = writeToCSV(ctx)
+	if err != nil {
+		logs.CtxError(ctx, "writeToCSV err, err: %+v", err)
+	}
+}
+
 func readFromCSV(ctx context.Context) error {
 	// 打开文件
 	path := "input.csv"

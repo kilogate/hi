@@ -7,21 +7,25 @@ import (
 	"time"
 
 	"hi-golang/demo/logs"
+	"hi-golang/demo/util"
 
 	"golang.org/x/sync/errgroup"
 )
 
 func main() {
-	ctx := logs.NewContextWithLogID(context.Background())
+	ctx := util.NewCtx()
 
 	logs.CtxInfo(ctx, "main start")
 
+	// 创建协程池
 	group, ctx := errgroup.WithContext(ctx)
+	group.SetLimit(10) // 设置最大协程数
 
-	keys := []string{"a", "b", "c"} // 加个"err"就报错
-	resMap := &sync.Map{}           // 并发Map
+	// 存储执行结果的并发Map
+	resMap := &sync.Map{}
 
 	// 提交任务
+	keys := []string{"a", "b", "c"} // 加个"err"就报错
 	for _, key := range keys {
 		key := key
 		group.Go(func() error {
@@ -35,6 +39,8 @@ func main() {
 		logs.CtxError(ctx, "main err, err: %+v", err)
 		return
 	}
+
+	// 遍历结果
 	resMap.Range(func(key, value any) bool {
 		logs.CtxInfo(ctx, "key: %s, value: %s", key, value)
 		return true
