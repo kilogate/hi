@@ -1,8 +1,10 @@
 package com.kilogate.hi.mockito;
 
+import com.kilogate.hi.mockito.util.StrUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 
 import java.util.ArrayList;
@@ -96,4 +98,12 @@ public class MockitoUsage {
         Mockito.verify(list, Mockito.atMost(6)).get(2);
     }
 
+    @Test
+    void testStatic() {
+        MockedStatic<StrUtil> strUtilMockedStatic = Mockito.mockStatic(StrUtil.class);
+        strUtilMockedStatic.when(() -> StrUtil.getStrLength(Mockito.anyString())).thenReturn(100);
+
+        int strLength = StrUtil.getStrLength("abc");
+        Assertions.assertEquals(100, strLength);
+    }
 }
